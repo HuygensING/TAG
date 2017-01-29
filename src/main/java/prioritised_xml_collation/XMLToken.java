@@ -7,4 +7,8 @@ package prioritised_xml_collation;
  */
 public class XMLToken {
     public String content;
+
+    public XMLToken(String content) {
+        this.content = content;
+    }
 }

@@ -36,8 +36,7 @@ public class ScorerUnitTest {
         XMLToken tokenB = new TextToken("white");
         Scorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
-        assertThat(resultScorer, is(false));
-        fail("TextToken content is not punctuation nor XMLElement");
+        assertThat(resultScorer, is(true));
     }
 
     @Test
@@ -58,3 +57,4 @@ public class ScorerUnitTest {
         assertThat(resultScorer, is(false));
     }
 }
+// TODO create four extra tests to assert each possible situation.

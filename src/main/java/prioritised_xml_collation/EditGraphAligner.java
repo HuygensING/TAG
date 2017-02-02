@@ -45,9 +45,12 @@ public class EditGraphAligner {
             IntStream.range(1, tokensA.size()+1).forEach(x -> {
                 int previousY = y-1;
                 int previousX = x-1;
-                Score upperLeft = scorer.score(x, y, this.cells[previousY][previousX]);
+                boolean match = scorer.match(tokensA.get(x-1), tokensB.get(y-1));
+                Score upperLeft = scorer.score(x, y, this.cells[previousY][previousX], match);
                 Score left = scorer.gap(x, y, this.cells[y][previousX]);
                 Score upper = scorer.gap(x, y, this.cells[previousY][x]);
+                //NOTE: performance: The creation of a List is a potential performance problem; better to do two
+                //separate comparisons.
                 Score max = Collections.max(Arrays.asList(upperLeft, left, upper), (score, other) -> score.globalScore - other.globalScore);
                 this.cells[y][x] = max;
             });
@@ -103,13 +106,21 @@ public class EditGraphAligner {
 
     class Scorer {
 
+        public boolean match(XMLToken a, XMLToken b) {
+            //note: performance: whitespace normalization and matching happens over and over again.
+            //note: in the production version of CollateX both these things happen before alignment.
+           return a.content.trim().equals(b.content.trim());
+        }
+
         public Score gap(int x, int y, Score parent) {
             Score.Type type = determineType(x, y, parent);
             return new Score(type, x, y, parent, parent.globalScore - 1);
         }
 
-        public Score score(int x, int y, Score parent) {
-            //TODO: implement this for matches!
+        public Score score(int x, int y, Score parent, boolean match) {
+            if (match) {
+                return new Score(Score.Type.match, x, y, parent, parent.globalScore);
+            }
             return new Score(Score.Type.mismatch, x, y, parent, parent.globalScore - 2);
         }
 

@@ -12,10 +12,10 @@ import java.util.stream.IntStream;
  * Parts of the code (segments) will be ported from code written by Elli Bleeker
  */
 public class EditGraphAligner {
-    private final Scorer scorer;
+    private final AbstractScorer scorer;
     private Score[][] cells;
 
-    public EditGraphAligner(Scorer scorer) {
+    public EditGraphAligner(AbstractScorer scorer) {
         this.scorer = scorer;
     }
     // tokensA is x
@@ -101,37 +101,6 @@ public class EditGraphAligner {
 
         public static enum Type {
             match, mismatch, addition, deletion, empty
-        }
-    }
-
-    class Scorer {
-
-        public boolean match(XMLToken a, XMLToken b) {
-            //note: performance: whitespace normalization and matching happens over and over again.
-            //note: in the production version of CollateX both these things happen before alignment.
-           return a.content.trim().equals(b.content.trim());
-        }
-
-        public Score gap(int x, int y, Score parent) {
-            Score.Type type = determineType(x, y, parent);
-            return new Score(type, x, y, parent, parent.globalScore - 1);
-        }
-
-        public Score score(int x, int y, Score parent, boolean match) {
-            if (match) {
-                return new Score(Score.Type.match, x, y, parent, parent.globalScore);
-            }
-            return new Score(Score.Type.mismatch, x, y, parent, parent.globalScore - 2);
-        }
-
-        private Score.Type determineType(int x, int y, Score parent) {
-            if (x == parent.x) {
-                return Score.Type.addition;
-            }
-            if (y == parent.y) {
-                return Score.Type.deletion;
-            }
-            return Score.Type.empty;
         }
     }
 

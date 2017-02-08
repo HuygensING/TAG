@@ -1,11 +1,9 @@
 package prioritised_xml_collation;
 
-import javax.xml.soap.Text;
-
 /**
  * Created by ellibleeker on 30/01/2017.
  */
-public class TypeScorer extends Scorer {
+public class TypeScorer extends AbstractScorer {
 
     @Override
     public boolean match(XMLToken tokenA, XMLToken tokenB) {

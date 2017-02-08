@@ -9,23 +9,22 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by ellibleeker on 30/01/2017.
  */
-public class ScorerUnitTest {
+public class TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLmatchPunctuation() {
         XMLToken tokenA = new TextToken(",");
         XMLToken tokenB = new TextToken("!");
-        Scorer scorePunctuation = new TypeScorer();
+        AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
-
     }
 
     @Test
     public void testScoreXMLnonMatchPunctuation() {
         XMLToken tokenA = new TextToken("black");
         XMLToken tokenB = new TextToken("!");
-        Scorer scorePunctuation = new TypeScorer();
+        AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(false));
     }
@@ -34,7 +33,7 @@ public class ScorerUnitTest {
     public void testScoreXMLmatchCharacters() {
         XMLToken tokenA = new TextToken("cat");
         XMLToken tokenB = new TextToken("white");
-        Scorer scorePunctuation = new TypeScorer();
+        AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
     }
@@ -43,7 +42,7 @@ public class ScorerUnitTest {
     public void testScoreXMLMatchElement() {
         XMLToken tokenA = new ElementToken("s");
         XMLToken tokenB = new ElementToken("p");
-        Scorer scorePunctuation = new TypeScorer();
+        AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
     }
@@ -52,7 +51,7 @@ public class ScorerUnitTest {
     public void testScoreXMLnonMatchElement() {
         XMLToken tokenA = new ElementToken("p");
         XMLToken tokenB = new TextToken("!");
-        Scorer scorePunctuation = new TypeScorer();
+        AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(false));
     }

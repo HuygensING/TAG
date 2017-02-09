@@ -13,7 +13,7 @@ import java.util.List;
  * Original created by Elli Bleeker.
  */
 public class XMLTokenContentMatcher extends BaseMatcher<XMLToken> {
-    private final String expectedContent;
+    final String expectedContent;
 
     private XMLTokenContentMatcher(String expectedContent) {
         this.expectedContent = expectedContent;

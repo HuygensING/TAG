@@ -31,13 +31,22 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         if (!(segment.type == this.type)) {
             return false;
         }
-        // two lists (XMLTokenContentMatcher and actual XMLToken)
+        // two lists for tokensWa (XMLTokenContentMatcher and actual XMLToken)
         // match every item in both lists >> with zip
-        Stream<XMLTokenContentMatcher> streamTokensMatcher = this.tokensWa.stream();
-        Stream<XMLToken> streamTokensActual = segment.tokensWa.stream();
-        List<Boolean> zipped = StreamUtils.zip(streamTokensMatcher, streamTokensActual, (matcher, actual) -> matcher.matches(actual))
+        Stream<XMLTokenContentMatcher> streamTokensWaMatcher = this.tokensWa.stream();
+        Stream<XMLToken> streamTokensWaActual = segment.tokensWa.stream();
+        List<Boolean> zippedWa = StreamUtils.zip(streamTokensWaMatcher, streamTokensWaActual, (matcher, actual) -> matcher.matches(actual))
                 .collect(Collectors.toList());
-        if (zipped.contains(false)) {
+        if (zippedWa.contains(false)) {
+            return false;
+        }
+        // two lists for tokensWb (XMLTokenContentMatcher and actual XMLToken)
+        // match every item in both lists >> with zip
+        Stream<XMLTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
+        Stream<XMLToken> streamTokensWbActual = segment.tokensWb.stream();
+        List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, (matcher, actual) -> matcher.matches(actual))
+                .collect(Collectors.toList());
+        if (zippedWb.contains(false)) {
             return false;
         }
         return true;

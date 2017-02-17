@@ -96,7 +96,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         return this;
     }
 
-    public SegmentMatcher(EditGraphAligner.Score.Type type) {
+    private SegmentMatcher(EditGraphAligner.Score.Type type) {
         this.type = type;
     }
 

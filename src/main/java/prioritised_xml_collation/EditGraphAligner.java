@@ -1,10 +1,11 @@
 package prioritised_xml_collation;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
+
+import static prioritised_xml_collation.EditGraphAligner.Score.Type.empty;
+import static prioritised_xml_collation.EditGraphAligner.Score.Type.match;
+import static prioritised_xml_collation.EditGraphAligner.Score.Type.mismatch;
 
 /**
  * Created by Ronald Haentjens Dekker on 29/01/17.
@@ -20,7 +21,7 @@ public class EditGraphAligner {
     }
     // tokensA is x
     // tokensB is y
-    public void align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    public List<Segment> align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
         // init cells and scorer
         this.cells = new Score[tokensB.size()+1 ][tokensA.size()+1 ];
 
@@ -55,6 +56,7 @@ public class EditGraphAligner {
                 this.cells[y][x] = max;
             });
         });
+        return calculateAlignment(tokensA, tokensB);
     }
 
     public static class Score {
@@ -127,5 +129,50 @@ public class EditGraphAligner {
             this.y = currentScore.previousY;
             return currentScore;
         }
+    }
+
+    private List<Segment> calculateAlignment(List<XMLToken>tokensA, List<XMLToken> tokensB) {
+        Score[][] editTable = this.cells;
+        // ScoreIterator iterates cells:
+        ScoreIterator iterateTable = new ScoreIterator(editTable);
+        int lastY = editTable.length - 1;
+        int lastX = editTable[0].length -1;
+        Score lastCell = editTable[lastY][lastX];
+        while (iterateTable.hasNext()) {
+            Score currentCell = iterateTable.next();
+            int x = currentCell.x;
+            int y = currentCell.y;
+            Boolean editOperation = lastCell.type != currentCell.type || !iterateTable.hasNext();
+            if (editOperation) {
+                addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY);
+                System.out.println(String.format("%d %d %d %d", lastX, x, lastY, y));
+                lastY = y;
+                lastX = x;
+                lastCell = editTable[lastY][lastX];
+            }
+        }
+        return null;
+    }
+
+    private List<Segment> addCelltoSuperwitness(Score currentCell, List<XMLToken>tokensA, List<XMLToken>tokensB, int lastX, int lastY) {
+        List<Segment> superwitness = new ArrayList<>();
+        int x = currentCell.x;
+        int y = currentCell.y;
+        List<XMLToken> segmentTokensA = tokensA.subList(x, lastX);
+        List<XMLToken> segmentTokensB = tokensB.subList(y, lastY);
+        if (currentCell.type == match) {
+            Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.match);
+            if (!segmentTokensA.isEmpty() && !segmentTokensB.isEmpty()) {
+                superwitness.add(0, segment);
+            }
+        }
+        if (currentCell.type == mismatch) {
+            Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.mismatch);
+            superwitness.add(0, segment);
+        }
+ //       if (currentCell.type == )
+
+        return null;
+
     }
 }

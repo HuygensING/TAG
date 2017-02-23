@@ -17,10 +17,10 @@ public abstract class AbstractScorer {
 
     public Score score(int x, int y, Score parent, boolean match) {
         if (match) {
-            return new Score(Score.Type.match, x, y, parent, parent.globalScore);
+            return new Score(Score.Type.aligned, x, y, parent, parent.globalScore);
         }
-        // "mismatch" means replacement (omission + addition)
-        return new Score(Score.Type.mismatch, x, y, parent, parent.globalScore - 2);
+        // "replacement" means replacement (omission + addition)
+        return new Score(Score.Type.replacement, x, y, parent, parent.globalScore - 2);
     }
 
     private Score.Type determineType(int x, int y, Score parent){
@@ -28,7 +28,7 @@ public abstract class AbstractScorer {
             return Score.Type.addition;
         }
         if (y == parent.y) {
-            return Score.Type.deletion;
+            return Score.Type.omission;
         }
         return Score.Type.empty;
     }

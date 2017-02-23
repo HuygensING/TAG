@@ -152,15 +152,17 @@ public class EditGraphAligner {
             Boolean stateChange = lastCell.type != currentCell.type;
             if (stateChange) {
                 addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY);
+                // System.out.println(String.format("%d %d %d %d", lastX, lastY, x, y));
                 // change the pointer
                 lastY = y;
                 lastX = x;
                 lastCell = editTable[lastY][lastX];
             }
-            // process the final cell in de EditGraphTable (additions/omissions at the beginning of the witnesses
-            currentCell = editTable[0][0];
-            addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY);
         }
+        // process the final cell in de EditGraphTable (additions/omissions at the beginning of the witnesses
+        Score currentCell = editTable[0][0];
+        addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY);
+        // System.out.println(String.format("%d %d %d %d", lastX, lastY, 0, 0));
     }
 
     private void addCelltoSuperwitness(Score currentCell, List<XMLToken> tokensA, List<XMLToken> tokensB, int lastX, int lastY) {

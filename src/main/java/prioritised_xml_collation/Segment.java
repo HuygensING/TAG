@@ -15,10 +15,13 @@ public class Segment {
         this.tokensWb = tokensWb;
         this.type = type;
 
-
-        // create Segment object
         // Segments of superwitness with tokensWa and tokensWb
 
 
+    }
+
+    @Override
+    public String toString() {
+        return this.type.toString()+this.tokensWa.toString();
     }
 }

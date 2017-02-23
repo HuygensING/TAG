@@ -8,4 +8,9 @@ public class ElementToken extends XMLToken {
     public ElementToken(String tag) {
         super(tag);
     }
+
+    @Override
+    public String toString() {
+        return content.toString();
+    }
 }

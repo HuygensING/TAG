@@ -8,4 +8,9 @@ public class TextToken extends XMLToken {
     public TextToken(String content) {
         super(content);
     }
+
+    @Override
+    public String toString() {
+        return content.toString();
+    }
 }

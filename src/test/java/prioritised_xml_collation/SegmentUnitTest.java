@@ -1,5 +1,6 @@
 package prioritised_xml_collation;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -78,6 +79,22 @@ public class SegmentUnitTest {
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         assertThat(segments, contains(s(EditGraphAligner.Score.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")), s(EditGraphAligner.Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")), s(EditGraphAligner.Score.Type.aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI"))));
     }
+
+    @Ignore("Test fails when root node is not a match")
+    @Test
+    public void testLastSegment() throws Exception {
+        File input_tokensA = new File("input_xml/witA-simple2.xml");
+        File input_tokensB = new File("input_xml/witB-simple.xml");
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        ContentMatchScorer contentScorer = new ContentMatchScorer();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        // take that output and align
+        List<Segment> segments = aligner.align(tokensWa, tokensWb);
+        assertThat(segments, contains(s(EditGraphAligner.Score.Type.replacement).tokensWa(t("body")).tokensWb(t("TEI")), s(EditGraphAligner.Score.Type.aligned).tokensWa(t("s")).tokensWb(t("s")), s(EditGraphAligner.Score.Type.omission).tokensWa(t("c")).tokensWb(t("")), s(EditGraphAligner.Score.Type.aligned).tokensWa(t("a"), t("/s")).tokensWb(t("a"), t("/s")), s(EditGraphAligner.Score.Type.replacement).tokensWa(t("/body")).tokensWb(t("/TEI"))));
+    }
+    // TODO When root node is not a match the test fails: adjust typing
  }
 
 

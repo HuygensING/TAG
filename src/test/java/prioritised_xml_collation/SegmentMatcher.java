@@ -53,7 +53,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
     @Override
-    public void describeTo(Description description) {
+        public void describeTo(Description description) {
         description.appendText(type.toString()+" ");
         description.appendText(tokensWa.stream()
                 .map(tokenContentMatcher -> tokenContentMatcher.expectedContent)
@@ -63,10 +63,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
                 .collect(joining(", "))+" ");
         }
 
+    @Override
     public void describeMismatch(Object object, Description description) {
             if (object instanceof Segment) {
                 Segment segment = (Segment) object;
-                description.appendText(" and type is: " + segment.type.toString());
+                description.appendText(" and type is " + segment.type.toString());
                 description.appendText(", with tokensWa ");
                 for (XMLToken token : segment.tokensWa) {
                     description.appendText(token.content);
@@ -99,6 +100,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     private SegmentMatcher(EditGraphAligner.Score.Type type) {
         this.type = type;
     }
+
 
 
 }

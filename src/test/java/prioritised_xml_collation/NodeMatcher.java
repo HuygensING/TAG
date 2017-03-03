@@ -19,6 +19,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
  * Created by ellibleeker on 24/02/2017.
  */
 public class NodeMatcher extends BaseMatcher<Node> {
+    // a node object has 2 fields:
     private SegmentMatcher segmentMatcher;
     private List<NodeMatcher> childrenMatcher;
 
@@ -80,7 +81,7 @@ public class NodeMatcher extends BaseMatcher<Node> {
     }
 
     // Factory method: each node has a segment
-    public static NodeMatcher n(SegmentMatcher segmentMatcher) {
+    public static NodeMatcher nM(SegmentMatcher segmentMatcher) {
         return new NodeMatcher(segmentMatcher);
     }
 
@@ -92,6 +93,6 @@ public class NodeMatcher extends BaseMatcher<Node> {
         return this;
     }
 
-
+// TODO make unittest for NodeMatcher
 
 }

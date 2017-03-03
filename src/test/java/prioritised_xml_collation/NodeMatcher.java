@@ -2,13 +2,8 @@ package prioritised_xml_collation;
 import com.codepoetics.protonpack.StreamUtils;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.collection.IsIterableContainingInOrder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,12 +15,24 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
  */
 public class NodeMatcher extends BaseMatcher<Node> {
     // a node object has 2 fields:
-    private SegmentMatcher segmentMatcher;
-    private List<NodeMatcher> childrenMatcher;
+    private final SegmentMatcher segmentMatcher;
+    private final List<NodeMatcher> childMatcher;
+    // unless specified otherwise, we do not expect the given node to be a root node
+    private Boolean isRootNode;
 
     private NodeMatcher(SegmentMatcher segmentMatcher) {
+
         this.segmentMatcher = segmentMatcher;
+        this.childMatcher = new ArrayList<>();
+        this.isRootNode = false;
     }
+
+    private NodeMatcher() {
+        this.segmentMatcher = null;
+        this.childMatcher = new ArrayList<>();
+        this.isRootNode = true;
+    }
+
 
     @Override
     // check whether given object is Node object:
@@ -45,24 +52,24 @@ public class NodeMatcher extends BaseMatcher<Node> {
             // TODO we don't do anything if the object has no SegmentMatcher
             // (for instance in the case of a root node)
         }
-        // NB Node object has list of nodes as childrenMatcher >> use zip
-        // NB two lists for childrenMatcher: NodeMatcher and actual Node
-        Stream<NodeMatcher> streamChildren = this.childrenMatcher.stream();
+        // NB Node object has list of nodes as childMatcher >> use zip
+        // NB two lists for childMatcher: NodeMatcher and actual Node
+        Stream<NodeMatcher> streamChildren = this.childMatcher.stream();
         Stream<Node> streamActualChildren = node.children.stream();
         List<Boolean> zippedChildren = StreamUtils.zip(streamChildren, streamActualChildren, (matcher, actual) -> matcher.matches(actual))
                 .collect(Collectors.toList());
         if (zippedChildren.contains(false)) {
             return false;
         }
-        // Check whether child node has childrenMatcher (i.e., segment type "replacement")
-        // NB this could be infinite!? childrenMatcher of childrenMatcher of childrenMatcher
+        // Check whether child node has childMatcher (i.e., segment type "replacement")
+        // NB this could be infinite!? childMatcher of childMatcher of childMatcher
         return true;
     }
 
     @Override
     public void describeTo(Description description) {
         description.appendText(segmentMatcher.toString()+" ");
-        description.appendText(childrenMatcher.toString()+" ");
+        description.appendText(childMatcher.toString()+" ");
     }
 
     @Override
@@ -80,16 +87,21 @@ public class NodeMatcher extends BaseMatcher<Node> {
         }
     }
 
-    // Factory method: each node has a segment
+    // Factory method: each node has a segment...
     public static NodeMatcher nM(SegmentMatcher segmentMatcher) {
         return new NodeMatcher(segmentMatcher);
+    }
+
+    // ... except the root node
+    public static NodeMatcher nM(){
+        return new NodeMatcher();
     }
 
     // Builder pattern: a Segment Node has one or more child nodes (list)
     // Child nodes could be empty (leaf node) or have one or more child nodes (list) again
     // "One or more" is indicated with '...'
     public NodeMatcher childrenMatcher(NodeMatcher... childrenMatcher) {
-        this.childrenMatcher = Arrays.asList(childrenMatcher);
+        this.childMatcher.addAll(Arrays.asList(childrenMatcher));
         return this;
     }
 

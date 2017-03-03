@@ -21,6 +21,7 @@ public class Node {
         // empty list for child nodes that may be filled later
         this.children = new ArrayList<>();
     }
+
     // if it is a root node, there is no segment
     public Node(){
         this.segment = null;
@@ -35,7 +36,8 @@ public class Node {
 
     // Factory method: each node has a segment
     public static Node n(Segment segment) {
-        return new Node(segment); }
+        return new Node(segment);
+    }
 
     // except if it's a root node
     public static Node n(){

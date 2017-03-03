@@ -42,7 +42,7 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentMatchScorer contentScorer = new ContentMatchScorer();
+        ContentScorer contentScorer = new ContentScorer();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -60,7 +60,7 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentMatchScorer contentScorer = new ContentMatchScorer();
+        ContentScorer contentScorer = new ContentScorer();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -79,7 +79,7 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentMatchScorer contentScorer = new ContentMatchScorer();
+        ContentScorer contentScorer = new ContentScorer();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -94,7 +94,7 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentMatchScorer contentScorer = new ContentMatchScorer();
+        ContentScorer contentScorer = new ContentScorer();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);

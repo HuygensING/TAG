@@ -15,17 +15,33 @@ public class Coordination {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         AbstractScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
         // align on content
-        List<Segment> segments = aligner.align(tokensWa, tokensWb);
+        List<Segment> contentSegments = contentAligner.align(tokensWa, tokensWb);
         // set root node
+        // rootNode has no segment
         Node rootNode = Node.n();
-        // add segments as nodes to root node
-
-        // for each segment type replaced
-        // align again on type with typeScorer
-        // add segments as nodes to child node
+        // for each segment in list segment
+        for (Segment segment : contentSegments) {
+        // create child node with segment
+            Node node = Node.n(segment);
+            // add node to root node
+            rootNode.children(node);
+        }
+//        // for each segment type replaced
+//        for (Segment.replacement : children) { // get all Nodes with type = replacement
+//            AbstractScorer typeScorer = new TypeScorer();
+//            EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
+//            // align again on type with typeScorer
+//            List<Segment> typeSegments = typeAligner.align(tokensWa, tokensWb);
+//            for (Segment segment : typeSegments)
+//            {
+//                Node node = Node.n(segment);
+//                // add segments as nodes to child node
+//                rootNode.children(node);
+//            }
+//        }
         // return root node (and with it the whole tree)
-        return null;
+        return rootNode;
     }
 }

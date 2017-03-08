@@ -50,5 +50,4 @@ public class Node {
         this.children.addAll(Arrays.asList(children));
         return this;
     }
-
 }

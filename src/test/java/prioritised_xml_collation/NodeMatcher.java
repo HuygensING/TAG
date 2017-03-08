@@ -68,7 +68,12 @@ public class NodeMatcher extends BaseMatcher<Node> {
 
     @Override
     public void describeTo(Description description) {
+        if (segmentMatcher == null) {
+        description.appendText("Root node");
+        }
+        else {
         description.appendText(segmentMatcher.toString()+" ");
+        }
         description.appendText(childMatcher.toString()+" ");
     }
 
@@ -76,12 +81,18 @@ public class NodeMatcher extends BaseMatcher<Node> {
     public void describeMismatch(Object object, Description description) {
         if (object instanceof Node){
             Node node = (Node) object;
-            description.appendText("and segment is " + node.segment.toString());
-            description.appendText("with children ");
-            for (Node child : node.children) {
-                description.appendText(child.toString()+" ");
+            if (node.segment == null) {
+                description.appendText("Node is root node ");
             }
-            description.appendText(".");
+            else {
+            description.appendText("with segment " + node.segment.toString());
+            }
+            if (!node.children.isEmpty()) {
+                description.appendText("with children ");
+                for (Node child : node.children) {
+                    describeMismatch(child, description);
+                }
+             }
         }
         else {description.appendText("but actual object is "+object.getClass().getName());
         }

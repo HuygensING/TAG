@@ -58,6 +58,6 @@ public class Segment {
 
     @Override
     public String toString() {
-        return this.type.toString()+this.tokensWa.toString();
+        return this.type.toString()+this.tokensWa.toString()+this.tokensWb.toString();
     }
 }

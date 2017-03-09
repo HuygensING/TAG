@@ -65,7 +65,7 @@ public class NodeUnitTest {
     }
 
     @Test
-    @Ignore("Rephrase Expectations")
+    @Ignore("Second round of alignment (on type) not entirely successful")
     public void testAlignTokensS21() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
@@ -78,14 +78,15 @@ public class NodeUnitTest {
         NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")));
         NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.addition).tokensWa(t("lb"), t("/lb")));
         NodeMatcher childrenMatcher5 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")));
-        NodeMatcher childrenMatcher6 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
-        NodeMatcher childrenMatcher7 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.addition).tokensWb(t("/s"), t("s")));
-        NodeMatcher childrenMatcher8 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
-        NodeMatcher childrenMatcher9 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("voor"), t("de"), t("liefelijke"), t("toestemming")).tokensWb(t("voor"), t("de"), t("liefelijke"), t("toestemming")));
-        NodeMatcher childrenMatcher10 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("!")).tokensWb(t(".")));
-        NodeMatcher childrenMatcher11 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("!")).tokensWb(t(".")));
-        NodeMatcher childrenMatcher12 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s")).tokensWb(t("text"), t("body"), t("div"), t("s")));
-        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2, childrenMatcher3, childrenMatcher4, childrenMatcher5, childrenMatcher6.childrenMatcher(childrenMatcher7, childrenMatcher8), childrenMatcher9, childrenMatcher10.childrenMatcher(childrenMatcher11), childrenMatcher12);
+        NodeMatcher childrenMatcher6 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
+        NodeMatcher childrenMatcher7 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWb(t(","), t("!")));
+        NodeMatcher childrenMatcher8 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.addition).tokensWb(t("/s"), t("s")));
+        NodeMatcher childrenMatcher9 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
+        NodeMatcher childrenMatcher10 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("voor"), t("de"), t("liefelijke"), t("toestemming")).tokensWb(t("voor"), t("de"), t("liefelijke"), t("toestemming")));
+        NodeMatcher childrenMatcher11 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("!")).tokensWb(t(".")));
+        NodeMatcher childrenMatcher12 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("!")).tokensWb(t(".")));
+        NodeMatcher childrenMatcher13 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("/s"), t("/div"), t("/body"), t("/text")).tokensWb(t("/s"), t("/div"), t("/body"), t("/text")));
+        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2, childrenMatcher3, childrenMatcher4, childrenMatcher5, childrenMatcher6.childrenMatcher(childrenMatcher7, childrenMatcher8, childrenMatcher9), childrenMatcher10, childrenMatcher11.childrenMatcher(childrenMatcher12), childrenMatcher13);
         assertThat(rootNode, is(rootNodeMatcher));
     }
 

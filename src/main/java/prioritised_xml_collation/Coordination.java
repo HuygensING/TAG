@@ -2,6 +2,8 @@ package prioritised_xml_collation;
 
 import java.util.List;
 
+import static prioritised_xml_collation.Segment.s;
+
 /**
  * Created by ellibleeker on 03/03/2017.
  */
@@ -23,25 +25,26 @@ public class Coordination {
         Node rootNode = Node.n();
         // for each segment in list segment
         for (Segment segment : contentSegments) {
-        // create child node with segment
+            // create child node with segment
             Node node = Node.n(segment);
             // add node to root node
             rootNode.children(node);
         }
-//        // for each segment type replaced
-//        for (Segment.replacement : children) { // get all Nodes with type = replacement
-//            AbstractScorer typeScorer = new TypeScorer();
-//            EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
-//            // align again on type with typeScorer
-//            List<Segment> typeSegments = typeAligner.align(tokensWa, tokensWb);
-//            for (Segment segment : typeSegments)
-//            {
-//                Node node = Node.n(segment);
-//                // add segments as nodes to child node
-//                rootNode.children(node);
-//            }
-//        }
-        // return root node (and with it the whole tree)
+        // for each segment type replaced
+        for (Node childNode : rootNode.children) {
+            if (childNode.segment != null && childNode.segment.type.equals(EditGraphAligner.Score.Type.replacement)) {
+                AbstractScorer typeScorer = new TypeScorer();
+                EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
+                // align again on type with typeScorer
+                List<Segment> typeSegments = typeAligner.align(childNode.segment.tokensWa, childNode.segment.tokensWb);
+                for (Segment segment : typeSegments) {
+                    Node node = Node.n(segment);
+                    // add segments as nodes to child node
+                    childNode.children(node);
+                }
+                //System.out.println(childNode.children);
+            }
+        }
         return rootNode;
     }
 }

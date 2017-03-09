@@ -31,7 +31,7 @@ public class Node {
     public String toString() {
         if (this.segment!= null)
             return this.segment.toString()+children.toString();
-        else return ("Root Node ")+children.toString();
+        else return ("Root node ")+children.toString();
     }
 
     // Factory method: each node has a segment

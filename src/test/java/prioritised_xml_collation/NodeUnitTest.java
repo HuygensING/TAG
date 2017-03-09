@@ -47,6 +47,24 @@ public class NodeUnitTest {
         assertThat(rootNode, is(rootNodeMatcher));
     }
 
+    @Test
+    public void testAlignTokens2() throws Exception {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
+        Coordination aligner = new Coordination();
+        Node rootNode = aligner.alignTokens(tokensWa, tokensWb);
+        NodeMatcher rootNodeMatcher = nM();
+        NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
+        NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
+        NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI")));
+        NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("c")).tokensWb(t("a")));
+       // System.out.println(rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher4), childrenMatcher3));
+        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher4), childrenMatcher3);
+        assertThat(rootNode, is(rootNodeMatcher));
+    }
+
+
 }
 
 

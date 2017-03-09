@@ -26,7 +26,7 @@ public class EditGraphAligner {
         this.cells = new Score[tokensB.size() + 1][tokensA.size() + 1];
 
         // init 0,0
-        this.cells[0][0] = new Score(Score.Type.empty, 0, 0, null, 0);
+        this.cells[0][0] = new Score(Boolean.FALSE, 0, 0, null, 0);
 
         // fill the first row with gaps
         IntStream.range(1, tokensA.size() + 1).forEach(x -> {
@@ -62,16 +62,16 @@ public class EditGraphAligner {
 
     public static class Score {
 
-        public Type type;
         public Score parent;
         public int globalScore = 0;
         int x;
         int y;
         int previousX;
         int previousY;
+        Boolean match;
 
-        public Score(Type type, int x, int y, Score parent, int i) {
-            this.type = type;
+        public Score(Boolean match, int x, int y, Score parent, int i) {
+            this.match = match;
             this.x = x;
             this.y = y;
             this.parent = parent;
@@ -80,8 +80,8 @@ public class EditGraphAligner {
             this.globalScore = i;
         }
 
-        public Score(Type type, int x, int y, Score parent) {
-            this.type = type;
+        public Score(Boolean match, int x, int y, Score parent) {
+            this.match = match;
             this.x = x;
             this.y = y;
             this.parent = parent;
@@ -149,8 +149,9 @@ public class EditGraphAligner {
             int x = currentCell.x;
             int y = currentCell.y;
             // stateChange if the type of the lastCell is not the same as the currentCell
-            Boolean stateChange = lastCell.type != currentCell.type;
+            Boolean stateChange = lastCell.match != currentCell.match;
             if (stateChange) {
+                System.out.println(lastCell.match+", "+currentCell.match);
                 addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY);
                 // System.out.println(String.format("%d %d %d %d", lastX, lastY, x, y));
                 // change the pointer
@@ -172,7 +173,7 @@ public class EditGraphAligner {
         List<XMLToken> segmentTokensA = tokensA.subList(x, lastX);
         List<XMLToken> segmentTokensB = tokensB.subList(y, lastY);
         // if currentCell has tokens of type "aligned", lastcell is replacement (because stateChange)
-        if (currentCell.type == aligned) {
+        if (currentCell.match == Boolean.TRUE) {
             // if cell contains tokens from both witnesses its a replacement/replacement
             if (!segmentTokensA.isEmpty() && !segmentTokensB.isEmpty()) {
                 Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.replacement);

@@ -7,6 +7,8 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -98,6 +100,8 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
     private SegmentMatcher(EditGraphAligner.Score.Type type) {
+        this.tokensWa = Collections.emptyList();
+        this.tokensWb = Collections.emptyList();
         this.type = type;
     }
 

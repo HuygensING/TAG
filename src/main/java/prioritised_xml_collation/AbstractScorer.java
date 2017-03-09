@@ -11,25 +11,24 @@ public abstract class AbstractScorer {
     // the method gap returns a new object Score (that is created in the EditGraphAligner)
     // and has the fields type, x, y, parent, i
     public Score gap(int x, int y, Score parent) {
-        Score.Type type = determineType(x, y, parent);
-        return new Score(type, x, y, parent, parent.globalScore - 1);
+        return new Score(Boolean.FALSE, x, y, parent, parent.globalScore - 1);
     }
 
     public Score score(int x, int y, Score parent, boolean match) {
         if (match) {
-            return new Score(Score.Type.aligned, x, y, parent, parent.globalScore);
+            return new Score(Boolean.TRUE, x, y, parent, parent.globalScore);
         }
         // "replacement" means replacement (omission + addition)
-        return new Score(Score.Type.replacement, x, y, parent, parent.globalScore - 2);
+        return new Score(Boolean.FALSE, x, y, parent, parent.globalScore - 2);
     }
-
-    private Score.Type determineType(int x, int y, Score parent){
-        if (x == parent.x) {
-            return Score.Type.addition;
-        }
-        if (y == parent.y) {
-            return Score.Type.omission;
-        }
-        return Score.Type.empty;
-    }
+//
+//    private Score.Type determineType(int x, int y, Score parent){
+//        if (x == parent.x) {
+//            return Score.Type.addition;
+//        }
+//        if (y == parent.y) {
+//            return Score.Type.omission;
+//        }
+//        return Score.Type.empty;
+//    }
 }

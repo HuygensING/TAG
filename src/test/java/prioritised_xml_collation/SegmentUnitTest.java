@@ -86,6 +86,21 @@ public class SegmentUnitTest {
         assertThat(segments, contains(sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI"))));
     }
 
+    @Test
+    public void testSegmentS21() throws Exception {
+        File input_tokensA = new File("input_xml/s21-A.xml");
+        File input_tokensB = new File("input_xml/s21-B.xml");
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        ContentScorer contentScorer = new ContentScorer();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        // take that output and align
+        List<Segment> segments = aligner.align(tokensWa, tokensWb);
+        System.out.println(segments);
+        assertThat(segments, contains(sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"),t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")), sM(EditGraphAligner.Score.Type.omission).tokensWa(t("lb"), t("/lb")).tokensWb(t("")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")), sM(EditGraphAligner.Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("voor"), t("de")).tokensWb(t("voor"), t("de")), sM(EditGraphAligner.Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("liefelijke"), t("toestemming")).tokensWb(t("liefelijke"), t("toestemming")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("!")).tokensWb(t(".")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("/s"), t("/div"), t("/body"), t("/text")).tokensWb(t("/s"), t("/div"), t("/body"), t("/text"))));
+    }
+
     @Ignore("Test fails when root node is not a match")
     @Test
     public void testLastSegment() throws Exception {
@@ -98,7 +113,7 @@ public class SegmentUnitTest {
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
-        assertThat(segments, contains(sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("body")).tokensWb(t("TEI")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("s")).tokensWb(t("s")), sM(EditGraphAligner.Score.Type.omission).tokensWa(t("c")).tokensWb(t("")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("a"), t("/s")).tokensWb(t("a"), t("/s")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("/body")).tokensWb(t("/TEI"))));
+        assertThat(segments, contains(sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"),t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")), sM(EditGraphAligner.Score.Type.omission).tokensWa(t("lb"), t("/lb")).tokensWb(t("")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")), sM(EditGraphAligner.Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("vóór"), t("de")).tokensWb(t("vóór"), t("de")), sM(EditGraphAligner.Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("liefelijke"), t("toestemming")).tokensWb(t("liefelijke"), t("toestemming")), sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("!")).tokensWb(t("."))));
     }
     // TODO When root node is not a match the test fails: adjust typing
  }

@@ -64,6 +64,31 @@ public class NodeUnitTest {
         assertThat(rootNode, is(rootNodeMatcher));
     }
 
+    @Test
+    @Ignore("Rephrase Expectations")
+    public void testAlignTokensS21() throws Exception {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
+        Coordination aligner = new Coordination();
+        Node rootNode = aligner.alignTokens(tokensWa, tokensWb);
+        NodeMatcher rootNodeMatcher = nM();
+        NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"), t("body"), t("div"), t("s"),t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")));
+        NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.omission).tokensWb(t("lb"), t("/lb")));
+        NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")));
+        NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.addition).tokensWa(t("lb"), t("/lb")));
+        NodeMatcher childrenMatcher5 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")));
+        NodeMatcher childrenMatcher6 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
+        NodeMatcher childrenMatcher7 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.addition).tokensWb(t("/s"), t("s")));
+        NodeMatcher childrenMatcher8 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
+        NodeMatcher childrenMatcher9 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("voor"), t("de"), t("liefelijke"), t("toestemming")).tokensWb(t("voor"), t("de"), t("liefelijke"), t("toestemming")));
+        NodeMatcher childrenMatcher10 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("!")).tokensWb(t(".")));
+        NodeMatcher childrenMatcher11 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("!")).tokensWb(t(".")));
+        NodeMatcher childrenMatcher12 = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s")).tokensWb(t("text"), t("body"), t("div"), t("s")));
+        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2, childrenMatcher3, childrenMatcher4, childrenMatcher5, childrenMatcher6.childrenMatcher(childrenMatcher7, childrenMatcher8), childrenMatcher9, childrenMatcher10.childrenMatcher(childrenMatcher11), childrenMatcher12);
+        assertThat(rootNode, is(rootNodeMatcher));
+    }
+
 
 }
 

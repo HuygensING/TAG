@@ -24,11 +24,9 @@ public class NodeUnitTest {
         Node node = n(s(EditGraphAligner.Score.Type.replacement).tokensWa("c").tokensWb("a"));
         Node children = n(s(EditGraphAligner.Score.Type.replacement).tokensWa("c").tokensWb("a"));
         node.children(children);
-
         NodeMatcher nodeMatcher = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         NodeMatcher childrenMatcher = nM(SegmentMatcher.sM(EditGraphAligner.Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         nodeMatcher.childrenMatcher(childrenMatcher);
-
         assertThat(node, is(nodeMatcher));
     }
 
@@ -91,6 +89,7 @@ public class NodeUnitTest {
     }
 
     @Test
+    // @Ignore("Second round of alignment (on type) not entirely successful")
     public void testAlignSelection21() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
@@ -109,8 +108,6 @@ public class NodeUnitTest {
         rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher3, childrenMatcher4, childrenMatcher5), childrenMatcher6.childrenMatcher(childrenMatcher7), childrenMatcher8);
         assertThat(rootNode, is(rootNodeMatcher));
     }
-
-
 }
 
 

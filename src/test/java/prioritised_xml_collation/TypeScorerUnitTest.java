@@ -1,8 +1,11 @@
 package prioritised_xml_collation;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static junit.framework.TestCase.fail;
+import java.io.File;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -54,6 +57,22 @@ public class TypeScorerUnitTest {
         AbstractScorer scorePunctuation = new TypeScorer();
         boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
         assertThat(resultScorer, is(false));
+    }
+
+    @Test
+    public void testSelectionS21() throws Exception {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
+        List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
+        AbstractScorer scoreType = new TypeScorer();
+        EditGraphAligner aligner = new EditGraphAligner(scoreType);
+        List segments = aligner.align(tokensA, tokensB);
+        System.out.println(segments);
+        Assert.fail("Expected fail");
+        // SegmentMatcher expectedSegments = sM(EditGraphAligner.Score.Type.aligned).tokensWa(t("text"), t("s"), t("vrouw")).tokensWb(t("a"), t("s"), t("vrouw")); sM(EditGraphAligner.Score.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid"), t("?")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("nerveuze"), t("verwachting"), t(".")); sM(EditGraphAligner.Score.Type.replacement)
+
+        // EditGraphAligner on Type
+
     }
 }
 // TODO create four extra tests to assert each possible situation.

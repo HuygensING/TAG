@@ -10,9 +10,9 @@ import java.util.List;
 public class Segment {
     final List<XMLToken>tokensWa;
     final List<XMLToken>tokensWb;
-    final EditGraphAligner.Score.Type type;
+    final Score.Type type;
 
-    public Segment(List tokensWa, List tokensWb, EditGraphAligner.Score.Type type) {
+    public Segment(List tokensWa, List tokensWb,Score.Type type) {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         this.type = type;
@@ -20,14 +20,14 @@ public class Segment {
         // Segments of superwitness with tokensWa and tokensWb
     }
 
-    public Segment(EditGraphAligner.Score.Type type) {
+    public Segment(Score.Type type) {
         this.tokensWa = new ArrayList<>();
         this.tokensWb = new ArrayList<>();
         this.type = type;
     }
 
     // Factory method
-    public static Segment s(EditGraphAligner.Score.Type type) {
+    public static Segment s(Score.Type type) {
         return new Segment(type);
     }
 

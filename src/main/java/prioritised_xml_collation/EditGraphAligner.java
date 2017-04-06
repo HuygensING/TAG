@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 /**
  * Created by Ronald Haentjens Dekker on 29/01/17.
- * Parts of the code (Score) written by Bram Buitendijk (for the Subst case).
+ * Parts of the code (ScoreIterator) written by Bram Buitendijk (for the Subst case).
  * Parts of the code (segments) will be ported from code written by Elli Bleeker
  */
 public class EditGraphAligner {
@@ -55,53 +55,5 @@ public class EditGraphAligner {
         });
         Segmenter segmenter = new Segmenter();
         return segmenter.calculateSegmentation(tokensA, tokensB, cells);
-    }
-
-    public static class Score {
-
-        public Score parent;
-        public int globalScore = 0;
-        int x;
-        int y;
-        int previousX;
-        int previousY;
-        Boolean match;
-
-        public Score(Boolean match, int x, int y, Score parent, int i) {
-            this.match = match;
-            this.x = x;
-            this.y = y;
-            this.parent = parent;
-            this.previousX = parent == null ? 0 : parent.x;
-            this.previousY = parent == null ? 0 : parent.y;
-            this.globalScore = i;
-        }
-
-        public Score(Boolean match, int x, int y, Score parent) {
-            this.match = match;
-            this.x = x;
-            this.y = y;
-            this.parent = parent;
-            this.previousX = parent.x;
-            this.previousY = parent.y;
-            this.globalScore = parent.globalScore;
-        }
-
-        public int getGlobalScore() {
-            return this.globalScore;
-        }
-
-        public void setGlobalScore(int globalScore) {
-            this.globalScore = globalScore;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + this.y + "," + this.x + "]:" + this.globalScore;
-        }
-
-        public static enum Type {
-            aligned, replacement, addition, omission, empty
-        }
     }
 }

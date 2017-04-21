@@ -1,6 +1,6 @@
 package prioritised_xml_collation;
 
-import prioritised_xml_collation.EditGraphAligner.Score;
+import prioritised_xml_collation.Score;
 
 /**
  * Created by ellibleeker on 30/01/2017.

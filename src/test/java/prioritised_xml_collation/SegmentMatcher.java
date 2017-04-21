@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.joining;
  * Created by ellibleeker on 08/02/2017.
  */
 public class SegmentMatcher extends BaseMatcher<Segment> {
-    private EditGraphAligner.Score.Type type;
+    private Score.Type type;
     private List<XMLTokenContentMatcher> tokensWa;
     private List<XMLTokenContentMatcher> tokensWb;
 
@@ -85,7 +85,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
 
-    public static SegmentMatcher sM(EditGraphAligner.Score.Type type) {
+    public static SegmentMatcher sM(Score.Type type) {
         return new SegmentMatcher(type);
     }
 
@@ -99,7 +99,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         return this;
     }
 
-    private SegmentMatcher(EditGraphAligner.Score.Type type) {
+    private SegmentMatcher(Score.Type type) {
         this.tokensWa = Collections.emptyList();
         this.tokensWb = Collections.emptyList();
         this.type = type;

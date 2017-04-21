@@ -32,7 +32,7 @@ public class Coordination {
         }
         // for each segment type replaced
         for (Node childNode : rootNode.children) {
-            if (childNode.segment != null && childNode.segment.type.equals(EditGraphAligner.Score.Type.replacement)) {
+            if (childNode.segment != null && childNode.segment.type.equals(Score.Type.replacement)) {
                 AbstractScorer typeScorer = new TypeScorer();
                 EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
                 // align again on type with typeScorer

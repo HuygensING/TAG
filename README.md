@@ -6,10 +6,8 @@
 
 ## Implementation
 
-### Alexandria Markup
+**Alexandria Markup**  is a prototype implementation of TAG. 
 
-Alexandria Markup is a prototype implementation of TAG. 
-
-* Istallation guide using Docker: <https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md>
+* Installation guide using Docker: <https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md>
 * Server source code: <https://github.com/HuygensING/alexandria-markup>
 

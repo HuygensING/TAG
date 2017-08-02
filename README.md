@@ -8,15 +8,9 @@ Full paper [available](https://www.balisage.net/Proceedings/vol19/html/Dekker01/
 
 Presented at Balisage: The Markup Conference 2017, August 1 - 4, 2017.
 
-## Alexandria
-Alexandria Markup is a prototype implementation of TAG.
+## Implementation
 
-### Installation
-Alexandria Markup installation guide using Docker:
+**Alexandria Markup**  is a prototype implementation of TAG. 
 
-https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md
-
-### Code
-Alexandria Markup server source code:
-https://github.com/HuygensING/alexandria-markup
-
+* Installation guide using Docker: <https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md>
+* Server source code: <https://github.com/HuygensING/alexandria-markup>

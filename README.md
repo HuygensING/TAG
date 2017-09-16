@@ -10,7 +10,7 @@ Haentjens Dekker, Ronald, and David J. Birnbaum. "It's more than just overlap: T
 
 ## Visualization
 
-[“Hunting of the Snark”](file:///./snark-fly.mp4) (mp4, 20G)
+[“Hunting of the Snark”](snark-fly.mp4) (mp4, 20G)
 
 ## Implementation
 

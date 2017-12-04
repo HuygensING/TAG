@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.sun.tools.doclets.formats.html.markup.HtmlStyle.description;
 import static java.util.stream.Collectors.joining;
 
 /**

@@ -53,7 +53,7 @@ public class EditGraphAligner {
                 this.cells[y][x] = max;
             });
         });
-        Segmenter segmenter = new Segmenter();
+        ContentSegmenter segmenter = new ContentSegmenter();
         return segmenter.calculateSegmentation(tokensA, tokensB, cells);
     }
 }

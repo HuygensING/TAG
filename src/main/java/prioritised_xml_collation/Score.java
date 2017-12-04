@@ -47,6 +47,6 @@ public class Score {
         }
 
         public static enum Type {
-            aligned, replacement, addition, omission, empty
+            aligned, replacement, addition, omission, empty, semanticVariation
         }
 }

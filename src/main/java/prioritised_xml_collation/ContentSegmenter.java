@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by ellibleeker on 06/04/2017.
  */
-public class Segmenter {
+public class ContentSegmenter {
     private List<Segment> superwitness;
 
     public List<Segment> calculateSegmentation(List<XMLToken> tokensA, List<XMLToken> tokensB, Score[][] editTable) {

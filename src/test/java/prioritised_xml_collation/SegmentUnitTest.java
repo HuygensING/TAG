@@ -1,6 +1,6 @@
 package prioritised_xml_collation;
 
-import org.junit.Ignore;
+import org.junit.Ignoregit;
 import org.junit.Test;
 
 import java.io.File;

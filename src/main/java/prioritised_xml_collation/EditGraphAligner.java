@@ -10,10 +10,12 @@ import java.util.stream.IntStream;
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
+    private final AbstractSegmenter segmenter;
     private Score[][] cells;
 
-    public EditGraphAligner(AbstractScorer scorer) {
+    public EditGraphAligner(AbstractScorer scorer, AbstractSegmenter segmenter) {
         this.scorer = scorer;
+        this.segmenter = segmenter;
     }
 
     // tokensA is x
@@ -53,7 +55,7 @@ public class EditGraphAligner {
                 this.cells[y][x] = max;
             });
         });
-        ContentSegmenter segmenter = new ContentSegmenter();
-        return segmenter.calculateSegmentation(tokensA, tokensB, cells);
+        return segmenter.calculateSegmentation(cells, tokensA, tokensB);
     }
 }
+//TODO: ContentSegmenter moet variabele segmenter zijn

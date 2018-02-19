@@ -16,7 +16,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 /**
  * Created by ellibleeker on 08/02/2017.
  */
-public class SegmentUnitTest {
+public class ContentSegmenterUnitTest {
 
 
     @Test
@@ -42,8 +42,9 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        AbstractScorer contentScorer = new ContentScorer();
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         // actualSegment = one segment object with two lists of token(s) and a type
@@ -60,8 +61,9 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        AbstractScorer contentScorer = new ContentScorer();
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         // actualSegment = one segment object with two lists of token(s) and a type
@@ -79,8 +81,9 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        AbstractScorer contentScorer = new ContentScorer();
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         assertThat(segments, contains(sM(Score.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")), sM(Score.Type.replacement).tokensWa(t("c")).tokensWb(t("a")), sM(Score.Type.aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI"))));
@@ -93,8 +96,9 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        AbstractScorer contentScorer = new ContentScorer();
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         System.out.println(segments);
@@ -109,8 +113,9 @@ public class SegmentUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
-        ContentScorer contentScorer = new ContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(contentScorer);
+        AbstractScorer contentScorer = new ContentScorer();
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
         assertThat(segments, contains(sM(Score.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"),t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")), sM(Score.Type.omission).tokensWa(t("lb"), t("/lb")).tokensWb(t("")), sM(Score.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")), sM(Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Score.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")), sM(Score.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")), sM(Score.Type.aligned).tokensWa(t("vóór"), t("de")).tokensWb(t("vóór"), t("de")), sM(Score.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Score.Type.aligned).tokensWa(t("liefelijke"), t("toestemming")).tokensWb(t("liefelijke"), t("toestemming")), sM(Score.Type.replacement).tokensWa(t("!")).tokensWb(t("."))));

@@ -16,7 +16,8 @@ public class TypeSegmenterTest {
         List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
         List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
         AbstractScorer scoreType = new TypeScorer();
-        EditGraphAligner aligner = new EditGraphAligner(scoreType);
+        AbstractSegmenter segmenterType = new TypeSegmenter();
+        EditGraphAligner aligner = new EditGraphAligner(scoreType, segmenterType);
         List segments = aligner.align(tokensA, tokensB);
         System.out.println(segments);
         Assert.fail("Expected fail");

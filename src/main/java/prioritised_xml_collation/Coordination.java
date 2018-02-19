@@ -17,7 +17,8 @@ public class Coordination {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         AbstractScorer contentScorer = new ContentScorer();
-        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
+        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // align on content
         List<Segment> contentSegments = contentAligner.align(tokensWa, tokensWb);
         // set root node
@@ -34,7 +35,8 @@ public class Coordination {
         for (Node childNode : rootNode.children) {
             if (childNode.segment != null && childNode.segment.type.equals(Score.Type.replacement)) {
                 AbstractScorer typeScorer = new TypeScorer();
-                EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
+                AbstractSegmenter typeSegmenter = new TypeSegmenter();
+                EditGraphAligner typeAligner = new EditGraphAligner(typeScorer, typeSegmenter);
                 // align again on type with typeScorer
                 List<Segment> typeSegments = typeAligner.align(childNode.segment.tokensWa, childNode.segment.tokensWb);
                 for (Segment segment : typeSegments) {

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by ellibleeker on 30/01/2017.
  */
-public class TypeScorerUnitTest {
+public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLmatchPunctuation() {

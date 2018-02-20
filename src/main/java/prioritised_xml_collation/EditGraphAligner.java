@@ -58,4 +58,3 @@ public class EditGraphAligner {
         return segmenter.calculateSegmentation(cells, tokensA, tokensB);
     }
 }
-//TODO: ContentSegmenter moet variabele segmenter zijn

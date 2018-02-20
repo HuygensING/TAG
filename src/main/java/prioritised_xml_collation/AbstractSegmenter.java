@@ -42,12 +42,13 @@ public abstract class AbstractSegmenter implements SegmenterInterface {
         int y = currentCell.y;
         List<XMLToken> segmentTokensA = tokensA.subList(x, lastX);
         List<XMLToken> segmentTokensB = tokensB.subList(y, lastY);
-        // if currentCell has tokens of type "match", lastcell is replacement (because stateChange)
         if (currentCell.match == Boolean.TRUE) {
+        // if currentCell has tokens of type "match", look at lastcell
+        // if lastCell is addition/omission/replacement stateChange occured and a new segment can be made
             // if cell contains tokens from both witnesses its a replacement
             if (!segmentTokensA.isEmpty() && !segmentTokensB.isEmpty()) {
                 Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.replacement);
-                // insert the segment to the list at the first position (position "0")
+                // insert the segment to the superwitness list at the first position (position "0")
                 superwitness.add(0, segment);
             }
             // addition: no TokensA
@@ -55,7 +56,9 @@ public abstract class AbstractSegmenter implements SegmenterInterface {
                 Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.addition);
                 superwitness.add(0, segment);
             }
-            // omission: no TokensB
+            // it's an omission: no TokensB
+            // if last cell is not a match/addition/replacement it is an omission
+            // this condition is always true, but these lines are kept for reasons of completeness
             else if (segmentTokensB.isEmpty()) {
                 Segment segment = new Segment(segmentTokensA, segmentTokensB, Score.Type.omission);
                 superwitness.add(0, segment);

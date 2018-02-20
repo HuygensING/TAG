@@ -14,6 +14,8 @@ public class TypeScorer extends AbstractScorer {
             return true;
         }
         if(tokenA instanceof TextToken && tokenB instanceof TextToken) {
+            // double pipes means "OR"
+            // so: if token type is punctuation or token type is content, boolean is true
            if(punctuationType || contentType) {
                 return true;
            }

@@ -18,8 +18,8 @@ public class  TypeScorerUnitTest {
     public void testScoreXMLmatchPunctuation() {
         XMLToken tokenA = new TextToken(",");
         XMLToken tokenB = new TextToken("!");
-        AbstractScorer scorePunctuation = new TypeScorer();
-        boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
+        AbstractScorer scoreType = new TypeScorer();
+        boolean resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
     }
 
@@ -27,8 +27,8 @@ public class  TypeScorerUnitTest {
     public void testScoreXMLnonMatchPunctuation() {
         XMLToken tokenA = new TextToken("black");
         XMLToken tokenB = new TextToken("!");
-        AbstractScorer scorePunctuation = new TypeScorer();
-        boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
+        AbstractScorer scoreType = new TypeScorer();
+        boolean resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(false));
     }
 
@@ -36,8 +36,8 @@ public class  TypeScorerUnitTest {
     public void testScoreXMLmatchCharacters() {
         XMLToken tokenA = new TextToken("cat");
         XMLToken tokenB = new TextToken("white");
-        AbstractScorer scorePunctuation = new TypeScorer();
-        boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
+        AbstractScorer scoreType = new TypeScorer();
+        boolean resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
     }
 
@@ -45,8 +45,8 @@ public class  TypeScorerUnitTest {
     public void testScoreXMLMatchElement() {
         XMLToken tokenA = new ElementToken("s");
         XMLToken tokenB = new ElementToken("p");
-        AbstractScorer scorePunctuation = new TypeScorer();
-        boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
+        AbstractScorer scoreType = new TypeScorer();
+        boolean resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(true));
     }
 
@@ -54,8 +54,8 @@ public class  TypeScorerUnitTest {
     public void testScoreXMLnonMatchElement() {
         XMLToken tokenA = new ElementToken("p");
         XMLToken tokenB = new TextToken("!");
-        AbstractScorer scorePunctuation = new TypeScorer();
-        boolean resultScorer = scorePunctuation.match(tokenA, tokenB);
+        AbstractScorer scoreType = new TypeScorer();
+        boolean resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(false));
     }
 

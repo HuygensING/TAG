@@ -10,10 +10,10 @@ import java.util.stream.IntStream;
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
-    private final AbstractSegmenter segmenter;
-    private Score[][] cells;
+    private final Segmenter segmenter;
+    Score[][] cells;
 
-    public EditGraphAligner(AbstractScorer scorer, AbstractSegmenter segmenter) {
+    public EditGraphAligner(AbstractScorer scorer, Segmenter segmenter) {
         this.scorer = scorer;
         this.segmenter = segmenter;
     }
@@ -56,5 +56,24 @@ public class EditGraphAligner {
             });
         });
         return segmenter.calculateSegmentation(cells, tokensA, tokensB);
+    }
+    public ScoreType establishTypeOfCell(Score cell, List<XMLToken> tokensA, List<XMLToken> tokensB){
+        XMLToken tokenA = tokensA.get(cell.x - 1);
+        XMLToken tokenB = tokensB.get(cell.y - 1);
+        System.out.println(tokenA);
+        System.out.println(tokenB);
+        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
+        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
+        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
+        if(punctuationType) {
+            return ScoreType.punctuation;
+        }
+        else if (contentType) {
+            return ScoreType.text;
+        }
+        else if (markupType) {
+            return ScoreType.markup;
+        }
+        else return ScoreType.mix;
     }
 }

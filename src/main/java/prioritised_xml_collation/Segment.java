@@ -10,9 +10,9 @@ import java.util.List;
 public class Segment {
     final List<XMLToken>tokensWa;
     final List<XMLToken>tokensWb;
-    final Score.Type type;
+    final Type type;
 
-    public Segment(List tokensWa, List tokensWb,Score.Type type) {
+    public Segment(List tokensWa, List tokensWb, Type type) {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         this.type = type;
@@ -20,14 +20,14 @@ public class Segment {
         // Segments of superwitness with tokensWa and tokensWb
     }
 
-    public Segment(Score.Type type) {
+    public Segment(Type type) {
         this.tokensWa = new ArrayList<>();
         this.tokensWb = new ArrayList<>();
         this.type = type;
     }
 
     // Factory method
-    public static Segment s(Score.Type type) {
+    public static Segment s(Type type) {
         return new Segment(type);
     }
 
@@ -59,5 +59,9 @@ public class Segment {
     @Override
     public String toString() {
         return this.type.toString()+this.tokensWa.toString()+this.tokensWb.toString();
+    }
+
+    public enum Type {
+        aligned, replacement, addition, omission, empty, semanticVariation
     }
 }

@@ -2,8 +2,6 @@ package prioritised_xml_collation;
 
 import java.util.List;
 
-import static prioritised_xml_collation.Segment.s;
-
 /**
  * Created by ellibleeker on 03/03/2017.
  */
@@ -17,7 +15,7 @@ public class Coordination {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         AbstractScorer contentScorer = new ContentScorer();
-        AbstractSegmenter contentSegmenter = new ContentSegmenter();
+        Segmenter contentSegmenter = new Segmenter();
         EditGraphAligner contentAligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // align on content
         List<Segment> contentSegments = contentAligner.align(tokensWa, tokensWb);
@@ -33,9 +31,9 @@ public class Coordination {
         }
         // for each segment type replaced
         for (Node childNode : rootNode.children) {
-            if (childNode.segment != null && childNode.segment.type.equals(Score.Type.replacement)) {
+            if (childNode.segment != null && childNode.segment.type.equals(Segment.Type.replacement)) {
                 AbstractScorer typeScorer = new TypeScorer();
-                AbstractSegmenter typeSegmenter = new TypeSegmenter();
+                Segmenter typeSegmenter = new Segmenter();
                 EditGraphAligner typeAligner = new EditGraphAligner(typeScorer, typeSegmenter);
                 // align again on type with typeScorer
                 List<Segment> typeSegments = typeAligner.align(childNode.segment.tokensWa, childNode.segment.tokensWb);

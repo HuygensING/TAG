@@ -2,12 +2,9 @@ package prioritised_xml_collation;
 
 import com.codepoetics.protonpack.StreamUtils;
 import org.hamcrest.BaseMatcher;
-import prioritised_xml_collation.Segment;
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +16,7 @@ import static java.util.stream.Collectors.joining;
  * Created by ellibleeker on 08/02/2017.
  */
 public class SegmentMatcher extends BaseMatcher<Segment> {
-    private Score.Type type;
+    private Segment.Type type;
     private List<XMLTokenContentMatcher> tokensWa;
     private List<XMLTokenContentMatcher> tokensWb;
 
@@ -84,7 +81,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
 
-    public static SegmentMatcher sM(Score.Type type) {
+    public static SegmentMatcher sM(Segment.Type type) {
         return new SegmentMatcher(type);
     }
 
@@ -98,7 +95,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         return this;
     }
 
-    private SegmentMatcher(Score.Type type) {
+    private SegmentMatcher(Segment.Type type) {
         this.tokensWa = Collections.emptyList();
         this.tokensWb = Collections.emptyList();
         this.type = type;

@@ -46,7 +46,4 @@ public class Score {
             return "[" + this.y + "," + this.x + "]:" + this.globalScore;
         }
 
-        public enum Type {
-            aligned, replacement, addition, omission, empty, semanticVariation
-        }
 }

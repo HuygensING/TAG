@@ -8,6 +8,6 @@ import java.util.List;
  */
 public interface SegmenterInterface {
     // Interface cannot have instance variables
-    // Interface is instantiated by methods in AbstractSegmenter
+    // Interface is instantiated by methods in Segmenter
     List<Segment> calculateSegmentation(Score[][] editTable, List<XMLToken> tokensA, List<XMLToken> tokensB);
 }

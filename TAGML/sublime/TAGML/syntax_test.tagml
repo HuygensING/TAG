@@ -1,0 +1,102 @@
+[!-- SYNTAX TEST "Packages/TAGML/TAGML.sublime-syntax" --]
+
+TAGML features
+
+Elements: [> <]
+Attributes: order-independent
+Text: Unicode. 
+Overlapping markup: explicitly mark dominance only when containment is ambiguous
+Hierarchies: determined in schema, mark dominance only.
+
+Whitespace: insignificant, unless otherwise stated (probably in the schema) (opposite of XML)
+Whitespace only significant in tags that can contain mixed content.
+2 types of markup: (define type in schema)
+- markup that can only contain other markup -> whitespace is insignificant, only used for layout
+- markup that can contain mixed content
+
+Datatyping: draw inspiration from FtanML and that one unpopular XML schema language (Schematron?). Should be included in the syntax(?)
+> should be defined in the schema
+
+
+
+
+[!-- source.tagml markup.open.tagml --]
+[markup>
+
+[!-- source.tagml markup.close.tagml --]
+<markup]
+
+[m bla="x">bla bla vla<m][a>asdads <a]
+
+
+Discontinuity: like TexMECS
+[!-- discontinuous --]
+[phr>to be,<-phr] he quoted [+phr>or not to be<phr]
+
+[tag |attr}attr-value{attr|>mixed [b>content<b]<tag]
+ 
+[anonymous a="b"]
+
+[s>[a>Cookie Monster [b>likes<a] cookies.<b]<s]
+
+
+// optional
+[?del><?del]
+
+// whitespace significance
+
+// namespace definition
+[!ns x http://bla.com/x.tagsl]
+
+[x:phr> <x:phr]
+
+// Non-linearity: requires more research. XML solves this in the schema, TexMECS in the syntax
+// non-linearity: grouping tags
+// TexMECS: unordered contents
+|>[del>del<del][add>add<add]<|
+
+// comments
+[!-- comments --]
+
+
+// Recursing: in tags, inspired by LMNL
+// to facilitate recursion in markup open tags, the annotations/attributes should have begin/end tags.
+// unlike in lmnl, the annotation syntax is distinct from the markup syntax
+// recursion in tags makes parsing and syntax highlighting more complicated.
+[markup (annotation/[a>annotation<a] [v>value<v]/annotation)>[v>mixed<v] content<markup]
+
+(annotation/value with [m>markup<m]/annotation)
+
+// Milestones: requires more research (and a use case, like marginalia). Anchor+annotation -> LMNL-like ‘document-in-document’
+// Are they really necessary? (probably: inclusion of images -> as placeholders in text)
+[img (src/http://img.com/img.png/img)]
+
+// Selfoverlap: use unique identities in markup
+[a~1>bla bla [a~2>bla bla<a~1] bla bla<a~2]
+
+
+annotation alternative (like ftanml)
+[markup {annotation |text [w>with<w] markup|}>text<markup]
+[markup {annotation {nested [1 2 3]}>text<markup]
+
+annotation Datatyping
+
+- boolean
+[m {done true}>bla<m]
+
+- string
+[m {name "Name"}>bla<m]
+[m {name 'Name'}>bla<m]
+
+- number
+[m {age 3.14}>bla<m]
+
+- list
+[m {todo ["run","jump","fly","continue"]}>bla<m]
+
+- nested annotation
+[m {address {street "Broadway"} {tel 911}}>text<m]
+[m address={street="Broadway" tel=911}>text<m]
+
+- mixed content
+[m {motto |To [ex>infinity<ex] and beyond|}>bla<m]

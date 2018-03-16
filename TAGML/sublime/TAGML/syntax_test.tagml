@@ -73,7 +73,7 @@ thought Alice
 
 // Milestones: requires more research (and a use case, like marginalia). Anchor+annotation -> LMNL-like ‘document-in-document’
 // Are they really necessary? (probably: inclusion of images -> as placeholders in text)
-[img (src/http://img.com/img.png/img)]
+[img src='http://example.com/img.png']
 
 // Selfoverlap: use unique identities in markup
 [a~1>bla bla [a~2>bla bla<a~1] bla bla<a~2]

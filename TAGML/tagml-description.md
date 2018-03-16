@@ -50,12 +50,12 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   ```
   Annotations can be added to the start tag of any markup.  
   Annotation values can be any of the following data types:
-  - string: `"string"` or `'string'`
-  - mixed content: `|mixed [b>content<b]|`
-  - boolean: `true` or `false`
-  - number: `3.14`
-  - (nested) annotation: `{x=1 y=2}`
-  - list of these data types: `['Hughie', 'Louis', 'Dewey']`
+  - string: `"string"` or `'string'` (bracketed by `"` or `'`)
+  - mixed content: `|mixed [b>content<b]|` (bracketed by `|`)
+  - boolean: `true` or `false` (not bracketed)
+  - number: `3.14` (not bracketed)
+  - (nested) annotation: `{x=1 y=2}` (bracketed by `{` and `}`)
+  - list of these data types: `['Hughie', 'Louis', 'Dewey']` (bracketed by `[` and `]`)
   
   By using an annotation data type as value for an annotation, you can have hierarchical annotations:
   ```
@@ -83,8 +83,42 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   thought Alice
   [+q>without pictures or conversation?<q]
   ```
-  In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag. 
+  In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag.
   
+#### Non-linearity
+  In general, the text of a TAGML document is to be read in the order in whichit has been transcribed.
+  In some cases, there may be different paths through the text, for example when an addition/deletion pair has been encoded:
+  ```
+  [q>To be, or [del>to be not<del][add>not to be<add]?<q] 
+  ``` 
+  To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path, and the `add` part the other, we group these markups by enclosing them in `set` tags:
+  ```
+  [q>To be, or |>[del>to be not<del][add>not to be<add]<|?<q] 
+  ```
+  In case of a solitary `del` without a corresponding `add`, use an *empty* markup to indicate there are two paths: one with the text marked up by `del`, and one without:  
+  ```
+  [q>To be, or |>[del>to<del][]<| not to be?<q] 
+  ```
+  
+#### Milestones / placeholders / empty markup
+  ```
+  [img src='http://example.com/img.png']
+  ```
+  
+#### Namespaces
+  ```
+  [!ns p http://tag.com/poetry]
+  [p:poem>Roses are red, .....<p:poem]
+  ```
+ 
+#### Comments
+  ```
+  [l>text text text<l]
+  [! comment !]
+  [l>text text text<l]
+  ```
+ 
+   
 ## TAGML Schema
 
 Markup can either structural, meaning it only contains other markup,  

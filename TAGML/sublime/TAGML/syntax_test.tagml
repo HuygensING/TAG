@@ -31,7 +31,11 @@ Datatyping: draw inspiration from FtanML and that one unpopular XML schema langu
 
 Discontinuity: like TexMECS
 [!-- discontinuous --]
-[phr>to be,<-phr] he quoted [+phr>or not to be<phr]
+[phr>"To be,"<-phr] he spake [+phr>"or not to be!"<phr]
+
+... [q>and what is the use of a book,<-q]
+thought Alice
+[+q>without pictures or conversation?<q]
 
 [tag |attr}attr-value{attr|>mixed [b>content<b]<tag]
  

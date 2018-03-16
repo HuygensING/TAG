@@ -10,9 +10,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
 
 A TAGML document consist of Unicode characters and adheres to the syntax defined in this description. 
 
-### Textual phenomena and how to code them in TAGML
-
-#### Markup tags
+### Markup tags
   ```
   [line>The rain in Spain falls mainly on the plain.<line]
   ```
@@ -26,21 +24,21 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   `1` is the identifier,  
   `annotation_1` and `annotation_2` are the names of the annotations
 
-#### Overlapping markup  
+### Overlapping markup  
   Unlike in XML, markup can *overlap* in TAGML:    
   ```
   [s>[a>Cookie Monster [b>likes<a] cookies.<b]<s]
   ```
   Markup "a" overlaps with markup "b", the "b" markup starts before the "a" markup ends, but that doesn't mean it also has to end before "a". 
 
-#### Self-overlapping markup
+### Self-overlapping markup
   ```
   [s>[a~1>Cookie Monster [a~2>likes<a~1] cookies.<a~2]<s]
   ```
   Markup of the same name can overlap by adding identifiers to the markup name (for both the opening and the closing tags).  
   The combination name + identifier should be unique within the TAGML document.
 
-#### Markup annotations
+### Markup annotations
   ```
   [poem type="limerick"
         author='John'
@@ -66,18 +64,18 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
     }>Amsterdam<origin]
   ```
 
-#### Whitespace significance  
+### Whitespace significance  
   Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined in the schema as containing mixed content.  
   In all other places, whitespace is insignificant and can be used for formatting the TAGML.
 
-#### Dominance / Containment  
+### Dominance / Containment  
   > When you’re talking about overlapping structures, it’s useful to make the distinction between structures that *contain* each other and structures that *dominate* each other. Containment is a happenstance relationship between ranges while dominance is one that has a meaningful semantic. A page may happen to *contain* a stanza, but a poem *dominates* the stanzas that it contains.
   
    Jeni Tennison, ["Overlap, Containment and Dominance"](http://www.jenitennison.com/2008/12/06/overlap-containment-and-dominance.html)
   
   The overlapping hierarchies are defined in the schema. If markup "b" is contained by markup "a", and both are in the same hierarchy, then "a" dominates "b"
 
-#### Discontinuity
+### Discontinuity
   ```
   ... [q>and what is the use of a book,<-q]
   thought Alice
@@ -85,13 +83,13 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   ```
   In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag.
   
-#### Non-linearity
+### Non-linearity
   In general, the text of a TAGML document is to be read in the order in whichit has been transcribed.
   In some cases, there may be different paths through the text, for example when an addition/deletion pair has been encoded:
   ```
   [q>To be, or [del>to be not<del][add>not to be<add]?<q] 
   ``` 
-  To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path, and the `add` part the other, we group these markups by enclosing them in `set` tags:
+  To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path, and the `add` part the other, we group these markups by enclosing them in `set` tags `|>` and `<|`:
   ```
   [q>To be, or |>[del>to be not<del][add>not to be<add]<|?<q] 
   ```
@@ -100,35 +98,90 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   [q>To be, or |>[del>to<del][]<| not to be?<q] 
   ```
   
-#### Milestones / placeholders / empty markup
+### Milestones / placeholders / empty markup
   ```
   [img src='http://example.com/img.png']
   ```
   
-#### Namespaces
+### Namespaces
   ```
   [!ns p http://tag.com/poetry]
   [p:poem>Roses are red, .....<p:poem]
   ```
+  Should be at the top of the document.
  
-#### Comments
+### Comments
   ```
   [l>text text text<l]
   [! comment !]
   [l>text text text<l]
   ```
- 
+
+## Examples
+
+### Genesis
+Original in LMNL ( from http://xml.coverpages.org/LMNL-Abstract.html )
+```
+[book [title [lang}en{lang]}Genesis{title]}
+[chapter}
+[section [title}The creation of the world.{title]}
+[para}
+[v}[s}[note}In the beginning of creation, when God made heaven and
+earth,{note [alt}In the beginning God created heaven and
+earth.{alt]]{v] [v}the earth was without form and void, with darkness
+over the face of the abyss, [note}and a mighty wind that swept{note [alt}and
+the spirit of God hovering{alt]] over the surface of the waters.{s]{v]
+[v}[s}God said, [quote}[s}Let there be a light{s]{quote], and there
+was light;{v] [v}and God saw that the light was good, and he separated
+the light from darkness.{s]{v] [v}[s}He called the light day, and the
+darkness night. So evening came, and morning came, the first
+day.{s]{v]
+{para]
+...{chapter]...{section]...{book]
+```
+
+in TAGML:
+```
+[book title={lang='en' content='Genesis'}>
+[chapter>
+[section title="The creation of the world.">
+[para>
+[v>[s>
+|>[original>In the beginning of creation, when God made heaven and earth,<original]
+[alt>In the beginning God created heaven and earth.<alt]<|
+<v] [v>the earth was without form and void, with darkness
+over the face of the abyss, |>[original>and a mighty wind that swept<original][alt>and
+the spirit of God hovering<alt]<| over the surface of the waters.<s]<v]
+[v>[s>God said, [quote>[s>Let there be a light<s]<quote], and there
+was light;<v] [v>and God saw that the light was good, and he separated
+the light from darkness.<s]<v] [v>[s>He called the light day, and the
+darkness night. So evening came, and morning came, the first
+day.<s]<v]
+<para]
+...<chapter]...<section]...<book]
+```
+
+The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation recursion encoding betwen LMNL and TAGML.
+
+The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
+is encoded in TAGML as a group with `original` and `alt` markup.    
    
 ## TAGML Schema
 
-Markup can either structural, meaning it only contains other markup,  
-or non-structural (TODO: betere term verzinnen), meaning it can contain mixed content: both text and markup.
+The schema should:
+- define hierarchies
+- define annotations for markup (value data type, required?)
+- define which markup can contain mixed content
+  (markup can be either structural, meaning it only contains other markup,  
+  or non-structural (TODO: betere term verzinnen), meaning it can contain mixed content: both text and markup.
+  )
 
 ----------
+
 ( TAGML is inspired by: )
 
-[TexMECS] http://mlcd.blackmesatech.com/mlcd/2003/Papers/texmecs.html
+[TexMECS] (http://mlcd.blackmesatech.com/mlcd/2003/Papers/texmecs.html)
 
-[LMNL]    http://lmnl-markup.org/specs/archive/LMNL_syntax.xhtml
+[LMNL]    (http://lmnl-markup.org/specs/archive/LMNL_syntax.xhtml)
 
-[FTANML]  https://www.balisage.net/Proceedings/vol10/html/Kay01/BalisageVol10-Kay01.html
+[FTANML]  (https://www.balisage.net/Proceedings/vol10/html/Kay01/BalisageVol10-Kay01.html)

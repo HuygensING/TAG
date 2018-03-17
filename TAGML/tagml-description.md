@@ -15,7 +15,7 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   [line>The rain in Spain falls mainly on the plain.<line]
   ```
   
-  For every open tag `[markup>]` there should be a corresponding close tag `<markup]`  
+  For every open tag `[markup>` there should be a corresponding close tag `<markup]`  
   markup has a *name*, an optional *identifier*, and (for the open tag) one or more *annotations*.
   ```
   [markup~1 annotation_1='string value' annotation_2=2.718>text<markup~1]

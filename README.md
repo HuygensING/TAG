@@ -6,7 +6,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 ## Presentations and publications
 
-* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. “Including XML markup in the automated collation of literary text.” Presented at XML Prague 2018, Prague, February 8–10, 2018. In _XML Prague 2018. Conference proceedings. Prague: University of Economics, 77–95.
+* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. “Including XML markup in the automated collation of literary text.” Presented at XML Prague 2018, Prague, February 8–10, 2018. In _XML Prague 2018. Conference proceedings._ Prague: University of Economics, 77–95.
 	* Paper: <http://archive.xmlprague.cz/2018/files/xmlprague-2018-proceedings.pdf#page=89>.
 	* Slides: <http://archive.xmlprague.cz/2018/files/presentations/BleekerBuitendijkHaentjensDekkerKulsdom_XML_Prague_2018.pdf>
 	* Video: <https://www.youtube.com/watch?v=WudSN3mGsGk>

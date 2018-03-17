@@ -10,7 +10,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 	* Paper: <http://archive.xmlprague.cz/2018/files/xmlprague-2018-proceedings.pdf#page=89>.
 	* Slides: <http://archive.xmlprague.cz/2018/files/presentations/BleekerBuitendijkHaentjensDekkerKulsdom_XML_Prague_2018.pdf>
 	* Video: <https://www.youtube.com/watch?v=WudSN3mGsGk>
-* Haentjens Dekker, Ronald, and David J. Birnbaum. 2017. “It's more than just overlap: Text As Graph.” Presented at Balisage: The Markup Conference 2017, Washington, DC, August 1 - 4, 2017. In _Proceedings of Balisage: The Markup Conference 2017_. Balisage Series on Markup Technologies, vol. 19 (2017). doi:`10.4242/BalisageVol19.Dekker01`.
+* Haentjens Dekker, Ronald, and David J. Birnbaum. 2017. “It’s more than just overlap: Text As Graph.” Presented at Balisage: The Markup Conference 2017, Washington, DC, August 1-4, 2017. In _Proceedings of Balisage: The Markup Conference 2017_. Balisage Series on Markup Technologies, vol. 19 (2017). doi:`10.4242/BalisageVol19.Dekker01`.
 	* Paper: <https://www.balisage.net/Proceedings/vol19/html/Dekker01/BalisageVol19-Dekker01.html>
 	* Visualization: [“Hunting of the Snark”](snark-fly.mp4) (mp4, 20G)
 

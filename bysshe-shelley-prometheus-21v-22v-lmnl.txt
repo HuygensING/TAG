@@ -1,0 +1,109 @@
+[text}
+[page}21v{}
+[div [type}p{]}
+[line [rend}indent2{]}1[rend [place}sup{]}st{]. Voice from the Mountains {line]
+[line}Thrice three hundred thousand years {line]
+[line [rend}indent1{]}Oe'r the Earthquakes couch we stood {line]
+[line}Oft as men convulsed with fear {line]
+[line [rend}indent1{]}We trembeld in our [w [facs}#ms_shelley_e1-0046-1{]}multitude{w] {line]
+{div]
+[div [type}p{]}
+[line [rend}indent2{]}2[rend [place}sub{]}d. Voice from the Springs {line]
+[line}Thunderbolts had parched our water{line]
+[line [rend}indent2{]}We had been stained with bitter blood {line]
+{page]
+[page}22v{}
+[line}And had ran mute [w [facs}#ms_shelley_e1-0046-2{]}mid{w] shrieks of slaugter{line]
+[line [rend}indent2{]}Thro' a city & a solitude!{line]
+{div]
+{page]
+{text]
+
+# a text is a sequence of pages
+# a page contains one or more divs
+# a div has a compulsory type annotation, and contains a sequence of lines
+# a line has an optional rend annotation and may contain zero or more words (w)  
+# a word (w) has a compulsory facsimile annotation
+
+Grammar: text -> page+ -> div+ -> line+ -> w* -> #PCDATA
+
+------
+
+[text}
+[poem}
+[sp}
+[speaker}1st. Voice from the Mountains{speaker]
+[stanza [rhyme}abab{]}
+[lg [type}quatrain{]}
+[l}Thrice three hundred thousand [w}[rhyme [label}a{]}year{rhyme]s{w] {l]
+[l}Oe'r the Earthquakes couch we [w}[rhyme [label}b{]}stood{rhyme]{w] {l]
+[l}Oft as men convulsed with [w}[rhyme}a{]}fear{rhyme]{w] {l]
+[l}We trembled in our [w}multi[rhyme [label}b{]}tude{rhyme]{w] {l]
+{lg]
+{sp]
+[sp}
+[speaker}2d. Voice from the Mountains{speaker]
+[lg [type}quatrain{]}
+[l}Thunderbolts had parched our [w}[rhyme [label}a{]}water{rhyme]{w]{l]
+[l}We had been stained with bitter [w}[rhyme [label}b{]}blood{rhyme]{w]{l]
+[l}And had ran mute 'mid shrieks of [w}[rhyme [label}a{]}slaugter{rhyme]{w]{l]
+[l}Thro' a city & a [w}[rhyme [label}b{]}solitude{rhyme]{w]{l]
+{lg]
+{sp]
+{stanza]
+{poem]
+{text]
+
+# a text is a sequence of poems
+# a poem contains zero or more speech (sp) ranges followed by one or more stanzas
+# every speech (sp) contains one speaker
+# a stanza contains one or more line groups (lg) with an optional type annotation
+# a line group contains one or more lines (l)
+# a line contains zero or more words (w)
+# a word (w) contains one or more rhymes
+# a rhyme has a compulsory label annotation  
+
+Grammar:
+text -> poem+ -> (sp* -> speaker) stanza+ -> lg+ -> l+ -> w+ -> rhyme+ -> label -> #PCDATA
+
+------
+
+[text}
+[s}
+[cl}[phr}1st. Voice{phr] [phr}from the Mountains{phr]
+{cl]
+[cl}
+    [phr [type}NP{]}[w [type}Adjunct{]}Thrice{w] three hundred thousand years{phr] 
+    [phr [type}PP{]}Oe'r the Earthquakes couch{phr] [phr [type}VP{]}we stood;{phr]{cl]
+[cl}
+    [phr=1 [type}Adverb{]}[w [type}Adjunct{]}Oft{w] [phr=2 [type}Adverb{]}as men convulsed with fears{phr=2] [phr [type}VP{]}We trembled{phr] in our multitude{phr=1]{cl]
+[cl}
+    [phr [type}NP{]}2d. Voice{phr] [phr [type}Adverb{]}from the Springs{phr]{cl]
+[cl}
+    [phr [type}N{]}Thunderbolts{phr] [phr [type}V{]}had parched{phr] [phr [type}O{]}our water[pc},{pc]{phr] 
+    [phr [type}N{]}We{phr] [phr [type}VP{]}had been stained{phr] [phr [type}Adjunct{]}with [w [type}A{]}bitter{w] blood{phr]{cl]
+[cl}
+    [phr}[w [type}contr{]}And{w] [phr [type}VP{]}had ran mute{phr] 'mid shrieks of slaugter{phr] 
+    [phr}Thro' a city & a solitude!{phr]
+{cl]
+
+
+NP = Noun Phrase
+PP = Prepositional Phrase
+VP = Verbal Phrase
+A = Adjective
+Adv = Adverb
+AV = Auxiliary Verb
+C = Conjunction
+D = Determiner
+N = Noun
+P = Preposition
+V = Verb
+contr = contraction
+
+# a phrase (phr) has a compulsory type annotation, and contains several words (w) 
+# a word (w) has a compusory type annotation, and may contain several morphemes (m)
+# a morpheme (m) has a compulsory type annotation, and may contain several characters (c) and punctuation characters (pc), which in turn have optional type annotation
+
+Grammar : text -> s+ -> cl+ -> phr+ -> w+ -> m? -> c? -> pc? -> #PCDATA
+

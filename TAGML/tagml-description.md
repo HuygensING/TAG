@@ -77,7 +77,7 @@ NOTE: The two annotations examples above are not completely consistent in how th
   In all other places, whitespace is insignificant and can be used for formatting the TAGML.
   
   ```
-  NOTE: There are rules defined in the XMLPath/XQuery standard on how to deal with whitespace. It seems like a good idea to follow these rules.
+  NOTE: There is a function in the XPath standard called normalize-whitespace that describes how a to deal with whitespace. It seems like a good idea to follow these rules. Or atleast get inspired by it. https://www.w3.org/TR/xpath/#function-normalize-space
   
   NOTE: There is an xml:space attribute that tries to define how the XML processor should deal with whitespace. As far we know almost nobody uses this. 
   ```

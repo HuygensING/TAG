@@ -68,6 +68,10 @@ NOTE: We need to define the escape characters. For now these seem to be: [ ] < >
     }>Amsterdam<origin]
   ```
 
+```
+NOTE: The two annotations examples above are not completely consistent in how they separate nested annotations. One example uses a comma, another does not. For example the position one does, while line (nested) annotation does not.
+```
+
 ### Whitespace significance  
   Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined in the schema as containing mixed content.  
   In all other places, whitespace is insignificant and can be used for formatting the TAGML.

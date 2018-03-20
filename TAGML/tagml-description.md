@@ -10,6 +10,10 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
 
 A TAGML document consist of Unicode characters and adheres to the syntax defined in this description. 
 
+```
+NOTE: We need to define the escape characters. For now these seem to be: [ ] < >
+```
+
 ### Markup tags
   ```
   [line>The rain in Spain falls mainly on the plain.<line]
@@ -67,7 +71,13 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
 ### Whitespace significance  
   Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined in the schema as containing mixed content.  
   In all other places, whitespace is insignificant and can be used for formatting the TAGML.
-
+  
+  ```
+  NOTE: There are rules defined in the XMLPath/XQuery standard on how to deal with whitespace. It seems like a good idea to follow these rules.
+  
+  NOTE: There is an xml:space attribute that tries to define how the XML processor should deal with whitespace. As far we know almost nobody uses this. 
+  ```
+  	
 ### Dominance / Containment  
   > When you’re talking about overlapping structures, it’s useful to make the distinction between structures that *contain* each other and structures that *dominate* each other. Containment is a happenstance relationship between ranges while dominance is one that has a meaningful semantic. A page may happen to *contain* a stanza, but a poem *dominates* the stanzas that it contains.
   
@@ -96,6 +106,11 @@ A TAGML document consist of Unicode characters and adheres to the syntax defined
   In case of a solitary `del` without a corresponding `add`, use an *empty* markup to indicate there are two paths: one with the text marked up by `del`, and one without:  
   ```
   [q>To be, or |>[del>to<del][]<| not to be?<q] 
+  ```
+  
+  ```
+  NOTE: I think we should add a <?NAME> construction for cases where there is a only a single option, which means that it is an optional path through the text. That would be much shorter than |>[NAME>text<NAME][]<|.
+  NOTE: Futhermore: The TAG datamodel allows for alternative text without markup. The rules above would not suffice in that case. 
   ```
   
 ### Milestones / placeholders / empty markup

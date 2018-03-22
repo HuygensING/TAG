@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
- * ContentTypeSegmenter
- * Created by Ronald HAentjens Dekker
+ * ContentType Segmenter
+ * Created by Ronald Haentjens Dekker
  * 22/03/2018
  *
  */

@@ -5,22 +5,19 @@ import java.util.stream.IntStream;
 
 /**
  * Created by Ronald Haentjens Dekker on 29/01/17.
- * Parts of the code (CellIterator) written by Bram Buitendijk (for the Subst case).
  * Parts of the code (segments) will be ported from code written by Elli Bleeker
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
-    private final SegmenterInterface segmenter;
     Cell[][] cells;
 
-    public EditGraphAligner(AbstractScorer scorer, SegmenterInterface segmenter) {
+    EditGraphAligner(AbstractScorer scorer) {
         this.scorer = scorer;
-        this.segmenter = segmenter;
     }
 
     // tokensA is x
     // tokensB is y
-    public List<Segment> align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    public EditGraphTable align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
         // init cells and scorer
         this.cells = new Cell[tokensB.size() + 1][tokensA.size() + 1];
 
@@ -56,26 +53,12 @@ public class EditGraphAligner {
                 this.cells[y][x] = max;
             });
         });
-        EditGraphTable table = new EditGraphTable(cells, tokensA, tokensB);
-        return segmenter.calculateSegmentation(table);
+        return new EditGraphTable(cells, tokensA, tokensB);
     }
-    public CellType establishTypeOfCell(Cell cell, List<XMLToken> tokensA, List<XMLToken> tokensB){
-        XMLToken tokenA = tokensA.get(cell.x - 1);
-        XMLToken tokenB = tokensB.get(cell.y - 1);
-        System.out.println(tokenA);
-        System.out.println(tokenB);
-        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
-        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
-        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
-        if(punctuationType) {
-            return CellType.punctuation;
-        }
-        else if (contentType) {
-            return CellType.text;
-        }
-        else if (markupType) {
-            return CellType.markup;
-        }
-        else return CellType.mix;
+
+    public List<Segment> alignAndSegment(List<XMLToken> tokensA, List<XMLToken> tokensB, SegmenterInterface contentSegmenter) {
+        EditGraphTable table = this.align(tokensA, tokensB);
+        return contentSegmenter.calculateSegmentation(table);
     }
+
 }

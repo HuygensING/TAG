@@ -8,14 +8,15 @@ import java.util.List;
  * 22/03/2018
  * Contains the cells
  * and the list of tokens for witness A and B
- * Provides iterator; that code originally written by Elli Bleeker
+ * Provides iterator; that code originally written by Bram Buitendijk (slightly changed to include upperleft cell)
+ * Provides cell type: code originally written by Elli Bleeker.
  */
 public class EditGraphTable implements Iterable<Cell> {
     private Cell[][] matrix;
     List<XMLToken> tokensA;
     List<XMLToken> tokensB;
 
-    public EditGraphTable(Cell[][] cells, List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    EditGraphTable(Cell[][] cells, List<XMLToken> tokensA, List<XMLToken> tokensB) {
         this.matrix = cells;
         this.tokensA = tokensA;
         this.tokensB = tokensB;
@@ -43,5 +44,25 @@ public class EditGraphTable implements Iterable<Cell> {
                 return currentCell;
             }
         };
+    }
+
+    public CellType establishTypeOfCell(Cell cell){
+        XMLToken tokenA = tokensA.get(cell.x - 1);
+        XMLToken tokenB = tokensB.get(cell.y - 1);
+        System.out.println(tokenA);
+        System.out.println(tokenB);
+        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
+        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
+        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
+        if(punctuationType) {
+            return CellType.punctuation;
+        }
+        else if (contentType) {
+            return CellType.text;
+        }
+        else if (markupType) {
+            return CellType.markup;
+        }
+        else return CellType.mix;
     }
 }

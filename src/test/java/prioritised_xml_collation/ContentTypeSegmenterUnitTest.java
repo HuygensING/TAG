@@ -33,9 +33,9 @@ public class ContentTypeSegmenterUnitTest {
         List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File(filename_w2));
         AbstractScorer contentScorer = new ContentScorer();
         SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
-        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer, contentSegmenter);
+        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
         // System.out.println(segmentsRound1);
-        return contentAligner.align(tokensA, tokensB);
+        return contentAligner.alignAndSegment(tokensA, tokensB, contentSegmenter);
     }
     private List<Segment> alignSegmentBasedOnType(Segment segmentReplaced) {
         // Take the replaced segment and get its tokens
@@ -45,8 +45,8 @@ public class ContentTypeSegmenterUnitTest {
         // Do the actual second phase alignment
         AbstractScorer scoreType = new TypeScorer();
         SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
-        EditGraphAligner typeAligner = new EditGraphAligner(scoreType, typeSegmenter);
-        return typeAligner.align(tokensAtype, tokensBtype);
+        EditGraphAligner typeAligner = new EditGraphAligner(scoreType);
+        return typeAligner.alignAndSegment(tokensAtype, tokensBtype, typeSegmenter);
     }
 
 

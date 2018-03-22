@@ -19,16 +19,17 @@ public class AlignedNonAlignedSegmenter extends AbstractSegmenter {
             // stateChange if the type of the lastCell is not the same as the currentCell
             Boolean stateChange = lastCell.match != currentCell.match;
             if (stateChange) {
-                addCelltoSuperwitness(currentCell, lastCell, superwitness, editTable);
+                // insert the segment to the superwitness list at the first position (position "0")
+                superwitness.add(0, createSegmentOfCells(currentCell, lastCell, editTable));
                 // change the pointer
                 lastCell = currentCell;
             }
         }
         // process the final cell in de EditGraphTable (additions/omissions at the beginning of the witnesses)
         if (lastCell!=currentCell) {
-            addCelltoSuperwitness(currentCell, lastCell, superwitness, editTable);
+            // insert the segment to the superwitness list at the first position (position "0")
+            superwitness.add(0, createSegmentOfCells(currentCell, lastCell, editTable));
         }
         return superwitness;
     }
-
 }

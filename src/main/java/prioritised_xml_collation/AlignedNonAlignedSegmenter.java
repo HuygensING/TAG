@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AlignedNonAlignedSegmenter extends AbstractSegmenter {
+public class AlignedNonAlignedSegmenter implements SegmenterInterface {
     public List<Segment> calculateSegmentation(EditGraphTable editTable) {
         ArrayList<Segment> superwitness = new ArrayList<>();
         // We set last cell to the first iterable cell. (lower right corner)
@@ -20,7 +20,7 @@ public class AlignedNonAlignedSegmenter extends AbstractSegmenter {
             Boolean stateChange = lastCell.match != currentCell.match;
             if (stateChange) {
                 // insert the segment to the superwitness list at the first position (position "0")
-                superwitness.add(0, createSegmentOfCells(currentCell, lastCell, editTable));
+                superwitness.add(0, editTable.createSegmentOfCells(currentCell, lastCell));
                 // change the pointer
                 lastCell = currentCell;
             }
@@ -28,7 +28,7 @@ public class AlignedNonAlignedSegmenter extends AbstractSegmenter {
         // process the final cell in de EditGraphTable (additions/omissions at the beginning of the witnesses)
         if (lastCell!=currentCell) {
             // insert the segment to the superwitness list at the first position (position "0")
-            superwitness.add(0, createSegmentOfCells(currentCell, lastCell, editTable));
+            superwitness.add(0, editTable.createSegmentOfCells(currentCell, lastCell));
         }
         return superwitness;
     }

@@ -10,7 +10,7 @@ import java.util.List;
  * 22/03/2018
  *
  */
-public class ContentTypeSegmenter extends AbstractSegmenter {
+public class ContentTypeSegmenter implements SegmenterInterface {
     public List<Segment> calculateSegmentation(EditGraphTable editTable) {
         ArrayList<Segment> superwitness = new ArrayList<>();
         // CellIterator iterates cells:

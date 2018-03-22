@@ -5,13 +5,13 @@ import java.util.stream.IntStream;
 
 /**
  * Created by Ronald Haentjens Dekker on 29/01/17.
- * Parts of the code (ScoreIterator) written by Bram Buitendijk (for the Subst case).
+ * Parts of the code (CellIterator) written by Bram Buitendijk (for the Subst case).
  * Parts of the code (segments) will be ported from code written by Elli Bleeker
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
     private final SegmenterInterface segmenter;
-    Score[][] cells;
+    Cell[][] cells;
 
     public EditGraphAligner(AbstractScorer scorer, SegmenterInterface segmenter) {
         this.scorer = scorer;
@@ -22,10 +22,10 @@ public class EditGraphAligner {
     // tokensB is y
     public List<Segment> align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
         // init cells and scorer
-        this.cells = new Score[tokensB.size() + 1][tokensA.size() + 1];
+        this.cells = new Cell[tokensB.size() + 1][tokensA.size() + 1];
 
         // init 0,0
-        this.cells[0][0] = new Score(Boolean.FALSE, 0, 0, null, 0);
+        this.cells[0][0] = new Cell(Boolean.FALSE, 0, 0, null, 0);
 
         // fill the first row with gaps
         IntStream.range(1, tokensA.size() + 1).forEach(x -> {
@@ -46,18 +46,18 @@ public class EditGraphAligner {
                 int previousY = y - 1;
                 int previousX = x - 1;
                 boolean match = scorer.match(tokensA.get(x - 1), tokensB.get(y - 1));
-                Score upperLeft = scorer.score(x, y, this.cells[previousY][previousX], match);
-                Score left = scorer.gap(x, y, this.cells[y][previousX]);
-                Score upper = scorer.gap(x, y, this.cells[previousY][x]);
+                Cell upperLeft = scorer.score(x, y, this.cells[previousY][previousX], match);
+                Cell left = scorer.gap(x, y, this.cells[y][previousX]);
+                Cell upper = scorer.gap(x, y, this.cells[previousY][x]);
                 //NOTE: performance: The creation of a List is a potential performance problem; better to do two
                 //separate comparisons.
-                Score max = Collections.max(Arrays.asList(upperLeft, left, upper), (score, other) -> score.globalScore - other.globalScore);
+                Cell max = Collections.max(Arrays.asList(upperLeft, left, upper), (score, other) -> score.globalScore - other.globalScore);
                 this.cells[y][x] = max;
             });
         });
         return segmenter.calculateSegmentation(cells, tokensA, tokensB);
     }
-    public ScoreType establishTypeOfCell(Score cell, List<XMLToken> tokensA, List<XMLToken> tokensB){
+    public CellType establishTypeOfCell(Cell cell, List<XMLToken> tokensA, List<XMLToken> tokensB){
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
         System.out.println(tokenA);
@@ -66,14 +66,14 @@ public class EditGraphAligner {
         boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
         boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
         if(punctuationType) {
-            return ScoreType.punctuation;
+            return CellType.punctuation;
         }
         else if (contentType) {
-            return ScoreType.text;
+            return CellType.text;
         }
         else if (markupType) {
-            return ScoreType.markup;
+            return CellType.markup;
         }
-        else return ScoreType.mix;
+        else return CellType.mix;
     }
 }

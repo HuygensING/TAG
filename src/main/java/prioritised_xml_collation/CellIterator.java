@@ -5,12 +5,12 @@ import java.util.Iterator;
 /**
  * Created by ellibleeker on 06/04/2017.
  */
-public class ScoreIterator implements Iterator<Score> {
+public class CellIterator implements Iterator<Cell> {
     private Integer y;
     private Integer x;
-    private Score[][] matrix;
+    private Cell[][] matrix;
 
-    ScoreIterator(Score[][] matrix) {
+    CellIterator(Cell[][] matrix) {
         this.matrix = matrix;
         this.x = matrix[0].length - 1;
         this.y = matrix.length - 1;
@@ -22,10 +22,10 @@ public class ScoreIterator implements Iterator<Score> {
         }
 
     @Override
-    public Score next() {
-    Score currentScore = this.matrix[this.y][this.x];
-    this.x = currentScore.previousX;
-    this.y = currentScore.previousY;
-    return currentScore;
+    public Cell next() {
+    Cell currentCell = this.matrix[this.y][this.x];
+    this.x = currentCell.previousX;
+    this.y = currentCell.previousY;
+    return currentCell;
     }
 }

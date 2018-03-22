@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlignedNonAlignedSegmenter implements SegmenterInterface {
-    public List<Segment> calculateSegmentation(Score[][] editTable, List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    public List<Segment> calculateSegmentation(Cell[][] editTable, List<XMLToken> tokensA, List<XMLToken> tokensB) {
         ArrayList<Segment> superwitness = new ArrayList<>();
-        // ScoreIterator iterates cells:
-        ScoreIterator iterateTable = new ScoreIterator(editTable);
+        // CellIterator iterates cells:
+        CellIterator iterateTable = new CellIterator(editTable);
         // pointer is set in lower right corner at "lastCell"
         int lastY = editTable.length - 1;
         int lastX = editTable[0].length - 1;
-        Score lastCell = editTable[lastY][lastX];
+        Cell lastCell = editTable[lastY][lastX];
         // As long as the pointer can move up in the editTable
         while (iterateTable.hasNext()) {
             // move one cell up
-            Score currentCell = iterateTable.next();
+            Cell currentCell = iterateTable.next();
             int x = currentCell.x;
             int y = currentCell.y;
             // stateChange if the type of the lastCell is not the same as the currentCell
@@ -31,13 +31,13 @@ public class AlignedNonAlignedSegmenter implements SegmenterInterface {
             }
         }
         // process the final cell in de EditGraphTable (additions/omissions at the beginning of the witnesses
-        Score currentCell = editTable[0][0];
+        Cell currentCell = editTable[0][0];
         addCelltoSuperwitness(currentCell, tokensA, tokensB, lastX, lastY, superwitness);
         // System.out.println(String.format("%d %d %d %d", lastX, lastY, 0, 0));
         return superwitness;
     }
 
-    private void addCelltoSuperwitness(Score currentCell, List<XMLToken> tokensA, List<XMLToken> tokensB, int lastX, int lastY, List<Segment> superwitness) {
+    private void addCelltoSuperwitness(Cell currentCell, List<XMLToken> tokensA, List<XMLToken> tokensB, int lastX, int lastY, List<Segment> superwitness) {
         int x = currentCell.x;
         int y = currentCell.y;
         List<XMLToken> segmentTokensA = tokensA.subList(x, lastX);

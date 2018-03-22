@@ -15,7 +15,7 @@ public class Coordination {
         this.tokensWa = tokensWa;
         this.tokensWb = tokensWb;
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner contentAligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // align on content
         List<Segment> contentSegments = contentAligner.align(tokensWa, tokensWb);
@@ -33,7 +33,7 @@ public class Coordination {
         for (Node childNode : rootNode.children) {
             if (childNode.segment != null && childNode.segment.type.equals(Segment.Type.replacement)) {
                 AbstractScorer typeScorer = new TypeScorer();
-                Segmenter typeSegmenter = new Segmenter();
+                SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
                 EditGraphAligner typeAligner = new EditGraphAligner(typeScorer, typeSegmenter);
                 // align again on type with typeScorer
                 List<Segment> typeSegments = typeAligner.align(childNode.segment.tokensWa, childNode.segment.tokensWb);

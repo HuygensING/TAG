@@ -15,12 +15,12 @@ public class ScoreTypeUnitTest {
         List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
         List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner contentAligner = new EditGraphAligner(contentScorer, contentSegmenter);
         List<Segment> segmentsRound1 = contentAligner.align(tokensA, tokensB);
         // System.out.println(segmentsRound1);
         AbstractScorer scoreType = new TypeScorer();
-        Segmenter typeSegmenter = new Segmenter();
+        ContentTypeSegmenter typeSegmenter = new ContentTypeSegmenter();
         EditGraphAligner typeAligner = new EditGraphAligner(scoreType, typeSegmenter);
         Segment segmentReplaced = segmentsRound1.get(1);
         List<XMLToken> tokensAtype = segmentReplaced.tokensWa;

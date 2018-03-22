@@ -10,10 +10,10 @@ import java.util.stream.IntStream;
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
-    private final Segmenter segmenter;
+    private final SegmenterInterface segmenter;
     Score[][] cells;
 
-    public EditGraphAligner(AbstractScorer scorer, Segmenter segmenter) {
+    public EditGraphAligner(AbstractScorer scorer, SegmenterInterface segmenter) {
         this.scorer = scorer;
         this.segmenter = segmenter;
     }

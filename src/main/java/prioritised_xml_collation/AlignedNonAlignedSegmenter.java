@@ -3,7 +3,7 @@ package prioritised_xml_collation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Segmenter implements SegmenterInterface {
+public class AlignedNonAlignedSegmenter implements SegmenterInterface {
     public List<Segment> calculateSegmentation(Score[][] editTable, List<XMLToken> tokensA, List<XMLToken> tokensB) {
         ArrayList<Segment> superwitness = new ArrayList<>();
         // ScoreIterator iterates cells:
@@ -59,7 +59,7 @@ public class Segmenter implements SegmenterInterface {
             // it's an omission: no TokensB
             // if last cell is not a match/addition/replacement it is an omission
             // this condition is always true, but these lines are kept for reasons of completeness
-            else if (segmentTokensB.isEmpty()) {
+            else {
                 Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.omission);
                 superwitness.add(0, segment);
             }

@@ -16,7 +16,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 /**
  * Created by ellibleeker on 08/02/2017.
  */
-public class ContentSegmenterUnitTest {
+public class ContentAlignedSegmenterUnitTest {
 
 
     @Test
@@ -43,7 +43,7 @@ public class ContentSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -62,7 +62,7 @@ public class ContentSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -82,7 +82,7 @@ public class ContentSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -97,7 +97,7 @@ public class ContentSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -114,7 +114,7 @@ public class ContentSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        Segmenter contentSegmenter = new Segmenter();
+        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);

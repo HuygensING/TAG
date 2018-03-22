@@ -43,7 +43,7 @@ public class ContentAlignedSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
+        AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -62,7 +62,7 @@ public class ContentAlignedSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
+        AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -82,7 +82,7 @@ public class ContentAlignedSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
+        AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -97,7 +97,7 @@ public class ContentAlignedSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
+        AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
@@ -105,7 +105,6 @@ public class ContentAlignedSegmenterUnitTest {
         assertThat(segments, contains(sM(Segment.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"),t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")), sM(Segment.Type.omission).tokensWa(t("lb"), t("/lb")).tokensWb(t("")), sM(Segment.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")), sM(Segment.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Segment.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")), sM(Segment.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")), sM(Segment.Type.aligned).tokensWa(t("voor"), t("de")).tokensWb(t("voor"), t("de")), sM(Segment.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Segment.Type.aligned).tokensWa(t("liefelijke"), t("toestemming")).tokensWb(t("liefelijke"), t("toestemming")), sM(Segment.Type.replacement).tokensWa(t("!")).tokensWb(t(".")), sM(Segment.Type.aligned).tokensWa(t("/s"), t("/div"), t("/body"), t("/text")).tokensWb(t("/s"), t("/div"), t("/body"), t("/text"))));
     }
 
-    @Ignore("Test fails when root node is not a match")
     @Test
     public void testLastSegment() throws Exception {
         File input_tokensA = new File("input_xml/witA-simple2.xml");
@@ -114,13 +113,12 @@ public class ContentAlignedSegmenterUnitTest {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
-        ContentTypeSegmenter contentSegmenter = new ContentTypeSegmenter();
+        AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer, contentSegmenter);
         // take that output and align
         List<Segment> segments = aligner.align(tokensWa, tokensWb);
-        assertThat(segments, contains(sM(Segment.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"),t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")), sM(Segment.Type.omission).tokensWa(t("lb"), t("/lb")).tokensWb(t("")), sM(Segment.Type.aligned).tokensWa(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")).tokensWb(t("del"), t("werven"), t("om"), t("/del"), t("add"), t("trachten"), t("naar"), t("/add"), t("een")), sM(Segment.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Segment.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")), sM(Segment.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")), sM(Segment.Type.aligned).tokensWa(t("vóór"), t("de")).tokensWb(t("vóór"), t("de")), sM(Segment.Type.addition).tokensWa(t("")).tokensWb(t("lb"), t("/lb")), sM(Segment.Type.aligned).tokensWa(t("liefelijke"), t("toestemming")).tokensWb(t("liefelijke"), t("toestemming")), sM(Segment.Type.replacement).tokensWa(t("!")).tokensWb(t("."))));
+        assertThat(segments, contains(sM(Segment.Type.replacement).tokensWa(t("body")).tokensWb(t("TEI")), sM(Segment.Type.aligned).tokensWa(t("s")).tokensWb(t("s")), sM(Segment.Type.omission).tokensWa(t("c")), sM(Segment.Type.aligned).tokensWa(t("a"), t("/s")).tokensWb(t("a"), t("/s")), sM(Segment.Type.replacement).tokensWa(t("/body")).tokensWb(t("/TEI"))));
     }
-    // TODO When root node is not a match the test fails: adjust typing
  }
 
 

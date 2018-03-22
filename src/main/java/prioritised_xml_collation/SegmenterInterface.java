@@ -8,5 +8,5 @@ import java.util.List;
 public interface SegmenterInterface {
     // Interface cannot have instance variables
     // Interface is instantiated by methods in ContentTypeSegmenter
-    List<Segment> calculateSegmentation(Cell[][] editTable, List<XMLToken> tokensA, List<XMLToken> tokensB);
+    List<Segment> calculateSegmentation(EditGraphTable table);
 }

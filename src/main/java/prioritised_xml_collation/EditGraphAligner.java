@@ -24,6 +24,7 @@ public class EditGraphAligner {
         // init cells and scorer
         this.cells = new Cell[tokensB.size() + 1][tokensA.size() + 1];
 
+        //TODO: move this init stuff to the table class!
         // init 0,0
         this.cells[0][0] = new Cell(Boolean.FALSE, 0, 0, null, 0);
 
@@ -55,7 +56,8 @@ public class EditGraphAligner {
                 this.cells[y][x] = max;
             });
         });
-        return segmenter.calculateSegmentation(cells, tokensA, tokensB);
+        EditGraphTable table = new EditGraphTable(cells, tokensA, tokensB);
+        return segmenter.calculateSegmentation(table);
     }
     public CellType establishTypeOfCell(Cell cell, List<XMLToken> tokensA, List<XMLToken> tokensB){
         XMLToken tokenA = tokensA.get(cell.x - 1);

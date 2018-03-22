@@ -12,9 +12,9 @@ import java.util.List;
  * Provides cell type: code originally written by Elli Bleeker.
  */
 public class EditGraphTable implements Iterable<Cell> {
-    private Cell[][] matrix;
-    List<XMLToken> tokensA;
-    List<XMLToken> tokensB;
+    Cell[][] matrix;
+    private List<XMLToken> tokensA;
+    private List<XMLToken> tokensB;
 
     EditGraphTable(Cell[][] cells, List<XMLToken> tokensA, List<XMLToken> tokensB) {
         this.matrix = cells;
@@ -46,26 +46,6 @@ public class EditGraphTable implements Iterable<Cell> {
         };
     }
 
-    public CellType establishTypeOfCell(Cell cell){
-        XMLToken tokenA = tokensA.get(cell.x - 1);
-        XMLToken tokenB = tokensB.get(cell.y - 1);
-        System.out.println(tokenA);
-        System.out.println(tokenB);
-        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
-        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
-        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
-        if(punctuationType) {
-            return CellType.punctuation;
-        }
-        else if (contentType) {
-            return CellType.text;
-        }
-        else if (markupType) {
-            return CellType.markup;
-        }
-        else return CellType.mix;
-    }
-
     // TODO: remove the remaining duplication in the return statements
     // TODO: by separating out the segment type determination code.
     Segment createSegmentOfCells(Cell currentCell, Cell lastCell) {
@@ -86,7 +66,7 @@ public class EditGraphTable implements Iterable<Cell> {
         // addition: no TokensA
         else if (segmentTokensA.isEmpty()) {
             Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.addition);
-            return  segment;
+            return segment;
         }
         // it's an omission: no TokensB
         // if last cell is not a match/addition/replacement it is an omission
@@ -95,6 +75,63 @@ public class EditGraphTable implements Iterable<Cell> {
             Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.omission);
             return segment;
         }
+    }
+
+    private String cellToString(Cell cell) {
+        XMLToken tokenA = tokensA.get(cell.x - 1);
+        XMLToken tokenB = tokensB.get(cell.y - 1);
+        return tokenA+" : "+tokenB;
+    }
+
+    public CellType establishTypeOfCell(Cell cell){
+        if (cell.x == 0 && cell.y == 0) {
+            return CellType.root;
+        }
+        XMLToken tokenA = tokensA.get(cell.x - 1);
+        XMLToken tokenB = tokensB.get(cell.y - 1);
+        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
+        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
+        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
+        if (punctuationType) {
+            return CellType.punctuation;
+        }
+        else if (contentType) {
+            return CellType.text;
+        }
+        else if (markupType) {
+            return CellType.markup;
+        }
+        else return CellType.mix;
+    }
+
+    public CellType determineTypeOfToken(XMLToken tokenA) {
+        boolean punctuationType = (tokenA.content.matches("\\W+"));
+        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
+        boolean markupType = (tokenA instanceof ElementToken);
+        if (punctuationType) {
+            return CellType.punctuation;
+        }
+        else if (contentType) {
+            return CellType.text;
+        }
+        else if (markupType) {
+            return CellType.markup;
+        }
+        else return CellType.mix;
+    }
+
+    public CellType determineUniqueCellType(Cell cell) {
+        CellType type = establishTypeOfCell(cell);
+        if (type == CellType.mix) {
+            if (cell.movedVertical()) {
+                // get the type from one side
+                XMLToken tokenB = tokensB.get(cell.y - 1);
+                return determineTypeOfToken(tokenB);
+            }  else {
+                throw new RuntimeException("WE CAN NOT HAVE MIXED TYPES! RESOLVE! "+cellToString(cell));
+            }
+        }
+        return type;
     }
 
 }

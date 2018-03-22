@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class EditGraphAligner {
     private final AbstractScorer scorer;
-    Cell[][] cells;
+    private Cell[][] cells;
 
     EditGraphAligner(AbstractScorer scorer) {
         this.scorer = scorer;

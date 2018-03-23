@@ -8,12 +8,6 @@ TAG (CAPS) stands for the model, **T**ext **a**s **G**raph
 
 A tag (lowercase) is the entity used to indicate the markup boundaries.
 
-A TAGML document consist of Unicode characters and adheres to the syntax defined in this description. 
-
-```
-NOTE: We need to define the escape characters. For now these seem to be: [ ] < >
-```
-
 ### Markup tags
   ```
   [line>The rain in Spain falls mainly on the plain.<line]
@@ -63,25 +57,12 @@ NOTE: We need to define the escape characters. For now these seem to be: [ ] < >
   ```
   [origin
     location={
-      position={x=1, y=2}
+      position={x=1 y=2}
       countrycode='nl'
     }>Amsterdam<origin]
   ```
 
-```
-NOTE: The two annotations examples above are not completely consistent in how they separate nested annotations. One example uses a comma, another does not. For example the position one does, while line (nested) annotation does not.
-```
-
-### Whitespace significance  
-  Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined in the schema as containing mixed content.  
-  In all other places, whitespace is insignificant and can be used for formatting the TAGML.
-  
-  ```
-  NOTE: There is a function in the XPath standard called normalize-whitespace that describes how a to deal with whitespace. It seems like a good idea to follow these rules. Or atleast get inspired by it. https://www.w3.org/TR/xpath/#function-normalize-space
-  
-  NOTE: There is an xml:space attribute that tries to define how the XML processor should deal with whitespace. As far we know almost nobody uses this. 
-  ```
-  	
+ 	
 ### Dominance / Containment  
   > When you’re talking about overlapping structures, it’s useful to make the distinction between structures that *contain* each other and structures that *dominate* each other. Containment is a happenstance relationship between ranges while dominance is one that has a meaningful semantic. A page may happen to *contain* a stanza, but a poem *dominates* the stanzas that it contains.
   
@@ -95,27 +76,32 @@ NOTE: The two annotations examples above are not completely consistent in how th
   thought Alice
   [+q>without pictures or conversation?<q]
   ```
-  In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag.
+  In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume
+  indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag.
   
 ### Non-linearity
-  In general, the text of a TAGML document is to be read in the order in whichit has been transcribed.
-  In some cases, there may be different paths through the text, for example when an addition/deletion pair has been encoded:
+  In general, the text of a TAGML document is to be read in the order in which it has been transcribed.
+  In some cases, there may be different paths through the text,
+  for example when an addition/deletion pair has been encoded:
   ```
-  [q>To be, or [del>to be not<del][add>not to be<add]?<q] 
+  [q>To be, or [del>to be not<del][add>not to be<add].<q] 
   ``` 
-  To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path, and the `add` part the other, we group these markups by enclosing them in `set` tags `|>` and `<|`:
+  To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path,
+  and the `add` part the other, we group these markups by enclosing them in `set` tags `|>` and `<|`,
+  with `|` to separate the diverging markups:
   ```
-  [q>To be, or |>[del>to be not<del][add>not to be<add]<|?<q] 
+  [q>To be, or |>[del>to be not<del]|[add>not to be<add]<|!<q] 
   ```
-  In case of a solitary `del` without a corresponding `add`, use an *empty* markup to indicate there are two paths: one with the text marked up by `del`, and one without:  
+  In case of a solitary `del` without a corresponding `add`, mark the markup as *optional* to indicate there are two paths:
+  one *with* the text marked up by `del`, and one *without* (grouping is not necessary in this case):  
   ```
-  [q>To be, or |>[del>to<del][]<| not to be?<q] 
+  [q>To be, or [?del>perchance<?del] not to be?<q] 
+  ```
+  The alternatives in the group don't need to be contained in markup, this is also valid TAGML:
+  ```
+  [l>At this point, the new text |>diverged|differed<| from the original.<l] 
   ```
   
-  ```
-  NOTE: I think we should add a <?NAME> construction for cases where there is a only a single option, which means that it is an optional path through the text. That would be much shorter than |>[NAME>text<NAME][]<|.
-  NOTE: Futhermore: The TAG datamodel allows for alternative text without markup. The rules above would not suffice in that case. 
-  ```
   
 ### Milestones / placeholders / empty markup
   ```
@@ -135,6 +121,35 @@ NOTE: The two annotations examples above are not completely consistent in how th
   [! comment !]
   [l>text text text<l]
   ```
+
+### Whitespace significance  
+  Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined
+  in the schema as containing mixed content.  
+  In all other places, whitespace is insignificant and can be used for formatting the TAGML.
+  
+  ```
+  NOTE: There is a function in the XPath standard called normalize-whitespace that describes how to deal with whitespace.
+   It seems like a good idea to follow these rules. Or at least get inspired by it.
+    https://www.w3.org/TR/xpath/#function-normalize-space
+  
+  NOTE: There is an xml:space attribute that tries to define how the XML processor should deal with whitespace.
+   As far we know almost nobody uses this. 
+  ```
+
+### Escaping
+A TAGML document consist of Unicode characters and adheres to the syntax defined in this description.
+
+In text, the following characters need to be escaped using the escape character `\ ` :
+```
+[ -> \[
+] -> \]
+< -> \<
+> -> \>
+| -> \|
+\ -> \\
+```
+
+Inside annotation string values: `'` -> `\'`, `"` -> `\"`
 
 ## Examples
 
@@ -183,7 +198,10 @@ day.<s]<v]
 The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation recursion encoding betwen LMNL and TAGML.
 
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
-is encoded in TAGML as a group with `original` and `alt` markup.    
+is encoded in TAGML as a group with `original` and `alt` markup.
+
+## TAGML Grammar
+    
    
 ## TAGML Schema
 

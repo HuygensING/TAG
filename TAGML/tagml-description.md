@@ -195,12 +195,54 @@ day.<s]<v]
 ...<chapter]...<section]...<book]
 ```
 
-The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation recursion encoding betwen LMNL and TAGML.
+The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation 
+recursion encoding betwen LMNL and TAGML.
 
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
 is encoded in TAGML as a group with `original` and `alt` markup.
 
 ## TAGML Grammar
+
+1. `tagml ::= documentHeader? mixedContent*`
+
+0. `documentHeader ::= namespaceDefinition*`
+0. `mixedContent ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | text | comment )*`
+
+0. `namespaceDefinition ::= '[!ns ' namespaceIdentifier ' ' namespaceURI ']'`
+0. `namespaceIdentifier ::= nameCharacter+`
+0. `namespaceURI ::= TODO`
+
+0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
+0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
+0. `markupMilestone ::= '['  tagIdentifier ']'`
+0. `textVariation ::= '|>' mixedContent ( '|' mixedContent )+ '<|'`
+0. `text ::= ( textCharacter | escapedCharacter )*`
+0. `comment ::= '[!' textCharacter* '!]'`
+
+0. `optional ::= '?'`
+0. `resume ::= '+'`
+0. `suspend ::= '-'`
+0. `tagIdentifier ::= qualifiedMarkupName markupIdentifier?`
+0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
+0. `markupIdentifier ::= '~' identifierCharacter+'`
+0. `namespaceIdentifier ::= nameCharacter+'`
+0. `localMarkupName ::= nameCharacter+`
+
+0. `annotation ::= annotationName '=' annotationValue`
+0. `annotationName ::= nameCharacter+`
+0. `annotationValue ::= stringValue | numberValue | booleanValue | mixedContentValue | listValue | objectValue `
+0. `stringValue ::= '"' characters '"' | "'" characters "'" `
+0. `numberValue ::= '-'? digits ('.' digits)? ([eE] [+-]? digits)?`
+0. `booleanValue ::= 'true' | 'false'`
+0. `mixedContentValue ::= '|' mixedContent '|'`
+0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
+0. `objectValue ::= '{' annotation+ '}'`
+0. `identifierCharacter ::= nameCharacter+`
+
+0. `digits ::= [0-9]+`
+0. `nameCharacter ::= [a-z] | digits | '_' `
+0. `textCharacter ::= nameCharacter | escapedCharacter | [ \t\n!?:]`
+0. `escapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\'`
     
    
 ## TAGML Schema

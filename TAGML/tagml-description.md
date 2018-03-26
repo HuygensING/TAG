@@ -203,46 +203,44 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 ## TAGML Grammar
 
-1. `tagml ::= documentHeader? mixedContent*`
+1. `document ::= documentHeader? mixedContent*`
 
 0. `documentHeader ::= namespaceDefinition*`
 0. `mixedContent ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | text | comment )*`
 
-0. `namespaceDefinition ::= '[!ns ' namespaceIdentifier ' ' namespaceURI ']'`
-0. `namespaceIdentifier ::= nameCharacter+`
-0. `namespaceURI ::= TODO`
+0. `namespaceDefinition ::= '[!ns ' NamespaceIdentifier ' ' NamespaceURI ']'`
+0. `NamespaceIdentifier ::= NameCharacter+`
 
-0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
-0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
+0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
+0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier ']'`
 0. `textVariation ::= '|>' mixedContent ( '|' mixedContent )+ '<|'`
-0. `text ::= ( textCharacter | escapedCharacter )*`
+0. `text ::= textCharacter*`
 0. `comment ::= '[!' textCharacter* '!]'`
 
-0. `optional ::= '?'`
-0. `resume ::= '+'`
-0. `suspend ::= '-'`
+0. `Optional ::= '?'`
+0. `Resume ::= '+'`
+0. `Suspend ::= '-'`
 0. `tagIdentifier ::= qualifiedMarkupName markupIdentifier?`
 0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
-0. `markupIdentifier ::= '~' identifierCharacter+'`
-0. `namespaceIdentifier ::= nameCharacter+'`
-0. `localMarkupName ::= nameCharacter+`
+0. `markupIdentifier ::= '~' NameCharacter+'`
+0. `localMarkupName ::= NameCharacter+`
 
 0. `annotation ::= annotationName '=' annotationValue`
-0. `annotationName ::= nameCharacter+`
-0. `annotationValue ::= stringValue | numberValue | booleanValue | mixedContentValue | listValue | objectValue `
+0. `annotationName ::= NameCharacter+`
+0. `annotationValue ::= stringValue | numberValue | BooleanValue | mixedContentValue | listValue | objectValue `
 0. `stringValue ::= '"' characters '"' | "'" characters "'" `
-0. `numberValue ::= '-'? digits ('.' digits)? ([eE] [+-]? digits)?`
-0. `booleanValue ::= 'true' | 'false'`
+0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
+0. `BooleanValue ::= 'true' | 'false'`
 0. `mixedContentValue ::= '|' mixedContent '|'`
 0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
 0. `objectValue ::= '{' annotation+ '}'`
-0. `identifierCharacter ::= nameCharacter+`
 
-0. `digits ::= [0-9]+`
-0. `nameCharacter ::= [a-z] | digits | '_' `
-0. `textCharacter ::= nameCharacter | escapedCharacter | [ \t\n!?:]`
-0. `escapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\'`
+0. `Digits ::= [0-9]+`
+0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
+0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
+0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
+0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
     
    
 ## TAGML Schema

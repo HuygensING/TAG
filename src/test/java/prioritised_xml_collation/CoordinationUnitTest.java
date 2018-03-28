@@ -87,4 +87,24 @@ public class CoordinationUnitTest {
         SegmentMatcher m13 = sM(aligned).tokensWa("/s", "/div", "/body", "/text");
         assertThat(segments, contains(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13));
     }
+
+    // Note: milestone elements are tokenized as an open and close tag, this has the danger that one of those tags can be seem as
+    // a replacement rather than an omission/addition.
+    @Test
+    public void testReplacementOfTextWithMarkup_AKA_ForcedMixedType() throws Exception {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-forced_mixed_replacement.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-forced_mixed_replacement.xml"));
+        Coordination aligner = new Coordination();
+        List<Segment> segments = aligner.alignTokens(tokensWb, tokensWa);
+        for (Segment s : segments) {
+            System.out.println(s);
+        }
+        SegmentMatcher m1 = sM(aligned).tokensWa("text");
+        SegmentMatcher m2 = sM(omission).tokensWa("lb");
+        SegmentMatcher m3 = sM(replacement).tokensWa("/lb").tokensWb("linebreak");
+        SegmentMatcher m4 = sM(aligned).tokensWa("/text");
+        assertThat(segments, contains(m1, m2, m3, m4));
+    }
+
 }

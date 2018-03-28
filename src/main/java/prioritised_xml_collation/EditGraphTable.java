@@ -87,6 +87,14 @@ public class EditGraphTable implements Iterable<Cell> {
         if (cell.x == 0 && cell.y == 0) {
             return CellType.root;
         }
+        if (cell.x == 0) {
+            XMLToken tokenB = tokensB.get(cell.y - 1);
+            return determineTypeOfToken(tokenB);
+        }
+        if (cell.y == 0) {
+            XMLToken tokenA = tokensA.get(cell.x - 1);
+            return determineTypeOfToken(tokenA);
+        }
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
         boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
@@ -126,8 +134,9 @@ public class EditGraphTable implements Iterable<Cell> {
                 XMLToken tokenA = tokensA.get(cell.x - 1);
                 return determineTypeOfToken(tokenA);
             } else {
-                // TODO: Add a unit test for this case; I think the only we can do here is keep the mixed type!
-                throw new RuntimeException("WE CAN NOT HAVE MIXED TYPES! RESOLVE! " + cellToString(cell));
+                // We have a replacement of a text type with markup or something similar and there is no way we can
+                // resolve that by looking at neighbours.
+                return CellType.mix;
             }
         }
         return type;

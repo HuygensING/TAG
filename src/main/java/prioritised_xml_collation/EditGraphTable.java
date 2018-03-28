@@ -77,6 +77,12 @@ public class EditGraphTable implements Iterable<Cell> {
         }
     }
 
+    Segment createSegmentOfCellsWithType(Cell currentCell, Cell lastCell, Segment.Type type) {
+        List<XMLToken> segmentTokensA = tokensA.subList(currentCell.x, lastCell.x);
+        List<XMLToken> segmentTokensB = tokensB.subList(currentCell.y, lastCell.y);
+        return new Segment(segmentTokensA, segmentTokensB, type);
+    }
+
     private String cellToString(Cell cell) {
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);

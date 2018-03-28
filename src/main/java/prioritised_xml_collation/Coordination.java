@@ -1,24 +1,35 @@
 package prioritised_xml_collation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ellibleeker on 03/03/2017.
+ * Extended by Ronald Haentjens Dekker 28/03/2018.
  */
-public class Coordination {
+class Coordination {
 
-    private List<XMLToken> tokensWa;
-    private List<XMLToken> tokensWb;
+    List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        Node node = alignTokensAndReturnRootNode(tokensWa, tokensWb);
+        List<Segment> result = new ArrayList<>();
+        // traverse the leaf nodes of the nodes.
+        List<Node> toTraverse = new ArrayList<>(node.children);
+        while (!toTraverse.isEmpty()) {
+            Node top = toTraverse.remove(0);
+            // System.out.println("Traversing: "+top);
+            if (top.children.isEmpty()) {
+                result.add(top.segment);
+                //System.out.println(top.segment);
+            } else {
+                //NOTE: It matters where I add this stuff, want depth first traversal
+                toTraverse.addAll(0, top.children);
+            }
+        }
+        return result;
+    }
 
-    public Node alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
-        // input tokens from outside class
-        this.tokensWa = tokensWa;
-        this.tokensWb = tokensWb;
-        AbstractScorer contentScorer = new ContentScorer();
-        SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
-        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
-        // align on content
-        List<Segment> contentSegments = contentAligner.alignAndSegment(tokensWa, tokensWb, contentSegmenter);
+    Node alignTokensAndReturnRootNode(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        List<Segment> contentSegments = alignmentPhaseOne(tokensWa, tokensWb);
         // set root node
         // rootNode has no segment
         Node rootNode = Node.n();
@@ -42,9 +53,18 @@ public class Coordination {
                     // add segments as nodes to child node
                     childNode.addChildren(node);
                 }
-                System.out.println(childNode.children);
+//                System.out.println(childNode.children);
             }
         }
         return rootNode;
     }
+
+    private List<Segment> alignmentPhaseOne(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        // align on content
+        AbstractScorer contentScorer = new ContentScorer();
+        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
+        SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
+        return contentAligner.alignAndSegment(tokensWa, tokensWb, contentSegmenter);
+    }
+
 }

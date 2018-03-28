@@ -23,7 +23,7 @@ public class ContentTypeSegmenter implements SegmenterInterface {
             Cell currentCell = iterateTable.next();
             // we change state based on type, in case of mixed that we look at the movement through the table
             if (editTable.determineUniqueCellType(currentCell) != editTable.determineUniqueCellType(lastCell)) {
-                Segment newSegment = editTable.createSegmentOfCells(currentCell, lastCell);
+                Segment newSegment = editTable.createSegmentOfCellsWithType(currentCell, lastCell, Segment.Type.replacement);
                 superwitness.add(0, newSegment);
                 lastCell = currentCell;
             }

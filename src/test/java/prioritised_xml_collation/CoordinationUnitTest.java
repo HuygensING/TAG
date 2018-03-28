@@ -49,6 +49,13 @@ public class CoordinationUnitTest {
         SegmentMatcher m4 = sM(addition).tokensWb("lb", "/lb");
         SegmentMatcher m5 = sM(aligned).tokensWa("vrouw");
         SegmentMatcher m6 = sM(replacement).tokensWa(",").tokensWb("!");
-        assertThat(segments, contains(m1, m2, m3, m4, m5, m6));
+        SegmentMatcher m7 = sM(addition).tokensWb("/s", "s");
+        SegmentMatcher m8 = sM(replacement).tokensWa("de", "ongewisheid").tokensWb("Die", "dagen", "van", "nerveuze","verwachting");
+        SegmentMatcher m9 = sM(aligned).tokensWa("voor", "de");
+        SegmentMatcher m10 = sM(addition).tokensWb("lb", "/lb");
+        SegmentMatcher m11 = sM(aligned).tokensWa("liefelijke", "toestemming");
+        SegmentMatcher m12 = sM(replacement).tokensWa("!", ".");
+        SegmentMatcher m13 = sM(aligned).tokensWa("/s", "/div", "/body", "/text");
+        assertThat(segments, contains(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13));
     }
 }

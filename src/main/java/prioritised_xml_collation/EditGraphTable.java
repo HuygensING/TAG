@@ -77,19 +77,13 @@ public class EditGraphTable implements Iterable<Cell> {
         }
     }
 
-    Segment createSegmentOfCellsWithType(Cell currentCell, Cell lastCell, Segment.Type type) {
-        List<XMLToken> segmentTokensA = tokensA.subList(currentCell.x, lastCell.x);
-        List<XMLToken> segmentTokensB = tokensB.subList(currentCell.y, lastCell.y);
-        return new Segment(segmentTokensA, segmentTokensB, type);
-    }
-
     private String cellToString(Cell cell) {
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
         return tokenA+" : "+tokenB;
     }
 
-    public CellType establishTypeOfCell(Cell cell){
+    CellType establishTypeOfCell(Cell cell){
         if (cell.x == 0 && cell.y == 0) {
             return CellType.root;
         }
@@ -110,7 +104,7 @@ public class EditGraphTable implements Iterable<Cell> {
         else return CellType.mix;
     }
 
-    public CellType determineTypeOfToken(XMLToken tokenA) {
+    private CellType determineTypeOfToken(XMLToken tokenA) {
         boolean punctuationType = (tokenA.content.matches("\\W+"));
         boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
         boolean markupType = (tokenA instanceof ElementToken);
@@ -126,7 +120,7 @@ public class EditGraphTable implements Iterable<Cell> {
         else return CellType.mix;
     }
 
-    public CellType determineUniqueCellType(Cell cell) {
+    CellType determineUniqueCellType(Cell cell) {
         CellType type = establishTypeOfCell(cell);
         if (type == CellType.mix) {
             if (cell.movedVertical()) {

@@ -26,6 +26,12 @@ public class Segment {
         this.type = type;
     }
 
+    public Segment(Segment original, Type type) {
+        this.tokensWa = original.tokensWa;
+        this.tokensWb = original.tokensWb;
+        this.type = type;
+    }
+
     // Factory method
     public static Segment s(Type type) {
         return new Segment(type);

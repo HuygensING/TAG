@@ -49,6 +49,12 @@ class Coordination {
                 // align again on type with typeScorer
                 List<Segment> typeSegments = typeAligner.alignAndSegment(childNode.segment.tokensWa, childNode.segment.tokensWb, typeSegmenter);
                 for (Segment segment : typeSegments) {
+                    /* If the tokens are aligned on type in the second round, it means that the content is replaced
+                     * in the first round, so override type of segment!
+                     */
+                    if (segment.type == Segment.Type.aligned) {
+                        segment = new Segment(segment, Segment.Type.replacement);
+                    }
                     Node node = Node.n(segment);
                     // add segments as nodes to child node
                     childNode.addChildren(node);

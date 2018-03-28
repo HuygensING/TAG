@@ -17,6 +17,7 @@ class Coordination {
         while (!toTraverse.isEmpty()) {
             Node top = toTraverse.remove(0);
             // System.out.println("Traversing: "+top);
+            // Is it a leaf? Yes, add the segment to the result; No: keep traversing.
             if (top.children.isEmpty()) {
                 result.add(top.segment);
                 //System.out.println(top.segment);
@@ -43,11 +44,8 @@ class Coordination {
         // for each segment type replaced
         for (Node childNode : rootNode.children) {
             if (childNode.segment != null && childNode.segment.type.equals(Segment.Type.replacement)) {
-                AbstractScorer typeScorer = new TypeScorer();
-                SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
-                EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
                 // align again on type with typeScorer
-                List<Segment> typeSegments = typeAligner.alignAndSegment(childNode.segment.tokensWa, childNode.segment.tokensWb, typeSegmenter);
+                List<Segment> typeSegments = alignmentPhaseTwo(childNode.segment.tokensWa, childNode.segment.tokensWb);
                 for (Segment segment : typeSegments) {
                     /* If the tokens are aligned on type in the second round, it means that the content is replaced
                      * in the first round, so override type of segment!
@@ -71,6 +69,14 @@ class Coordination {
         EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
         SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
         return contentAligner.alignAndSegment(tokensWa, tokensWb, contentSegmenter);
+    }
+
+    private List<Segment> alignmentPhaseTwo(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        // align on type
+        AbstractScorer typeScorer = new TypeScorer();
+        EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
+        SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
+        return typeAligner.alignAndSegment(tokensWa, tokensWb, typeSegmenter);
     }
 
 }

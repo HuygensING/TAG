@@ -39,6 +39,10 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         if (zippedWa.contains(false)) {
             return false;
         }
+        // There are more or less expectations than actual!
+        if (this.tokensWa.size() != segment.tokensWa.size()) {
+            return false;
+        }
         // two lists for tokensWb (XMLTokenContentMatcher and actual XMLToken)
         // aligned every item in both lists >> with zip
         Stream<XMLTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
@@ -46,6 +50,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, (matcher, actual) -> matcher.matches(actual))
                 .collect(Collectors.toList());
         if (zippedWb.contains(false)) {
+            return false;
+        }
+        // There are more or less expectations than actual!
+        // For alignment segments it is allowed to not specify b!
+        if (this.type != Segment.Type.aligned && this.tokensWb.size() != segment.tokensWb.size()) {
             return false;
         }
         return true;

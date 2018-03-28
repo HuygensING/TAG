@@ -54,7 +54,36 @@ public class CoordinationUnitTest {
         SegmentMatcher m9 = sM(aligned).tokensWa("voor", "de");
         SegmentMatcher m10 = sM(addition).tokensWb("lb", "/lb");
         SegmentMatcher m11 = sM(aligned).tokensWa("liefelijke", "toestemming");
-        SegmentMatcher m12 = sM(replacement).tokensWa("!", ".");
+        SegmentMatcher m12 = sM(replacement).tokensWa("!").tokensWb(".");
+        SegmentMatcher m13 = sM(aligned).tokensWa("/s", "/div", "/body", "/text");
+        assertThat(segments, contains(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13));
+    }
+
+    /*
+     * In this testcase the witnesses are reversed, the split becomes a join, addition becomes omission and so on.
+     */
+    @Test
+    public void testSentence21Reversed() throws Exception {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
+        Coordination aligner = new Coordination();
+        List<Segment> segments = aligner.alignTokens(tokensWb, tokensWa);
+        for (Segment s : segments) {
+            System.out.println(s);
+        }
+        SegmentMatcher m1 = sM(aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit"));
+        SegmentMatcher m2 = sM(addition).tokensWb("lb", "/lb");
+        SegmentMatcher m3 = sM(aligned).tokensWa("del", "werven", "om", "/del", "add", "trachten", "naar", "/add", "een");
+        SegmentMatcher m4 = sM(omission).tokensWa("lb", "/lb");
+        SegmentMatcher m5 = sM(aligned).tokensWa("vrouw");
+        SegmentMatcher m6 = sM(replacement).tokensWb(",").tokensWa("!");
+        SegmentMatcher m7 = sM(omission).tokensWa("/s", "s");
+        SegmentMatcher m8 = sM(replacement).tokensWb("de", "ongewisheid").tokensWa("Die", "dagen", "van", "nerveuze","verwachting");
+        SegmentMatcher m9 = sM(aligned).tokensWa("voor", "de");
+        SegmentMatcher m10 = sM(omission).tokensWa("lb", "/lb");
+        SegmentMatcher m11 = sM(aligned).tokensWa("liefelijke", "toestemming");
+        SegmentMatcher m12 = sM(replacement).tokensWa(".").tokensWb("!");
         SegmentMatcher m13 = sM(aligned).tokensWa("/s", "/div", "/body", "/text");
         assertThat(segments, contains(m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13));
     }

@@ -80,10 +80,10 @@ public class EditGraphTable implements Iterable<Cell> {
     private String cellToString(Cell cell) {
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
-        return tokenA+" : "+tokenB;
+        return tokenA + " : " + tokenB;
     }
 
-    CellType establishTypeOfCell(Cell cell){
+    CellType establishTypeOfCell(Cell cell) {
         if (cell.x == 0 && cell.y == 0) {
             return CellType.root;
         }
@@ -94,14 +94,11 @@ public class EditGraphTable implements Iterable<Cell> {
         boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
         if (punctuationType) {
             return CellType.punctuation;
-        }
-        else if (contentType) {
+        } else if (contentType) {
             return CellType.text;
-        }
-        else if (markupType) {
+        } else if (markupType) {
             return CellType.markup;
-        }
-        else return CellType.mix;
+        } else return CellType.mix;
     }
 
     private CellType determineTypeOfToken(XMLToken tokenA) {
@@ -110,14 +107,11 @@ public class EditGraphTable implements Iterable<Cell> {
         boolean markupType = (tokenA instanceof ElementToken);
         if (punctuationType) {
             return CellType.punctuation;
-        }
-        else if (contentType) {
+        } else if (contentType) {
             return CellType.text;
-        }
-        else if (markupType) {
+        } else if (markupType) {
             return CellType.markup;
-        }
-        else return CellType.mix;
+        } else return CellType.mix;
     }
 
     CellType determineUniqueCellType(Cell cell) {
@@ -127,11 +121,15 @@ public class EditGraphTable implements Iterable<Cell> {
                 // get the type from one side
                 XMLToken tokenB = tokensB.get(cell.y - 1);
                 return determineTypeOfToken(tokenB);
-            }  else {
-                throw new RuntimeException("WE CAN NOT HAVE MIXED TYPES! RESOLVE! "+cellToString(cell));
+            } else if (cell.movedHorizontal()) {
+                // get the type from one side
+                XMLToken tokenA = tokensA.get(cell.x - 1);
+                return determineTypeOfToken(tokenA);
+            } else {
+                // TODO: Add a unit test for this case; I think the only we can do here is keep the mixed type!
+                throw new RuntimeException("WE CAN NOT HAVE MIXED TYPES! RESOLVE! " + cellToString(cell));
             }
         }
         return type;
     }
-
 }

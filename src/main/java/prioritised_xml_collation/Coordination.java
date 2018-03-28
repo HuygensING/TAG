@@ -27,7 +27,7 @@ public class Coordination {
             // create child node with segment
             Node node = Node.n(segment);
             // add node to root node
-            rootNode.children(node);
+            rootNode.addChildren(node);
         }
         // for each segment type replaced
         for (Node childNode : rootNode.children) {
@@ -40,9 +40,9 @@ public class Coordination {
                 for (Segment segment : typeSegments) {
                     Node node = Node.n(segment);
                     // add segments as nodes to child node
-                    childNode.children(node);
+                    childNode.addChildren(node);
                 }
-                //System.out.println(childNode.children);
+                System.out.println(childNode.children);
             }
         }
         return rootNode;

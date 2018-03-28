@@ -11,20 +11,15 @@ public class Node {
     final Segment segment;
     final List<Node> children;
 
-    public Node(Segment segment, List<Node> children) {
-        this.segment = segment;
-        this.children = children;
-    }
-
-    public Node(Segment segment) {
-        this.segment = segment;
-        // empty list for child nodes that may be filled later
+    // if it is a root node, there is no segment
+    private Node(){
+        this.segment = null;
         this.children = new ArrayList<>();
     }
 
-    // if it is a root node, there is no segment
-    public Node(){
-        this.segment = null;
+    private Node(Segment segment) {
+        this.segment = segment;
+        // empty list for child nodes that may be filled later
         this.children = new ArrayList<>();
     }
 
@@ -34,20 +29,18 @@ public class Node {
         else return ("Root node ")+children.toString();
     }
 
+    void addChildren(Node... children) {
+        this.children.addAll(Arrays.asList(children));
+    }
+
     // Factory method: each node has a segment
-    public static Node n(Segment segment) {
+    static Node n(Segment segment) {
         return new Node(segment);
     }
 
     // except if it's a root node
-    public static Node n(){
+    static Node n(){
         return new Node();
     }
 
-    // Builder pattern: a segment node has one or more child nodes as a list
-    // child nodes could be empty (leaf node) or have again one or more child nodes
-    public Node children (Node... children) {
-        this.children.addAll(Arrays.asList(children));
-        return this;
-    }
 }

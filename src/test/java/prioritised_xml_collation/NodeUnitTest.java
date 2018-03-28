@@ -21,7 +21,7 @@ public class NodeUnitTest {
     public void testNodeMatcher() throws Exception {
         Node node = n(s(Segment.Type.replacement).tokensWa("c").tokensWb("a"));
         Node children = n(s(Segment.Type.replacement).tokensWa("c").tokensWb("a"));
-        node.children(children);
+        node.addChildren(children);
         NodeMatcher nodeMatcher = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         NodeMatcher childrenMatcher = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         nodeMatcher.childrenMatcher(childrenMatcher);

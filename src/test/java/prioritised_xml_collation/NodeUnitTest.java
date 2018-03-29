@@ -28,6 +28,7 @@ public class NodeUnitTest {
         assertThat(node, is(nodeMatcher));
     }
 
+    // This test only tests the nodes of the first phase of the alignment
     @Test
     public void testAlignTokens() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
@@ -43,6 +44,8 @@ public class NodeUnitTest {
         assertThat(rootNode, is(rootNodeMatcher));
     }
 
+    // This test uses the same examples as the previous one, but tests the nodes of the first and second phase.
+    // In this case there is no difference between the result of the first phase and the second one.
     @Test
     public void testAlignTokens2() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
@@ -54,7 +57,7 @@ public class NodeUnitTest {
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
         NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI")));
-        NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("c")).tokensWb(t("a")));
+        NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
        System.out.println(rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher4), childrenMatcher3));
         rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher4), childrenMatcher3);
         assertThat(rootNode, is(rootNodeMatcher));

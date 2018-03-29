@@ -11,4 +11,12 @@ public class XMLToken {
     public XMLToken(String content) {
         this.content = content;
     }
+
+    //TODO: move Type responsibility to this class
+
+    //TODO: whitespace handling
+
+    //TODO: add generics
+
+    //TODO: handle milestones as single tokens
 }

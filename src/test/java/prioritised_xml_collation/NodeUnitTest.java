@@ -33,7 +33,7 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
-        Coordination firstAlignment = new Coordination();
+        TwoPhasedAligner firstAlignment = new TwoPhasedAligner();
         Node rootNode = firstAlignment.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
@@ -48,7 +48,7 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
-        Coordination aligner = new Coordination();
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
         Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
@@ -66,7 +66,7 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
-        Coordination aligner = new Coordination();
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
         Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"), t("body"), t("div"), t("s"),t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")));
@@ -92,7 +92,7 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
-        Coordination aligner = new Coordination();
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
         Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("text"), t("s"), t("vrouw")));

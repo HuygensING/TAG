@@ -19,7 +19,7 @@ public class TokenizeXMLUnitTest {
 
     @Test
     public void testTokenizeXML() throws FileNotFoundException, XMLStreamException {
-        File input = new File("input_xml/witA-simple.xml");
+        File input = new File("input_xml/black_cat_example.xml");
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokens = tokenizer.convertXMLFileIntoTokens(input);
         assertThat(tokens, containsTokens("TEI", "s", "The", "add", "black", "/add", "cat", ".",

@@ -80,12 +80,20 @@ public class EditGraphTable implements Iterable<Cell> {
     private String cellToString(Cell cell) {
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
-        return tokenA+" : "+tokenB;
+        return tokenA + " : " + tokenB;
     }
 
-    public CellType establishTypeOfCell(Cell cell){
+    CellType establishTypeOfCell(Cell cell) {
         if (cell.x == 0 && cell.y == 0) {
             return CellType.root;
+        }
+        if (cell.x == 0) {
+            XMLToken tokenB = tokensB.get(cell.y - 1);
+            return determineTypeOfToken(tokenB);
+        }
+        if (cell.y == 0) {
+            XMLToken tokenA = tokensA.get(cell.x - 1);
+            return determineTypeOfToken(tokenA);
         }
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
@@ -94,44 +102,43 @@ public class EditGraphTable implements Iterable<Cell> {
         boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
         if (punctuationType) {
             return CellType.punctuation;
-        }
-        else if (contentType) {
+        } else if (contentType) {
             return CellType.text;
-        }
-        else if (markupType) {
+        } else if (markupType) {
             return CellType.markup;
-        }
-        else return CellType.mix;
+        } else return CellType.mix;
     }
 
-    public CellType determineTypeOfToken(XMLToken tokenA) {
+    private CellType determineTypeOfToken(XMLToken tokenA) {
         boolean punctuationType = (tokenA.content.matches("\\W+"));
         boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
         boolean markupType = (tokenA instanceof ElementToken);
         if (punctuationType) {
             return CellType.punctuation;
-        }
-        else if (contentType) {
+        } else if (contentType) {
             return CellType.text;
-        }
-        else if (markupType) {
+        } else if (markupType) {
             return CellType.markup;
-        }
-        else return CellType.mix;
+        } else return CellType.mix;
     }
 
-    public CellType determineUniqueCellType(Cell cell) {
+    CellType determineUniqueCellType(Cell cell) {
         CellType type = establishTypeOfCell(cell);
         if (type == CellType.mix) {
             if (cell.movedVertical()) {
                 // get the type from one side
                 XMLToken tokenB = tokensB.get(cell.y - 1);
                 return determineTypeOfToken(tokenB);
-            }  else {
-                throw new RuntimeException("WE CAN NOT HAVE MIXED TYPES! RESOLVE! "+cellToString(cell));
+            } else if (cell.movedHorizontal()) {
+                // get the type from one side
+                XMLToken tokenA = tokensA.get(cell.x - 1);
+                return determineTypeOfToken(tokenA);
+            } else {
+                // We have a replacement of a text type with markup or something similar and there is no way we can
+                // resolve that by looking at neighbours.
+                return CellType.mix;
             }
         }
         return type;
     }
-
 }

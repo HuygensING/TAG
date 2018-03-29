@@ -4,6 +4,7 @@ import com.codepoetics.protonpack.StreamUtils;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,6 +39,10 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         if (zippedWa.contains(false)) {
             return false;
         }
+        // There are more or less expectations than actual!
+        if (this.tokensWa.size() != segment.tokensWa.size()) {
+            return false;
+        }
         // two lists for tokensWb (XMLTokenContentMatcher and actual XMLToken)
         // aligned every item in both lists >> with zip
         Stream<XMLTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
@@ -45,6 +50,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, (matcher, actual) -> matcher.matches(actual))
                 .collect(Collectors.toList());
         if (zippedWb.contains(false)) {
+            return false;
+        }
+        // There are more or less expectations than actual!
+        // For alignment segments it is allowed to not specify b!
+        if (this.type != Segment.Type.aligned && this.tokensWb.size() != segment.tokensWb.size()) {
             return false;
         }
         return true;
@@ -68,11 +78,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
                 description.appendText(" and type is " + segment.type.toString());
                 description.appendText(", with tokensWa ");
                 for (XMLToken token : segment.tokensWa) {
-                    description.appendText(token.content);
+                    description.appendText(token.content+" ");
                 }
                 description.appendText(" and tokensWb ");
                 for (XMLToken token : segment.tokensWb) {
-                    description.appendText(token.content);
+                    description.appendText(token.content+" ");
                 }
                 description.appendText(".");
             }
@@ -81,16 +91,16 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
 
-    public static SegmentMatcher sM(Segment.Type type) {
+    static SegmentMatcher sM(Segment.Type type) {
         return new SegmentMatcher(type);
     }
 
-    public SegmentMatcher tokensWa(XMLTokenContentMatcher... tokens) {
+    SegmentMatcher tokensWa(XMLTokenContentMatcher... tokens) {
         this.tokensWa = Arrays.asList(tokens);
         return this;
     }
 
-    public SegmentMatcher tokensWb(XMLTokenContentMatcher... tokens) {
+    SegmentMatcher tokensWb(XMLTokenContentMatcher... tokens) {
         this.tokensWb = Arrays.asList(tokens);
         return this;
     }
@@ -102,6 +112,23 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
     }
 
 
+    SegmentMatcher tokensWa(String... expectedTokens) {
+        List<XMLTokenContentMatcher> matchers = new ArrayList<>();
+        for (String expectedToken : expectedTokens) {
+            matchers.add(XMLTokenContentMatcher.t(expectedToken));
+        }
+        this.tokensWa = matchers;
+        return this;
+    }
+
+    SegmentMatcher tokensWb(String... expectedTokens) {
+        List<XMLTokenContentMatcher> matchers = new ArrayList<>();
+        for (String expectedToken : expectedTokens) {
+            matchers.add(XMLTokenContentMatcher.t(expectedToken));
+        }
+        this.tokensWb = matchers;
+        return this;
+    }
 
 }
 

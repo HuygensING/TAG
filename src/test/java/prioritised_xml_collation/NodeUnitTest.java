@@ -21,7 +21,7 @@ public class NodeUnitTest {
     public void testNodeMatcher() throws Exception {
         Node node = n(s(Segment.Type.replacement).tokensWa("c").tokensWb("a"));
         Node children = n(s(Segment.Type.replacement).tokensWa("c").tokensWb("a"));
-        node.children(children);
+        node.addChildren(children);
         NodeMatcher nodeMatcher = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         NodeMatcher childrenMatcher = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
         nodeMatcher.childrenMatcher(childrenMatcher);
@@ -33,8 +33,8 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
-        Coordination firstAlignment = new Coordination();
-        Node rootNode = firstAlignment.alignTokens(tokensWa, tokensWb);
+        TwoPhasedAligner firstAlignment = new TwoPhasedAligner();
+        Node rootNode = firstAlignment.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
         NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
@@ -48,8 +48,8 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
-        Coordination aligner = new Coordination();
-        Node rootNode = aligner.alignTokens(tokensWa, tokensWb);
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
+        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")));
         NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("c")).tokensWb(t("a")));
@@ -66,8 +66,8 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
-        Coordination aligner = new Coordination();
-        Node rootNode = aligner.alignTokens(tokensWa, tokensWb);
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
+        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("text"), t("body"), t("div"), t("s"), t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")).tokensWb(t("text"), t("body"), t("div"), t("s"),t("Hoe"), t("zoet"), t("moet"), t("nochtans"), t("zijn"), t("dit")));
         NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.omission).tokensWb(t("lb"), t("/lb")));
@@ -92,8 +92,8 @@ public class NodeUnitTest {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
-        Coordination aligner = new Coordination();
-        Node rootNode = aligner.alignTokens(tokensWa, tokensWb);
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
+        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("text"), t("s"), t("vrouw")));
         NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));

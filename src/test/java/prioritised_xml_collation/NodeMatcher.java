@@ -59,6 +59,18 @@ public class NodeMatcher extends BaseMatcher<Node> {
         List<Boolean> zippedChildren = StreamUtils.zip(streamChildren, streamActualChildren, (matcher, actual) -> matcher.matches(actual))
                 .collect(Collectors.toList());
         if (zippedChildren.contains(false)) {
+            // debug
+            for ( int i =0; i < zippedChildren.size(); i++) {
+                if (zippedChildren.get(i) == false) {
+                    NodeMatcher expected = childMatcher.get(i);
+                    Node actual = node.children.get(i);
+                    System.out.println("Expected: "+expected+" but was: "+actual);
+                    //TODO: An exception should not be thrown, add to "describe mismatch buffer" instead.
+                    throw new RuntimeException("We got trouble here!");
+                }
+
+
+            }
             return false;
         }
         // Check whether child node has childMatcher (i.e., segment type "replacement")

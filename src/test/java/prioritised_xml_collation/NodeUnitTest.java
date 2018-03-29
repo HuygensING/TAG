@@ -99,14 +99,13 @@ public class NodeUnitTest {
         Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
         NodeMatcher rootNodeMatcher = nM();
         NodeMatcher childrenMatcher1 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("text"), t("s"), t("vrouw")));
-        NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
-        NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWb(t(","), t("!")));
+        NodeMatcher childrenMatcher2 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t(","), t("de"), t("ongewisheid"), t("?")).tokensWb(t("!"), t("/s"), t("s"), t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting"),t(".")));
+        NodeMatcher childrenMatcher3 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t(",")).tokensWb(t("!")));
         NodeMatcher childrenMatcher4 = nM(SegmentMatcher.sM(Segment.Type.addition).tokensWb(t("/s"), t("s")));
-        NodeMatcher childrenMatcher5 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
-        NodeMatcher childrenMatcher6 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("!")).tokensWb(t(".")));
-        NodeMatcher childrenMatcher7 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("!")).tokensWb(t(".")));
-        NodeMatcher childrenMatcher8 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("/s"), t("/text")).tokensWb(t("/s"), t("/text")));
-        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher3, childrenMatcher4, childrenMatcher5), childrenMatcher6.childrenMatcher(childrenMatcher7), childrenMatcher8);
+        NodeMatcher childrenMatcher5 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")));
+        NodeMatcher childrenMatcher6 = nM(SegmentMatcher.sM(Segment.Type.replacement).tokensWa(t("?")).tokensWb(t(".")));
+        NodeMatcher childrenMatcher7 = nM(SegmentMatcher.sM(Segment.Type.aligned).tokensWa(t("/s"), t("/text")).tokensWb(t("/s"), t("/text")));
+        rootNodeMatcher.childrenMatcher(childrenMatcher1, childrenMatcher2.childrenMatcher(childrenMatcher3, childrenMatcher4, childrenMatcher5, childrenMatcher6), childrenMatcher7);
         assertThat(rootNode, is(rootNodeMatcher));
     }
 }

@@ -8,8 +8,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static prioritised_xml_collation.SegmentMatcher.sM;
+import static prioritised_xml_collation.XMLTokenContentMatcher.t;
 
 /**
  * Created by ellibleeker on 21/04/2017.
@@ -21,33 +22,30 @@ public class ContentTypeSegmenterUnitTest {
         List<Segment> segmentsRound2 = alignSegmentBasedOnType(segmentsRound1.get(1));
         System.out.println(segmentsRound2);
 
-
-
-        // SegmentMatcher expectedSegments = sM(Cell.Type.aligned).tokensWa(t("text"), t("s")).tokensWb(t("text"), t("s")); sM(Cell.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw")); sM(Cell.Type.aligned).tokensWa(t(",")).tokensWb(t("!")); sM(Cell.Type.addition).tokensWb(t("/s"), t("s")); sM(Cell.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting")); sM(Cell.Type.aligned).tokensWa(t("?")).tokensWb(t(".")); sM(Cell.Type.aligned).tokensWa(t("s"), t("text")).tokensWb(t("s"), t("text"));
-        // assertThat(segmentsRound2, contains(expectedSegments));
+         // Segment 1 is aligned, not because of the content, but because they have the same type (punctuation)
+         SegmentMatcher m1 = sM(Segment.Type.aligned).tokensWa(t(",")).tokensWb(t("!"));
+         SegmentMatcher m2 = sM(Segment.Type.addition).tokensWb(t("/s"), t("s"));
+         // When aligning on type, the length of tokens A and B does not have to be the same!
+         SegmentMatcher m3 = sM(Segment.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting"));
+         SegmentMatcher m4 = sM(Segment.Type.aligned).tokensWa(t("?")).tokensWb(t("."));
+         assertThat(segmentsRound2, contains(m1, m2, m3, m4));
     }
 
     private List<Segment> firstRoundAlignment(String filename_w1, String filename_w2) throws FileNotFoundException, XMLStreamException {
         Tokenizer tokenizer = new Tokenizer();
         List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File(filename_w1));
         List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File(filename_w2));
-        AbstractScorer contentScorer = new ContentScorer();
-        SegmenterInterface contentSegmenter = new AlignedNonAlignedSegmenter();
-        EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
-        // System.out.println(segmentsRound1);
-        return contentAligner.alignAndSegment(tokensA, tokensB, contentSegmenter);
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
+        return aligner.alignmentPhaseOne(tokensA, tokensB);
     }
+
     private List<Segment> alignSegmentBasedOnType(Segment segmentReplaced) {
         // Take the replaced segment and get its tokens
         List<XMLToken> tokensAtype = segmentReplaced.tokensWa;
         List<XMLToken> tokensBtype = segmentReplaced.tokensWb;
 
         // Do the actual second phase alignment
-        AbstractScorer scoreType = new TypeScorer();
-        SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
-        EditGraphAligner typeAligner = new EditGraphAligner(scoreType);
-        return typeAligner.alignAndSegment(tokensAtype, tokensBtype, typeSegmenter);
+        TwoPhasedAligner aligner = new TwoPhasedAligner();
+        return aligner.alignmentPhaseTwo(tokensAtype, tokensBtype);
     }
-
-
 }

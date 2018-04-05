@@ -109,7 +109,7 @@ public class EditGraphTable implements Iterable<Cell> {
         } else return CellType.mix;
     }
 
-    private CellType determineTypeOfToken(XMLToken tokenA) {
+    static CellType determineTypeOfToken(XMLToken tokenA) {
         boolean punctuationType = (tokenA.content.matches("\\W+"));
         boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
         boolean markupType = (tokenA instanceof ElementToken);

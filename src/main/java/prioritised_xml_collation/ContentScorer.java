@@ -6,9 +6,12 @@ package prioritised_xml_collation;
 class ContentScorer extends AbstractScorer {
 
     @Override
-    public boolean match(XMLToken a, XMLToken b) {
+    public Segment.Type match(XMLToken a, XMLToken b) {
         //note: performance: whitespace normalization and matching happens over and over again.
         //note: in the production version of CollateX both these things happen before alignment.
-        return a.content.trim().equals(b.content.trim());
+        boolean c = a.content.trim().equals(b.content.trim());
+        if (c)
+        {    return Segment.Type.aligned; }
+        return Segment.Type.not_aligned;
     }
 }

@@ -68,6 +68,6 @@ public class Segment {
     }
 
     public enum Type {
-        aligned, replacement, addition, omission, empty, semanticVariation
+        aligned, replacement, addition, omission, empty, not_aligned, semanticVariation
     }
 }

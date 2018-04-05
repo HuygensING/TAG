@@ -77,7 +77,25 @@ public class EditGraphTable implements Iterable<Cell> {
         }
     }
 
-    private String cellToString(Cell cell) {
+    String cellToString(Cell cell) {
+        if (cell.x == 0 && cell.y == 0) {
+            return "root";
+        }
+        if (cell.movedVertical()) {
+            // get the type from one side
+            XMLToken tokenB = tokensB.get(cell.y - 1);
+            return tokenB.toString();
+        } else if (cell.movedHorizontal()) {
+            // get the type from one side
+            XMLToken tokenA = tokensA.get(cell.x - 1);
+            return tokenA.toString();
+        }
+        if (cell.match) {
+            // get the type from one side
+            XMLToken tokenA = tokensA.get(cell.x - 1);
+            return tokenA.toString()+" (aligned)";
+        }
+
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
         return tokenA + " : " + tokenB;

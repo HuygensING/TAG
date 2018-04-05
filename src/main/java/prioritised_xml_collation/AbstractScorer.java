@@ -17,7 +17,7 @@ public abstract class AbstractScorer {
             return new Cell(Boolean.TRUE, x, y, parent, parent.globalScore+1);
         }
         if (typeOfMatch == Segment.Type.semanticVariation) {
-            return new Cell(Boolean.TRUE, x, y, parent, parent.globalScore);
+            return new Cell(Boolean.FALSE, x, y, parent, parent.globalScore);
         }
         // "replacement" means replacement (omission + addition)
         return new Cell(Boolean.FALSE, x, y, parent, parent.globalScore - 2);

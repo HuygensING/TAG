@@ -11,8 +11,18 @@ import java.util.List;
  */
 class TypeAndContentAligner {
     List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
-        AbstractScorer typeAndContentScorer = new TypeAndContentScorer();
-        EditGraphAligner aligner = new EditGraphAligner(typeAndContentScorer);
+        EditGraphAligner aligner = createAligner();
         return aligner.alignAndSegment(tokensWa, tokensWb, new AlignedNonAlignedSegmenter());
+    }
+
+    EditGraphTable alignAndReturnTable(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        EditGraphAligner editGraphAligner = createAligner();
+        EditGraphTable editGraphTable = editGraphAligner.align(tokensWa, tokensWb);
+        return editGraphTable;
+    }
+
+    private EditGraphAligner createAligner() {
+        AbstractScorer typeAndContentScorer = new TypeAndContentScorer();
+        return new EditGraphAligner(typeAndContentScorer);
     }
 }

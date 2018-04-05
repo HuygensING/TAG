@@ -5,6 +5,7 @@ import org.junit.Test;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.List;
 
 /*
@@ -21,10 +22,17 @@ public class TypeAndContentAlignerTestCase {
         List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
-        List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb);
-        for (Segment s : segments) {
-            System.out.println(s);
+
+        EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
+        Iterator<Cell> cells = editGraphTable.iterator();
+        for (; cells.hasNext();) {
+            Cell cell = cells.next();
+            System.out.println(editGraphTable.cellToString(cell));
         }
+//        List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb);
+//        for (Segment s : segments) {
+//            System.out.println(s);
+//        }
 
     }
 }

@@ -43,8 +43,8 @@ public class EditGraphAligner {
             IntStream.range(1, tokensA.size() + 1).forEach(x -> {
                 int previousY = y - 1;
                 int previousX = x - 1;
-                Segment.Type type = scorer.match(tokensA.get(x - 1), tokensB.get(y - 1));
-                Cell upperLeft = scorer.score(x, y, this.cells[previousY][previousX], type);
+                Cell.Match match = scorer.match(tokensA.get(x - 1), tokensB.get(y - 1));
+                Cell upperLeft = scorer.score(x, y, this.cells[previousY][previousX], match);
                 Cell left = scorer.gap(x, y, this.cells[y][previousX]);
                 Cell upper = scorer.gap(x, y, this.cells[previousY][x]);
                 //NOTE: performance: The creation of a List is a potential performance problem; better to do two

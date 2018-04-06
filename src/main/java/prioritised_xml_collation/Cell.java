@@ -37,4 +37,7 @@ public class Cell {
         return differenceHorizontal == 0 && differenceVertical != 0;
     }
 
+    public enum Match {
+        match, not_matched, semanticMatch
+    }
 }

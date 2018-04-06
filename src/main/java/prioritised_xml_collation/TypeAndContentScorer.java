@@ -2,18 +2,18 @@ package prioritised_xml_collation;
 
 public class TypeAndContentScorer extends AbstractScorer {
     @Override
-    public Segment.Type match(XMLToken tokenA, XMLToken tokenB) {
+    public Cell.Match match(XMLToken tokenA, XMLToken tokenB) {
         CellType typeTokenA = EditGraphTable.determineTypeOfToken(tokenA);
         CellType typeTokenB = EditGraphTable.determineTypeOfToken(tokenB);
         if (typeTokenA != typeTokenB) {
-            return Segment.Type.not_aligned;
+            return Cell.Match.not_matched;
         }
         //NOTE: no normalisation applied!
         boolean contentAligned = tokenA.content.equals(tokenB.content);
         if (contentAligned) {
-            return Segment.Type.aligned;
+            return Cell.Match.match;
         }
-        return Segment.Type.semanticVariation;
+        return Cell.Match.semanticMatch;
     }
 
 }

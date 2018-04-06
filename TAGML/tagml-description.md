@@ -151,6 +151,55 @@ In text, the following characters need to be escaped using the escape character 
 
 Inside annotation string values: `'` -> `\'`, `"` -> `\"`
 
+### Linking elements
+In XML, the `xml:id` attribute is used to uniquely identify an element. This id can then be used in attributes of other
+ elements to link to the first element.
+ 
+ ```xml
+  <xml>
+   <meta>
+     <persons>
+       <person xml:id="huyg0001">
+         <name>Constantijn Huygens</name>
+         .....
+       </person>
+     </persons>
+   </meta>
+   <text>
+     <title>De Zee-Straet</title>
+     door <author pers="#huyg0001">Constantijn Huygens<author>
+     .......
+     </text>
+ </xml>
+ ```
+
+ In TAGML, there is a special annotation `:id` to uniquely identify an element (markup or annotation),
+ and a special annotation datatype whose value is the id of another element. 
+
+In TAGML, the example could be coded as:
+```
+[text meta={
+    persons=[
+      {:id='huyg0001' name='Constantijn Huygens'}
+    ]
+  }>[title>De Zee-Straet<title]
+  door [author pers->huyg0001>Constantijn Huygens<author]
+  .......
+<text]
+```
+
+The TAGML parser will give a warning when `:id`s are never referred to, or when an annotation refers to a non-existing `:id`.
+
+
+### TODO?
+- include other files in a TAGML file (importer instruction)
+  ```
+  [?include 'common.tagml']
+  ```
+  When importing a TAGML file with includes into the model, the model will be built as if from a single big file:
+  no information about the fact that the TAGML was composed from several files is saved in the model.
+
+
 ## Examples
 
 ### Genesis

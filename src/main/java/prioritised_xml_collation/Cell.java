@@ -11,13 +11,13 @@ public class Cell {
     int previousY;
     Boolean match;
 
-    Cell(Boolean match, int x, int y, Cell parent, int i) {
+    Cell(Boolean match, int x, int y, Cell parent, int globalScore) {
         this.match = match;
         this.x = x;
         this.y = y;
         this.previousX = parent == null ? -1 : parent.x;
         this.previousY = parent == null ? -1 : parent.y;
-        this.globalScore = i;
+        this.globalScore = globalScore;
     }
 
     @Override

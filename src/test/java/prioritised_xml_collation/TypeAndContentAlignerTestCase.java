@@ -35,4 +35,18 @@ public class TypeAndContentAlignerTestCase {
 //        }
 
     }
+    @Test
+    public void testPath() throws FileNotFoundException, XMLStreamException {
+        Tokenizer tokenizer = new Tokenizer();
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_A.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_B.xml"));
+        TypeAndContentAligner aligner = new TypeAndContentAligner();
+
+        EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
+        Iterator<Cell> cells = editGraphTable.iterator();
+        for (; cells.hasNext(); ) {
+            Cell cell = cells.next();
+            System.out.println(editGraphTable.cellToString(cell));
+        }
+    }
 }

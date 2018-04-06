@@ -107,11 +107,11 @@ public class EditGraphTable implements Iterable<Cell> {
         }
         if (cell.x == 0) {
             XMLToken tokenB = tokensB.get(cell.y - 1);
-            return determineTypeOfToken(tokenB);
+            return convertTokenTypeIntoCellType(determineTypeOfToken(tokenB));
         }
         if (cell.y == 0) {
             XMLToken tokenA = tokensA.get(cell.x - 1);
-            return determineTypeOfToken(tokenA);
+            return convertTokenTypeIntoCellType(determineTypeOfToken(tokenA));
         }
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
@@ -127,17 +127,18 @@ public class EditGraphTable implements Iterable<Cell> {
         } else return CellType.mix;
     }
 
-    static CellType determineTypeOfToken(XMLToken tokenA) {
+    static Token.Type determineTypeOfToken(XMLToken tokenA) {
         boolean punctuationType = (tokenA.content.matches("\\W+"));
         boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
         boolean markupType = (tokenA instanceof ElementToken);
         if (punctuationType) {
-            return CellType.punctuation;
+            return Token.Type.punctuation;
         } else if (contentType) {
-            return CellType.text;
+            return Token.Type.text;
         } else if (markupType) {
-            return CellType.markup;
-        } else return CellType.mix;
+            return Token.Type.markup;
+        }
+        throw new RuntimeException("Unknown token type!");
     }
 
     CellType determineUniqueCellType(Cell cell) {
@@ -146,11 +147,11 @@ public class EditGraphTable implements Iterable<Cell> {
             if (cell.movedVertical()) {
                 // get the type from one side
                 XMLToken tokenB = tokensB.get(cell.y - 1);
-                return determineTypeOfToken(tokenB);
+                return convertTokenTypeIntoCellType(determineTypeOfToken(tokenB));
             } else if (cell.movedHorizontal()) {
                 // get the type from one side
                 XMLToken tokenA = tokensA.get(cell.x - 1);
-                return determineTypeOfToken(tokenA);
+                return convertTokenTypeIntoCellType(determineTypeOfToken(tokenA));
             } else {
                 // We have a replacement of a text type with markup or something similar and there is no way we can
                 // resolve that by looking at neighbours.
@@ -158,5 +159,18 @@ public class EditGraphTable implements Iterable<Cell> {
             }
         }
         return type;
+    }
+
+    private CellType convertTokenTypeIntoCellType(Token.Type type) {
+        if (type == Token.Type.markup) {
+            return CellType.markup;
+        }
+        if (type == Token.Type.punctuation) {
+            return CellType.punctuation;
+        }
+        if (type == Token.Type.text) {
+            return CellType.text;
+        }
+        throw new RuntimeException("Unknown Token.Type!");
     }
 }

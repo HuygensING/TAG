@@ -63,7 +63,7 @@ class TwoPhasedAligner {
         return rootNode;
     }
 
-    private List<Segment> alignmentPhaseOne(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+    List<Segment> alignmentPhaseOne(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
         // align on content
         AbstractScorer contentScorer = new ContentScorer();
         EditGraphAligner contentAligner = new EditGraphAligner(contentScorer);
@@ -71,12 +71,19 @@ class TwoPhasedAligner {
         return contentAligner.alignAndSegment(tokensWa, tokensWb, contentSegmenter);
     }
 
-    private List<Segment> alignmentPhaseTwo(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+    List<Segment> alignmentPhaseTwo(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
         // align on type
         AbstractScorer typeScorer = new TypeScorer();
         EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
         SegmenterInterface typeSegmenter = new ContentTypeSegmenter();
         return typeAligner.alignAndSegment(tokensWa, tokensWb, typeSegmenter);
+    }
+
+    EditGraphTable alignmentPhaseTwoWithoutSegments(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        // align on type
+        AbstractScorer typeScorer = new TypeScorer();
+        EditGraphAligner typeAligner = new EditGraphAligner(typeScorer);
+        return typeAligner.align(tokensWa, tokensWb);
     }
 
 }

@@ -1,5 +1,7 @@
 package prioritised_xml_collation;
 
+// The Scorer determines whether a cell contains a match
+// and fills the EditTable with a global score
 public class TypeAndContentScorer extends AbstractScorer {
     @Override
     public Cell.Match match(XMLToken tokenA, XMLToken tokenB) {

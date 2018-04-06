@@ -180,7 +180,7 @@ In TAGML, the example could be coded as:
 ```
 [text meta={
     persons=[
-      {:id='huyg0001' name='Constantijn Huygens'}
+      {:id=huyg0001 name='Constantijn Huygens'}
     ]
   }>[title>De Zee-Straet<title]
   door [author pers->huyg0001>Constantijn Huygens<author]

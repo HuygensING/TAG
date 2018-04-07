@@ -87,10 +87,10 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   [q>To be, or [del>to be not<del][add>not to be<add].<q] 
   ``` 
   To indicate that the `del` and `add` markup pair is where the text diverges, with the `del` part one path,
-  and the `add` part the other, we group these markups by enclosing them in `set` tags `|>` and `<|`,
+  and the `add` part the other, we group these markups by enclosing them in `textvariation` tags `<|` and `|>`,
   with `|` to separate the diverging markups:
   ```
-  [q>To be, or |>[del>to be not<del]|[add>not to be<add]<|!<q] 
+  [q>To be, or <|[del>to be not<del]|[add>not to be<add]|>!<q] 
   ```
   In case of a solitary `del` without a corresponding `add`, mark the markup as *optional* to indicate there are two paths:
   one *with* the text marked up by `del`, and one *without* (grouping is not necessary in this case):  
@@ -99,7 +99,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
   The alternatives in the group don't need to be contained in markup, this is also valid TAGML:
   ```
-  [l>At this point, the new text |>diverged|differed<| from the original.<l] 
+  [l>At this point, the new text <|diverged|differed|> from the original.<l] 
   ```
   
   
@@ -230,11 +230,11 @@ in TAGML:
 [section title="The creation of the world.">
 [para>
 [v>[s>
-|>[original>In the beginning of creation, when God made heaven and earth,<original]
-[alt>In the beginning God created heaven and earth.<alt]<|
+<|[original>In the beginning of creation, when God made heaven and earth,<original]
+|[alt>In the beginning God created heaven and earth.<alt]|>
 <v] [v>the earth was without form and void, with darkness
-over the face of the abyss, |>[original>and a mighty wind that swept<original][alt>and
-the spirit of God hovering<alt]<| over the surface of the waters.<s]<v]
+over the face of the abyss, <|[original>and a mighty wind that swept<original]|[alt>and
+the spirit of God hovering<alt]|> over the surface of the waters.<s]<v]
 [v>[s>God said, [quote>[s>Let there be a light<s]<quote], and there
 was light;<v] [v>and God saw that the light was good, and he separated
 the light from darkness.<s]<v] [v>[s>He called the light day, and the
@@ -263,7 +263,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier ']'`
-0. `textVariation ::= '|>' mixedContent ( '|' mixedContent )+ '<|'`
+0. `textVariation ::= '<|' mixedContent ( '|' mixedContent )+ '|>'`
 0. `text ::= textCharacter*`
 0. `comment ::= '[!' textCharacter* '!]'`
 
@@ -281,7 +281,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `stringValue ::= '"' characters '"' | "'" characters "'" `
 0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
 0. `BooleanValue ::= 'true' | 'false'`
-0. `mixedContentValue ::= '|' mixedContent '|'`
+0. `mixedContentValue ::= '[>' mixedContent '<]'`
 0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
 0. `objectValue ::= '{' annotation+ '}'`
 

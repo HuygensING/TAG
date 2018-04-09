@@ -37,6 +37,10 @@ public class Cell {
         return differenceHorizontal == 0 && differenceVertical != 0;
     }
 
+    public Boolean isRoot() {
+        return x == 0 && y == 0;
+    }
+
     public enum Match {
         match, not_matched, semanticMatch
     }

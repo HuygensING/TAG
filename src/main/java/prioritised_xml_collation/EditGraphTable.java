@@ -102,7 +102,7 @@ public class EditGraphTable implements Iterable<Cell> {
     }
 
     CellType establishTypeOfCell(Cell cell) {
-        if (cell.x == 0 && cell.y == 0) {
+        if (cell.isRoot()) {
             return CellType.root;
         }
         if (cell.x == 0) {

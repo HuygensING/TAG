@@ -1,7 +1,6 @@
 package prioritised_xml_collation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /*
@@ -20,15 +19,12 @@ public class AlignmentAndTypeSegmenter implements SegmenterInterface {
         List<Segment> result = new ArrayList<>();
         // We set last cell to the first iterable cell. (lower right corner)
         Cell lastCell = editTable.iterator().next();
-        // CellIterator iterates cells:
-        Iterator<Cell> iterateTable = editTable.iterator();
+        // For loop iterates cells of the editTable:
         // As long as the pointer can move up in the editTable
-        while (iterateTable.hasNext()) {
-            // move one cell up
-            Cell currentCell = iterateTable.next();
+        // move one cell up
+        for (Cell currentCell : editTable) {
             // stateChange if the type of the lastCell is not the same as the currentCell
-            // TODO: a is root function would be faster
-            Boolean stateChange = editTable.establishTypeOfCell(currentCell) == CellType.root || lastCell.match != currentCell.match;
+            Boolean stateChange = currentCell.isRoot() || lastCell.match != currentCell.match;
             // stateChange if type is different and we are within a change
             if (!stateChange) {
                 stateChange = !lastCell.match && editTable.determineUniqueCellType(currentCell) != editTable.determineUniqueCellType(lastCell);

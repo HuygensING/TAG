@@ -23,18 +23,19 @@ public class TypeAndContentAlignerTestCase {
         List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
 
-        EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
-        Iterator<Cell> cells = editGraphTable.iterator();
-        for (; cells.hasNext();) {
-            Cell cell = cells.next();
-            System.out.println(editGraphTable.cellToString(cell));
-        }
-//        List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb);
-//        for (Segment s : segments) {
-//            System.out.println(s);
+//        EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
+//        Iterator<Cell> cells = editGraphTable.iterator();
+//        for (; cells.hasNext();) {
+//            Cell cell = cells.next();
+//            System.out.println(editGraphTable.cellToString(cell));
 //        }
+        List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb, new AlignmentAndTypeSegmenter());
+        for (Segment s : segments) {
+            System.out.println(s);
+        }
 
     }
+
     @Test
     public void testPath() throws FileNotFoundException, XMLStreamException {
         Tokenizer tokenizer = new Tokenizer();

@@ -23,10 +23,10 @@ public class AlignmentAndTypeSegmenter implements SegmenterInterface {
         // As long as the pointer can move up in the editTable
         // move one cell up
         for (Cell currentCell : editTable) {
-            // stateChange if the type of the lastCell is not the same as the currentCell
+            // stateChange if cell is root or the alignment of the lastCell is not the same as the currentCell
             Boolean stateChange = currentCell.isRoot() || lastCell.match != currentCell.match;
-            // stateChange if type is different and we are within a change
             if (!stateChange) {
+                // stateChange if type is different and we are within a modification.
                 stateChange = !lastCell.match && editTable.determineUniqueCellType(currentCell) != editTable.determineUniqueCellType(lastCell);
             }
             if (stateChange) {

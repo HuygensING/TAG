@@ -12,22 +12,14 @@ public class CellTypeUnitTest {
     @Test
     public void TestScoreType() throws Exception{
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
-        List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
-        TwoPhasedAligner aligner = new TwoPhasedAligner();
-        List<Segment> segmentsRound1 = aligner.alignmentPhaseOne(tokensA, tokensB);
-
-        Segment segmentReplaced = segmentsRound1.get(1);
-        List<XMLToken> tokensAtype = segmentReplaced.tokensWa;
-        List<XMLToken> tokensBtype = segmentReplaced.tokensWb;
-        System.out.println(tokensAtype);
-        System.out.println(tokensBtype);
-
-        EditGraphTable table = aligner.alignmentPhaseTwoWithoutSegments(tokensAtype, tokensBtype);
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
+        TypeAndContentAligner aligner = new TypeAndContentAligner();
+        EditGraphTable table = aligner.alignAndReturnTable(tokensWa, tokensWb);
         Cell[][] cells = table.matrix;
-        assertEquals(CellType.text, table.establishTypeOfCell(cells[7][2]));
-        assertEquals(CellType.punctuation, table.establishTypeOfCell(cells[1][1]));
-        assertEquals(CellType.mix, table.establishTypeOfCell(cells[3][2]));
+        assertEquals(CellType.text, table.establishTypeOfCell(cells[10][5]));
+        assertEquals(CellType.punctuation, table.establishTypeOfCell(cells[4][4]));
+        assertEquals(CellType.mix, table.establishTypeOfCell(cells[6][5]));
     }
 
 }

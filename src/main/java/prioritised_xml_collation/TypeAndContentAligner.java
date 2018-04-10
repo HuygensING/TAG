@@ -10,6 +10,11 @@ import java.util.List;
  * This code is an experiment to see whether we can do the high quality alignment in one single phase
  */
 class TypeAndContentAligner {
+    List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+        EditGraphAligner aligner = createAligner();
+        return aligner.alignAndSegment(tokensWa, tokensWb, new AlignmentAndTypeSegmenter());
+    }
+
     List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb, SegmenterInterface segmenter) {
         EditGraphAligner aligner = createAligner();
         return aligner.alignAndSegment(tokensWa, tokensWb, segmenter);

@@ -18,34 +18,22 @@ import static prioritised_xml_collation.XMLTokenContentMatcher.t;
 public class ContentTypeSegmenterUnitTest {
     @Test
     public void testSelectionS21() throws Exception {
-        List<Segment> segmentsRound1 = firstRoundAlignment("input_xml/s21-focus-A.xml", "input_xml/s21-focus-B.xml");
-        List<Segment> segmentsRound2 = alignSegmentBasedOnType(segmentsRound1.get(1));
-        System.out.println(segmentsRound2);
-
-         // Segment 1 is aligned, not because of the content, but because they have the same type (punctuation)
-         SegmentMatcher m1 = sM(Segment.Type.aligned).tokensWa(t(",")).tokensWb(t("!"));
-         SegmentMatcher m2 = sM(Segment.Type.addition).tokensWb(t("/s"), t("s"));
-         // When aligning on type, the length of tokens A and B does not have to be the same!
-         SegmentMatcher m3 = sM(Segment.Type.aligned).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting"));
-         SegmentMatcher m4 = sM(Segment.Type.aligned).tokensWa(t("?")).tokensWb(t("."));
-         assertThat(segmentsRound2, contains(m1, m2, m3, m4));
-    }
-
-    private List<Segment> firstRoundAlignment(String filename_w1, String filename_w2) throws FileNotFoundException, XMLStreamException {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensA = tokenizer.convertXMLFileIntoTokens(new File(filename_w1));
-        List<XMLToken> tokensB = tokenizer.convertXMLFileIntoTokens(new File(filename_w2));
-        TwoPhasedAligner aligner = new TwoPhasedAligner();
-        return aligner.alignmentPhaseOne(tokensA, tokensB);
+        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
+        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
+        TypeAndContentAligner aligner = new TypeAndContentAligner();
+        List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb, new ContentTypeSegmenter());
+        System.out.println(segments);
+
+        SegmentMatcher m1 = sM(Segment.Type.aligned).tokensWa(t("text"), t("s")).tokensWb(t("text"), t("s"));
+        SegmentMatcher m2 = sM(Segment.Type.aligned).tokensWa(t("vrouw")).tokensWb(t("vrouw"));
+        // Segment 1 is separate, not because of the content, but because they have the same type (punctuation)
+         SegmentMatcher m3 = sM(Segment.Type.replacement).tokensWa(t(",")).tokensWb(t("!"));
+         SegmentMatcher m4 = sM(Segment.Type.addition).tokensWb(t("/s"), t("s"));
+         SegmentMatcher m5 = sM(Segment.Type.replacement).tokensWa(t("de"), t("ongewisheid")).tokensWb(t("Die"), t("dagen"), t("van"), t("nerveuze"), t("verwachting"));
+         SegmentMatcher m6 = sM(Segment.Type.replacement).tokensWa(t("?")).tokensWb(t("."));
+         SegmentMatcher m7 = sM(Segment.Type.aligned).tokensWa(t("/s"), t("/text")).tokensWb(t("/s"), t("/text"));
+         assertThat(segments, contains(m1, m2, m3, m4, m5, m6, m7));
     }
 
-    private List<Segment> alignSegmentBasedOnType(Segment segmentReplaced) {
-        // Take the replaced segment and get its tokens
-        List<XMLToken> tokensAtype = segmentReplaced.tokensWa;
-        List<XMLToken> tokensBtype = segmentReplaced.tokensWb;
-
-        // Do the actual second phase alignment
-        TwoPhasedAligner aligner = new TwoPhasedAligner();
-        return aligner.alignmentPhaseTwo(tokensAtype, tokensBtype);
-    }
 }

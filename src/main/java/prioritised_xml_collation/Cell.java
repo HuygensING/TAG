@@ -41,7 +41,4 @@ public class Cell {
         return x == 0 && y == 0;
     }
 
-    public enum Match {
-        match, not_matched, semanticMatch
-    }
 }

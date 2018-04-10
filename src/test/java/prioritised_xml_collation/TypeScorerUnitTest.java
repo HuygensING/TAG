@@ -1,10 +1,6 @@
 package prioritised_xml_collation;
 
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.File;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -19,8 +15,8 @@ public class  TypeScorerUnitTest {
         XMLToken tokenA = new TextToken(",");
         XMLToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
-        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
-        assertThat(resultScorer, is(Cell.Match.match));
+        AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(AbstractScorer.Match.match));
     }
 
     @Test
@@ -28,8 +24,8 @@ public class  TypeScorerUnitTest {
         XMLToken tokenA = new TextToken("black");
         XMLToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
-        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
-        assertThat(resultScorer, is(Cell.Match.not_matched));
+        AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(AbstractScorer.Match.not_matched));
     }
 
     @Test
@@ -37,8 +33,8 @@ public class  TypeScorerUnitTest {
         XMLToken tokenA = new TextToken("cat");
         XMLToken tokenB = new TextToken("white");
         AbstractScorer scoreType = new TypeScorer();
-        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
-        assertThat(resultScorer, is(Cell.Match.match));
+        AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(AbstractScorer.Match.match));
     }
 
     @Test
@@ -46,8 +42,8 @@ public class  TypeScorerUnitTest {
         XMLToken tokenA = new ElementToken("s");
         XMLToken tokenB = new ElementToken("p");
         AbstractScorer scoreType = new TypeScorer();
-        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
-        assertThat(resultScorer, is(Cell.Match.match));
+        AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(AbstractScorer.Match.match));
     }
 
     @Test
@@ -55,8 +51,8 @@ public class  TypeScorerUnitTest {
         XMLToken tokenA = new ElementToken("p");
         XMLToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
-        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
-        assertThat(resultScorer, is(Cell.Match.not_matched));
+        AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(AbstractScorer.Match.not_matched));
     }
 
 }

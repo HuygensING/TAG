@@ -14,12 +14,12 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
   
   For every open tag `[markup>` there should be a corresponding close tag `<markup]`  
-  markup has a *name*, an optional *identifier*, and (for the open tag) one or more *annotations*.
+  markup has a *name*, an optional *suffix*, and (for the open tag) one or more *annotations*.
   ```
   [markup~1 annotation_1='string value' annotation_2=2.718>text<markup~1]
   ```
   `markup` is the name,  
-  `1` is the identifier,  
+  `~1` is the suffix,  
   `annotation_1` and `annotation_2` are the names of the annotations
 
 ### Overlapping markup  
@@ -33,8 +33,8 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
   [s>[a~1>Cookie Monster [a~2>likes<a~1] cookies.<a~2]<s]
   ```
-  Markup of the same name can overlap by adding identifiers to the markup name (for both the opening and the closing tags).  
-  The combination name + identifier should be unique within the TAGML document.
+  Markup of the same name can overlap by adding suffixes to the markup name (for both the opening and the closing tags).  
+  The combination name + suffix should be unique within the TAGML document.
 
 ### Markup annotations
   ```
@@ -270,9 +270,9 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `Optional ::= '?'`
 0. `Resume ::= '+'`
 0. `Suspend ::= '-'`
-0. `tagIdentifier ::= qualifiedMarkupName markupIdentifier?`
+0. `tagIdentifier ::= qualifiedMarkupName markupSuffix?`
 0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
-0. `markupIdentifier ::= '~' NameCharacter+'`
+0. `markupSuffix ::= '~' NameCharacter+'`
 0. `localMarkupName ::= NameCharacter+`
 
 0. `annotation ::= annotationName '=' annotationValue`

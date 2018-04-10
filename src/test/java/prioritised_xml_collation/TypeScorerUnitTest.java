@@ -14,50 +14,50 @@ import static org.junit.Assert.assertThat;
  */
 public class  TypeScorerUnitTest {
 
-//    @Test
-//    public void testScoreXMLmatchPunctuation() {
-//        XMLToken tokenA = new TextToken(",");
-//        XMLToken tokenB = new TextToken("!");
-//        AbstractScorer scoreType = new TypeScorer();
-//        boolean resultScorer = scoreType.match(tokenA, tokenB);
-//        assertThat(resultScorer, is(true));
-//    }
-//
-//    @Test
-//    public void testScoreXMLnonMatchPunctuation() {
-//        XMLToken tokenA = new TextToken("black");
-//        XMLToken tokenB = new TextToken("!");
-//        AbstractScorer scoreType = new TypeScorer();
-//        boolean resultScorer = scoreType.match(tokenA, tokenB);
-//        assertThat(resultScorer, is(false));
-//    }
-//
-//    @Test
-//    public void testScoreXMLmatchCharacters() {
-//        XMLToken tokenA = new TextToken("cat");
-//        XMLToken tokenB = new TextToken("white");
-//        AbstractScorer scoreType = new TypeScorer();
-//        boolean resultScorer = scoreType.match(tokenA, tokenB);
-//        assertThat(resultScorer, is(true));
-//    }
+    @Test
+    public void testScoreXMLmatchPunctuation() {
+        XMLToken tokenA = new TextToken(",");
+        XMLToken tokenB = new TextToken("!");
+        AbstractScorer scoreType = new TypeScorer();
+        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(Cell.Match.match));
+    }
 
-//    @Test
-//    public void testScoreXMLMatchElement() {
-//        XMLToken tokenA = new ElementToken("s");
-//        XMLToken tokenB = new ElementToken("p");
-//        AbstractScorer scoreType = new TypeScorer();
-//        boolean resultScorer = scoreType.match(tokenA, tokenB);
-//        assertThat(resultScorer, is(true));
-//    }
-//
-//    @Test
-//    public void testScoreXMLnonMatchElement() {
-//        XMLToken tokenA = new ElementToken("p");
-//        XMLToken tokenB = new TextToken("!");
-//        AbstractScorer scoreType = new TypeScorer();
-//        boolean resultScorer = scoreType.match(tokenA, tokenB);
-//        assertThat(resultScorer, is(false));
-//    }
+    @Test
+    public void testScoreXMLnonMatchPunctuation() {
+        XMLToken tokenA = new TextToken("black");
+        XMLToken tokenB = new TextToken("!");
+        AbstractScorer scoreType = new TypeScorer();
+        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(Cell.Match.not_matched));
+    }
+
+    @Test
+    public void testScoreXMLmatchCharacters() {
+        XMLToken tokenA = new TextToken("cat");
+        XMLToken tokenB = new TextToken("white");
+        AbstractScorer scoreType = new TypeScorer();
+        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(Cell.Match.match));
+    }
+
+    @Test
+    public void testScoreXMLMatchElement() {
+        XMLToken tokenA = new ElementToken("s");
+        XMLToken tokenB = new ElementToken("p");
+        AbstractScorer scoreType = new TypeScorer();
+        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(Cell.Match.match));
+    }
+
+    @Test
+    public void testScoreXMLnonMatchElement() {
+        XMLToken tokenA = new ElementToken("p");
+        XMLToken tokenB = new TextToken("!");
+        AbstractScorer scoreType = new TypeScorer();
+        Cell.Match resultScorer = scoreType.match(tokenA, tokenB);
+        assertThat(resultScorer, is(Cell.Match.not_matched));
+    }
 
 }
 // TODO create four extra tests to assert each possible situation.

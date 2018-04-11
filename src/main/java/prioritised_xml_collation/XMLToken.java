@@ -12,8 +12,19 @@ public class XMLToken {
         this.content = content;
     }
 
+    //TODO: this can be done more efficiently!
     Token.Type getType() {
-        return Token.determineTypeOfToken(this);
+        boolean punctuationType = (content.matches("\\W+"));
+        boolean contentType = (content.matches("\\w+") && this instanceof TextToken);
+        boolean markupType = (this instanceof ElementToken);
+        if (punctuationType) {
+            return Token.Type.punctuation;
+        } else if (contentType) {
+            return Token.Type.text;
+        } else if (markupType) {
+            return Token.Type.markup;
+        }
+        throw new RuntimeException("Unknown token type!");
     }
 
     //TODO: whitespace handling

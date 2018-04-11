@@ -10,19 +10,4 @@ public class Token {
         text, markup, punctuation
     }
 
-    //TODO: move to XMLToken class and Tokeniser
-    static Token.Type determineTypeOfToken(XMLToken token) {
-        boolean punctuationType = (token.content.matches("\\W+"));
-        boolean contentType = (token.content.matches("\\w+") && token instanceof TextToken);
-        boolean markupType = (token instanceof ElementToken);
-        if (punctuationType) {
-            return Token.Type.punctuation;
-        } else if (contentType) {
-            return Token.Type.text;
-        } else if (markupType) {
-            return Token.Type.markup;
-        }
-        throw new RuntimeException("Unknown token type!");
-    }
-
 }

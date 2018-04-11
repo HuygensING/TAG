@@ -78,7 +78,7 @@ public class EditGraphTable implements Iterable<Cell> {
     }
 
     String cellToString(Cell cell) {
-        if (cell.x == 0 && cell.y == 0) {
+        if (cell.isRoot()) {
             return "root";
         }
         if (cell.movedVertical()) {
@@ -101,6 +101,7 @@ public class EditGraphTable implements Iterable<Cell> {
         return tokenA + " : " + tokenB;
     }
 
+    //TODO: merge establishTypeOfCell and determineUniqueCellType!
     CellType establishTypeOfCell(Cell cell) {
         if (cell.isRoot()) {
             return CellType.root;
@@ -115,22 +116,21 @@ public class EditGraphTable implements Iterable<Cell> {
         }
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
-        boolean punctuationType = (tokenA.content.matches("\\W+") && tokenB.content.matches("\\W+"));
-        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken && tokenB.content.matches("\\w+") && tokenB instanceof TextToken);
-        boolean markupType = (tokenA instanceof ElementToken) && (tokenB instanceof ElementToken);
-        if (punctuationType) {
-            return CellType.punctuation;
-        } else if (contentType) {
-            return CellType.text;
-        } else if (markupType) {
-            return CellType.markup;
-        } else return CellType.mix;
+        Token.Type typeTokenA = determineTypeOfToken(tokenA);
+        Token.Type typeTokenB = determineTypeOfToken(tokenB);
+
+        if (typeTokenA == typeTokenB) {
+            return convertTokenTypeIntoCellType(typeTokenA);
+        } else {
+            return CellType.mix;
+        }
     }
 
-    static Token.Type determineTypeOfToken(XMLToken tokenA) {
-        boolean punctuationType = (tokenA.content.matches("\\W+"));
-        boolean contentType = (tokenA.content.matches("\\w+") && tokenA instanceof TextToken);
-        boolean markupType = (tokenA instanceof ElementToken);
+    //TODO: move to XMLToken class and Tokeniser
+    static Token.Type determineTypeOfToken(XMLToken token) {
+        boolean punctuationType = (token.content.matches("\\W+"));
+        boolean contentType = (token.content.matches("\\w+") && token instanceof TextToken);
+        boolean markupType = (token instanceof ElementToken);
         if (punctuationType) {
             return Token.Type.punctuation;
         } else if (contentType) {
@@ -141,6 +141,8 @@ public class EditGraphTable implements Iterable<Cell> {
         throw new RuntimeException("Unknown token type!");
     }
 
+
+    //TODO: Change order around! First look at move!
     CellType determineUniqueCellType(Cell cell) {
         CellType type = establishTypeOfCell(cell);
         if (type == CellType.mix) {

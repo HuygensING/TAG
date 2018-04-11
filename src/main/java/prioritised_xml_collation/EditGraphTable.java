@@ -101,8 +101,7 @@ public class EditGraphTable implements Iterable<Cell> {
         return tokenA + " : " + tokenB;
     }
 
-    //TODO: rename!
-    CellType determineUniqueCellType(Cell cell) {
+    CellType determineCellType(Cell cell) {
         if (cell.isRoot()) {
             return CellType.root;
         }

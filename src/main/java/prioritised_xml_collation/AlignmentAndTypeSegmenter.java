@@ -27,7 +27,7 @@ public class AlignmentAndTypeSegmenter implements SegmenterInterface {
             Boolean stateChange = currentCell.isRoot() || lastCell.match != currentCell.match;
             if (!stateChange) {
                 // stateChange if type is different and we are within a modification.
-                stateChange = !lastCell.match && editTable.determineUniqueCellType(currentCell) != editTable.determineUniqueCellType(lastCell);
+                stateChange = !lastCell.match && editTable.determineCellType(currentCell) != editTable.determineCellType(lastCell);
             }
             if (stateChange) {
                 Segment newSegment = editTable.createSegmentOfCells(currentCell, lastCell);

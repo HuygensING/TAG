@@ -17,9 +17,9 @@ public class CellTypeUnitTest {
         TypeAndContentAligner aligner = new TypeAndContentAligner();
         EditGraphTable table = aligner.alignAndReturnTable(tokensWa, tokensWb);
         Cell[][] cells = table.matrix;
-        assertEquals(CellType.text, table.determineUniqueCellType(cells[10][5]));
-        assertEquals(CellType.punctuation, table.determineUniqueCellType(cells[4][4]));
-        assertEquals(CellType.mix, table.determineUniqueCellType(cells[6][5]));
+        assertEquals(CellType.text, table.determineCellType(cells[10][5]));
+        assertEquals(CellType.punctuation, table.determineCellType(cells[4][4]));
+        assertEquals(CellType.mix, table.determineCellType(cells[6][5]));
     }
 
 }

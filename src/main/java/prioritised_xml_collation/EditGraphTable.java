@@ -101,52 +101,31 @@ public class EditGraphTable implements Iterable<Cell> {
         return tokenA + " : " + tokenB;
     }
 
-    //TODO: merge establishTypeOfCell and determineUniqueCellType!
-    CellType establishTypeOfCell(Cell cell) {
+    //TODO: rename!
+    CellType determineUniqueCellType(Cell cell) {
         if (cell.isRoot()) {
             return CellType.root;
         }
-        if (cell.x == 0) {
+        if (cell.movedVertical()) {
+            // get the type from one side
             XMLToken tokenB = tokensB.get(cell.y - 1);
             return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenB));
-        }
-        if (cell.y == 0) {
+        } else if (cell.movedHorizontal()) {
+            // get the type from one side
             XMLToken tokenA = tokensA.get(cell.x - 1);
             return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenA));
-        }
-        XMLToken tokenA = tokensA.get(cell.x - 1);
-        XMLToken tokenB = tokensB.get(cell.y - 1);
-        Token.Type typeTokenA = Token.determineTypeOfToken(tokenA);
-        Token.Type typeTokenB = Token.determineTypeOfToken(tokenB);
-
-        if (typeTokenA == typeTokenB) {
-            return convertTokenTypeIntoCellType(typeTokenA);
         } else {
+            XMLToken tokenA = tokensA.get(cell.x - 1);
+            XMLToken tokenB = tokensB.get(cell.y - 1);
+            Token.Type typeTokenA = Token.determineTypeOfToken(tokenA);
+            Token.Type typeTokenB = Token.determineTypeOfToken(tokenB);
+            if (typeTokenA == typeTokenB) {
+                return convertTokenTypeIntoCellType(typeTokenA);
+            }
+            // We have a replacement of a text type with markup or something similar and there is no way we can
+            // resolve that by looking at neighbours.
             return CellType.mix;
         }
-    }
-
-
-
-    //TODO: Change order around! First look at move!
-    CellType determineUniqueCellType(Cell cell) {
-        CellType type = establishTypeOfCell(cell);
-        if (type == CellType.mix) {
-            if (cell.movedVertical()) {
-                // get the type from one side
-                XMLToken tokenB = tokensB.get(cell.y - 1);
-                return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenB));
-            } else if (cell.movedHorizontal()) {
-                // get the type from one side
-                XMLToken tokenA = tokensA.get(cell.x - 1);
-                return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenA));
-            } else {
-                // We have a replacement of a text type with markup or something similar and there is no way we can
-                // resolve that by looking at neighbours.
-                return CellType.mix;
-            }
-        }
-        return type;
     }
 
     private CellType convertTokenTypeIntoCellType(Token.Type type) {

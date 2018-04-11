@@ -108,16 +108,16 @@ public class EditGraphTable implements Iterable<Cell> {
         if (cell.movedVertical()) {
             // get the type from one side
             XMLToken tokenB = tokensB.get(cell.y - 1);
-            return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenB));
+            return convertTokenTypeIntoCellType(tokenB.getType());
         } else if (cell.movedHorizontal()) {
             // get the type from one side
             XMLToken tokenA = tokensA.get(cell.x - 1);
-            return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenA));
+            return convertTokenTypeIntoCellType(tokenA.getType());
         } else {
             XMLToken tokenA = tokensA.get(cell.x - 1);
             XMLToken tokenB = tokensB.get(cell.y - 1);
-            Token.Type typeTokenA = Token.determineTypeOfToken(tokenA);
-            Token.Type typeTokenB = Token.determineTypeOfToken(tokenB);
+            Token.Type typeTokenA = tokenA.getType();
+            Token.Type typeTokenB = tokenB.getType();
             if (typeTokenA == typeTokenB) {
                 return convertTokenTypeIntoCellType(typeTokenA);
             }

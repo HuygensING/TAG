@@ -12,7 +12,9 @@ public class XMLToken {
         this.content = content;
     }
 
-    //TODO: move Type responsibility to this class
+    Token.Type getType() {
+        return Token.determineTypeOfToken(this);
+    }
 
     //TODO: whitespace handling
 

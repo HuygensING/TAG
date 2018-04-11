@@ -108,16 +108,16 @@ public class EditGraphTable implements Iterable<Cell> {
         }
         if (cell.x == 0) {
             XMLToken tokenB = tokensB.get(cell.y - 1);
-            return convertTokenTypeIntoCellType(determineTypeOfToken(tokenB));
+            return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenB));
         }
         if (cell.y == 0) {
             XMLToken tokenA = tokensA.get(cell.x - 1);
-            return convertTokenTypeIntoCellType(determineTypeOfToken(tokenA));
+            return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenA));
         }
         XMLToken tokenA = tokensA.get(cell.x - 1);
         XMLToken tokenB = tokensB.get(cell.y - 1);
-        Token.Type typeTokenA = determineTypeOfToken(tokenA);
-        Token.Type typeTokenB = determineTypeOfToken(tokenB);
+        Token.Type typeTokenA = Token.determineTypeOfToken(tokenA);
+        Token.Type typeTokenB = Token.determineTypeOfToken(tokenB);
 
         if (typeTokenA == typeTokenB) {
             return convertTokenTypeIntoCellType(typeTokenA);
@@ -126,20 +126,6 @@ public class EditGraphTable implements Iterable<Cell> {
         }
     }
 
-    //TODO: move to XMLToken class and Tokeniser
-    static Token.Type determineTypeOfToken(XMLToken token) {
-        boolean punctuationType = (token.content.matches("\\W+"));
-        boolean contentType = (token.content.matches("\\w+") && token instanceof TextToken);
-        boolean markupType = (token instanceof ElementToken);
-        if (punctuationType) {
-            return Token.Type.punctuation;
-        } else if (contentType) {
-            return Token.Type.text;
-        } else if (markupType) {
-            return Token.Type.markup;
-        }
-        throw new RuntimeException("Unknown token type!");
-    }
 
 
     //TODO: Change order around! First look at move!
@@ -149,11 +135,11 @@ public class EditGraphTable implements Iterable<Cell> {
             if (cell.movedVertical()) {
                 // get the type from one side
                 XMLToken tokenB = tokensB.get(cell.y - 1);
-                return convertTokenTypeIntoCellType(determineTypeOfToken(tokenB));
+                return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenB));
             } else if (cell.movedHorizontal()) {
                 // get the type from one side
                 XMLToken tokenA = tokensA.get(cell.x - 1);
-                return convertTokenTypeIntoCellType(determineTypeOfToken(tokenA));
+                return convertTokenTypeIntoCellType(Token.determineTypeOfToken(tokenA));
             } else {
                 // We have a replacement of a text type with markup or something similar and there is no way we can
                 // resolve that by looking at neighbours.

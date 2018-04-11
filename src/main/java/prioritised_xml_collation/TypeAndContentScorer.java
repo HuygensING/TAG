@@ -6,8 +6,8 @@ public class TypeAndContentScorer extends AbstractScorer {
     @Override
     public Match match(XMLToken tokenA, XMLToken tokenB) {
         // First we see whether the tokens have the same type
-        Token.Type typeTokenA = EditGraphTable.determineTypeOfToken(tokenA);
-        Token.Type typeTokenB = EditGraphTable.determineTypeOfToken(tokenB);
+        Token.Type typeTokenA = Token.determineTypeOfToken(tokenA);
+        Token.Type typeTokenB = Token.determineTypeOfToken(tokenB);
         if (typeTokenA != typeTokenB) {
             return AbstractScorer.Match.not_matched;
         }

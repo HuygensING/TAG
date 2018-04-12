@@ -19,7 +19,11 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.IntStream;
 
 /**
@@ -68,7 +72,7 @@ public class EditGraphAligner {
                 Cell upper = scorer.gap(x, y, this.cells[previousY][x]);
                 //NOTE: performance: The creation of a List is a potential performance problem; better to do two
                 //separate comparisons.
-                Cell max = Collections.max(Arrays.asList(upperLeft, left, upper), (score, other) -> score.globalScore - other.globalScore);
+                Cell max = Collections.max(Arrays.asList(upperLeft, left, upper), Comparator.comparingInt(score -> score.globalScore));
                 this.cells[y][x] = max;
             });
         });

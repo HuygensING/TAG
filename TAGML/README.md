@@ -167,7 +167,7 @@ In XML, the `xml:id` attribute is used to uniquely identify an element. This id 
    </meta>
    <text>
      <title>De Zee-Straet</title>
-     door <author pers="#huyg0001">Constantijn Huygens<author>
+     door <author pers="#huyg0001">Constantijn Huygens</author>
      .......
      </text>
  </xml>

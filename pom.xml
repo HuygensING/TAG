@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>nl.knaw.huc.di.tag</groupId>
+  <artifactId>TAG</artifactId>
+  <packaging>pom</packaging>
+  <inceptionYear>2016</inceptionYear>
+  <version>1.0-SNAPSHOT</version>
+
+  <modules>
+    <!--<module>TAG-diff</module>-->
+  </modules>
+
+  <properties>
+    <encoding>UTF-8</encoding>
+    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+    <project.license.name>Apache License version 2.0</project.license.name>
+    <project.license.url>http://www.apache.org/licenses/LICENSE-2.0</project.license.url>
+    <java.version>1.8</java.version>
+
+    <maven-compiler.version>3.7.0</maven-compiler.version>
+    <maven-jar.version>3.0.2</maven-jar.version>
+    <maven-javadoc.version>3.0.0-M1</maven-javadoc.version>
+    <maven-license.version>1.14</maven-license.version>
+    <maven-project-info-reports.version>2.9</maven-project-info-reports.version>
+    <maven-shade.version>3.1.0</maven-shade.version>
+    <maven-source.version>3.0.1</maven-source.version>
+    <maven-war.version>3.2.0</maven-war.version>
+    <hamcrest.version>1.3</hamcrest.version>
+    <protonpack.version>1.15</protonpack.version>
+    <wagon-ssh.version>2.7</wagon-ssh.version>
+  </properties>
+
+  <organization>
+    <name>HuC DI (KNAW)</name>
+    <url>https://huc.knaw.nl</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>dekker</id>
+      <name>Ronald Dekker</name>
+      <email>ronald.dekker@di.huc.knaw.nl</email>
+      <url>https://www.huygens.knaw.nl/dekker/</url>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>ellibleeker</id>
+      <name>Elli Bleeker</name>
+      <email>elli.bleeker@di.huc.knaw.nl</email>
+      <url>https://www.huygens.knaw.nl/bleeker-elli/</url>
+      <roles>
+        <role>architect</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>bramb</id>
+      <name>Bram Buitendijk</name>
+      <email>bram.buitendijk@di.huc.knaw.nl</email>
+      <url>https://www.huygens.knaw.nl/buitendijk/</url>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>${project.license.name}</name>
+      <url>${project.license.url}</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <excludes>
+          <exclude>*.properties</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.ftl</include>
+          <include>**/*.js</include>
+          <include>**/*.css</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>src/test/java</directory>
+        <includes>
+          <include>**/*.html</include>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*.ftl</include>
+        </includes>
+      </testResource>
+    </testResources>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven-source.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>${maven-license.version}</version>
+        <executions>
+          <execution>
+            <phase>verify</phase>
+            <goals>
+              <goal>update-file-header</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <licenseName>apache_v2</licenseName>
+          <excludes>
+            <exclude>**/*.properties</exclude>
+            <exclude>**/*.json</exclude>
+            <exclude>**/*.jsonld</exclude>
+          </excludes>
+          <sectionDelimiter>=======</sectionDelimiter>
+          <canUpdateCopyright>true</canUpdateCopyright>
+          <canUpdateDescription>true</canUpdateDescription>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>${wagon-ssh.version}</version>
+      </extension>
+    </extensions>
+
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>maven.huygens</id>
+      <name>Huygens Maven Repository</name>
+      <url>${huygens-repo}</url>
+    </repository>
+    <snapshotRepository>
+      <id>maven.huygens.snapshot</id>
+      <name>Huygens Maven Snapshot Repository</name>
+      <url>${huygens-repo}</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>huygens</id>
+      <url>http://maven.huygens.knaw.nl/repository/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>oracleReleases</id>
+      <name>Oracle Released Java Packages</name>
+      <url>http://download.oracle.com/maven</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
+  <scm>
+    <connection>scm:git:git@github.com:huygensING/TAG.git</connection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <prerequisites>
+    <maven>3.0.0</maven>
+  </prerequisites>
+
+</project>

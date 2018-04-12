@@ -64,7 +64,7 @@ public class Segment {
         Arrays.stream(tokenA)
                 // iterate each string in the stream
                 // and transform into XMLToken object
-                .map(content -> new XMLToken(content))
+                .map(XMLToken::new)
                 // forEach runs pipeline; ordered in given order
                 .forEachOrdered(tokensWa::add);
         return this;
@@ -75,7 +75,7 @@ public class Segment {
         Arrays.stream(tokenB)
                 // iterate each string in the stream
                 // and transform into XMLToken object
-                .map(content -> new XMLToken(content))
+                .map(XMLToken::new)
                 // forEach runs pipeline; ordered in given order
                 .forEachOrdered(tokensWb::add);
         return this;

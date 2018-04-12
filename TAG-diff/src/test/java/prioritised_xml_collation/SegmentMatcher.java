@@ -53,7 +53,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         // aligned every item in both lists >> with zip
         Stream<XMLTokenContentMatcher> streamTokensWaMatcher = this.tokensWa.stream();
         Stream<XMLToken> streamTokensWaActual = segment.tokensWa.stream();
-        List<Boolean> zippedWa = StreamUtils.zip(streamTokensWaMatcher, streamTokensWaActual, (matcher, actual) -> matcher.matches(actual))
+        List<Boolean> zippedWa = StreamUtils.zip(streamTokensWaMatcher, streamTokensWaActual, XMLTokenContentMatcher::matches)
                 .collect(Collectors.toList());
         if (zippedWa.contains(false)) {
             return false;
@@ -66,7 +66,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         // aligned every item in both lists >> with zip
         Stream<XMLTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
         Stream<XMLToken> streamTokensWbActual = segment.tokensWb.stream();
-        List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, (matcher, actual) -> matcher.matches(actual))
+        List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, XMLTokenContentMatcher::matches)
                 .collect(Collectors.toList());
         if (zippedWb.contains(false)) {
             return false;

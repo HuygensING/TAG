@@ -11,7 +11,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <modules>
-    <!--<module>TAG-diff</module>-->
+    <module>TAG-diff</module>
   </modules>
 
   <properties>
@@ -33,6 +33,7 @@
     <hamcrest.version>1.3</hamcrest.version>
     <protonpack.version>1.15</protonpack.version>
     <wagon-ssh.version>2.7</wagon-ssh.version>
+    <junit.version>4.12</junit.version>
   </properties>
 
   <organization>

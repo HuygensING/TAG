@@ -73,10 +73,7 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         }
         // There are more or less expectations than actual!
         // For alignment segments it is allowed to not specify b!
-        if (this.type != Segment.Type.aligned && this.tokensWb.size() != segment.tokensWb.size()) {
-            return false;
-        }
-        return true;
+      return this.type == Segment.Type.aligned || this.tokensWb.size() == segment.tokensWb.size();
     }
 
     @Override

@@ -30,6 +30,6 @@ public class TextToken extends XMLToken {
 
     @Override
     public String toString() {
-        return content.toString();
+        return content;
     }
 }

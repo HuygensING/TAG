@@ -30,6 +30,6 @@ public class ElementToken extends XMLToken {
 
     @Override
     public String toString() {
-        return content.toString();
+        return content;
     }
 }

@@ -75,24 +75,20 @@ public class EditGraphTable implements Iterable<Cell> {
             // if currentCell has tokens of type "match", look at lastcell
             // if lastCell is addition/omission/replacement stateChange occured and a new segment can be made
             if (lastCell.match == Boolean.FALSE) {
-                Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.replacement);
-                return segment;
+              return new Segment(segmentTokensA, segmentTokensB, Segment.Type.replacement);
             } else {
-                Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.aligned);
-                return segment;
+              return new Segment(segmentTokensA, segmentTokensB, Segment.Type.aligned);
             }
         }
         // addition: no TokensA
         else if (segmentTokensA.isEmpty()) {
-            Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.addition);
-            return segment;
+          return new Segment(segmentTokensA, segmentTokensB, Segment.Type.addition);
         }
         // it's an omission: no TokensB
         // if last cell is not a match/addition/replacement it is an omission
         // this condition is always true, but these lines are kept for reasons of completeness
         else {
-            Segment segment = new Segment(segmentTokensA, segmentTokensB, Segment.Type.omission);
-            return segment;
+          return new Segment(segmentTokensA, segmentTokensB, Segment.Type.omission);
         }
     }
 

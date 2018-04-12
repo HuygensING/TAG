@@ -41,8 +41,7 @@ class TypeAndContentAligner {
 
     EditGraphTable alignAndReturnTable(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
         EditGraphAligner editGraphAligner = createAligner();
-        EditGraphTable editGraphTable = editGraphAligner.align(tokensWa, tokensWb);
-        return editGraphTable;
+      return editGraphAligner.align(tokensWa, tokensWb);
     }
 
     private EditGraphAligner createAligner() {

@@ -21,9 +21,7 @@ package prioritised_xml_collation;
  */
 import org.junit.Test;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;

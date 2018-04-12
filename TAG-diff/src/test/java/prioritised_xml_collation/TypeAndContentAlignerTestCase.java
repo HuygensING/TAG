@@ -30,7 +30,6 @@ import java.util.List;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static prioritised_xml_collation.Segment.Type.*;
-import static prioritised_xml_collation.Segment.Type.aligned;
 import static prioritised_xml_collation.SegmentMatcher.sM;
 import static prioritised_xml_collation.XMLTokenContentMatcher.t;
 

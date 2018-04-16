@@ -27,9 +27,9 @@ import java.util.List;
  * Created by ellibleeker on 08/02/2017.
  */
 public class Segment {
-    final List<TAGToken>tokensWa;
-    final List<TAGToken>tokensWb;
-    final Type type;
+    public final List<TAGToken>tokensWa;
+    public final List<TAGToken>tokensWb;
+    public final Type type;
 
     public Segment(List tokensWa, List tokensWb, Type type) {
         this.tokensWa = tokensWa;

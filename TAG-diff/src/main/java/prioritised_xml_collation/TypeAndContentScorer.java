@@ -23,7 +23,7 @@ package prioritised_xml_collation;
 // and fills the EditTable with a global score
 public class TypeAndContentScorer extends AbstractScorer {
     @Override
-    public Match match(XMLToken tokenA, XMLToken tokenB) {
+    public Match match(TAGToken tokenA, TAGToken tokenB) {
         // First we see whether the tokens have the same type
         Token.Type typeTokenA = tokenA.getType();
         Token.Type typeTokenB = tokenB.getType();
@@ -31,8 +31,7 @@ public class TypeAndContentScorer extends AbstractScorer {
             return AbstractScorer.Match.not_matched;
         }
         // Only then we see whether they match on content
-        //NOTE: no normalisation applied!
-        boolean contentMatch = tokenA.content.equals(tokenB.content);
+        boolean contentMatch = tokenA.normalizedContent.equals(tokenB.normalizedContent);
         if (contentMatch) {
             return AbstractScorer.Match.match;
         }

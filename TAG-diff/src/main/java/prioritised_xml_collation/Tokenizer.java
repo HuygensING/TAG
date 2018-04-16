@@ -36,27 +36,27 @@ import java.util.regex.Pattern;
  * Created by Ronald Haentjens Dekker on 27/01/17.
  * Ported from code written by Elli Bleeker
  */
-public class Tokenizer {
-    public List<XMLToken> convertXMLFileIntoTokens(File input) throws FileNotFoundException, XMLStreamException {
+class Tokenizer {
+    List<TAGToken> convertXMLFileIntoTokens(File input) throws FileNotFoundException, XMLStreamException {
         FileReader fileReader = new FileReader(input);
         return tokenizeXMLDocument(fileReader);
     }
 
-    private List<XMLToken> tokenizeXMLDocument(Reader reader) throws XMLStreamException {
-        List<XMLToken> tokens = new ArrayList<>();
+    private List<TAGToken> tokenizeXMLDocument(Reader reader) throws XMLStreamException {
+        List<TAGToken> tokens = new ArrayList<>();
         XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
         XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(reader);
         while (xmlEventReader.hasNext()) {
             XMLEvent event = xmlEventReader.nextEvent();
             if (event.isStartElement()) {
                 StartElement startElement = event.asStartElement();
-                tokens.add(new ElementToken(startElement.getName().getLocalPart()));
+                tokens.add(new MarkupOpenToken(startElement.getName().getLocalPart()));
             } else if (event.isCharacters()) {
                 Characters characters = event.asCharacters();
                 tokens.addAll(tokenizeText(characters.getData()));
             } else if (event.isEndElement()) {
                 EndElement endElement = event.asEndElement();
-                tokens.add(new ElementToken("/" + endElement.getName().getLocalPart()));
+                tokens.add(new MarkupCloseToken("/" + endElement.getName().getLocalPart()));
             }
         }
         return tokens;

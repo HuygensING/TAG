@@ -37,8 +37,8 @@ import static java.util.stream.Collectors.joining;
  */
 public class SegmentMatcher extends BaseMatcher<Segment> {
     private Segment.Type type;
-    private List<XMLTokenContentMatcher> tokensWa;
-    private List<XMLTokenContentMatcher> tokensWb;
+    private List<TAGTokenContentMatcher> tokensWa;
+    private List<TAGTokenContentMatcher> tokensWb;
 
     @Override
     public boolean matches(Object o) {
@@ -49,11 +49,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         if (!(segment.type == this.type)) {
             return false;
         }
-        // two lists for tokensWa (XMLTokenContentMatcher and actual XMLToken)
+        // two lists for tokensWa (TAGTokenContentMatcher and actual TAGToken)
         // aligned every item in both lists >> with zip
-        Stream<XMLTokenContentMatcher> streamTokensWaMatcher = this.tokensWa.stream();
-        Stream<XMLToken> streamTokensWaActual = segment.tokensWa.stream();
-        List<Boolean> zippedWa = StreamUtils.zip(streamTokensWaMatcher, streamTokensWaActual, XMLTokenContentMatcher::matches)
+        Stream<TAGTokenContentMatcher> streamTokensWaMatcher = this.tokensWa.stream();
+        Stream<TAGToken> streamTokensWaActual = segment.tokensWa.stream();
+        List<Boolean> zippedWa = StreamUtils.zip(streamTokensWaMatcher, streamTokensWaActual, TAGTokenContentMatcher::matches)
                 .collect(Collectors.toList());
         if (zippedWa.contains(false)) {
             return false;
@@ -62,11 +62,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         if (this.tokensWa.size() != segment.tokensWa.size()) {
             return false;
         }
-        // two lists for tokensWb (XMLTokenContentMatcher and actual XMLToken)
+        // two lists for tokensWb (TAGTokenContentMatcher and actual TAGToken)
         // aligned every item in both lists >> with zip
-        Stream<XMLTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
-        Stream<XMLToken> streamTokensWbActual = segment.tokensWb.stream();
-        List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, XMLTokenContentMatcher::matches)
+        Stream<TAGTokenContentMatcher> streamTokensWbMatcher = this.tokensWb.stream();
+        Stream<TAGToken> streamTokensWbActual = segment.tokensWb.stream();
+        List<Boolean> zippedWb = StreamUtils.zip(streamTokensWbMatcher, streamTokensWbActual, TAGTokenContentMatcher::matches)
                 .collect(Collectors.toList());
         if (zippedWb.contains(false)) {
             return false;
@@ -93,11 +93,11 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
                 Segment segment = (Segment) object;
                 description.appendText(" and type is " + segment.type.toString());
                 description.appendText(", with tokensWa ");
-                for (XMLToken token : segment.tokensWa) {
+                for (TAGToken token : segment.tokensWa) {
                     description.appendText(token.content+" ");
                 }
                 description.appendText(" and tokensWb ");
-                for (XMLToken token : segment.tokensWb) {
+                for (TAGToken token : segment.tokensWb) {
                     description.appendText(token.content+" ");
                 }
                 description.appendText(".");
@@ -111,12 +111,12 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
         return new SegmentMatcher(type);
     }
 
-    SegmentMatcher tokensWa(XMLTokenContentMatcher... tokens) {
+    SegmentMatcher tokensWa(TAGTokenContentMatcher... tokens) {
         this.tokensWa = Arrays.asList(tokens);
         return this;
     }
 
-    SegmentMatcher tokensWb(XMLTokenContentMatcher... tokens) {
+    SegmentMatcher tokensWb(TAGTokenContentMatcher... tokens) {
         this.tokensWb = Arrays.asList(tokens);
         return this;
     }
@@ -129,18 +129,18 @@ public class SegmentMatcher extends BaseMatcher<Segment> {
 
 
     SegmentMatcher tokensWa(String... expectedTokens) {
-        List<XMLTokenContentMatcher> matchers = new ArrayList<>();
+        List<TAGTokenContentMatcher> matchers = new ArrayList<>();
         for (String expectedToken : expectedTokens) {
-            matchers.add(XMLTokenContentMatcher.t(expectedToken));
+            matchers.add(TAGTokenContentMatcher.t(expectedToken));
         }
         this.tokensWa = matchers;
         return this;
     }
 
     SegmentMatcher tokensWb(String... expectedTokens) {
-        List<XMLTokenContentMatcher> matchers = new ArrayList<>();
+        List<TAGTokenContentMatcher> matchers = new ArrayList<>();
         for (String expectedToken : expectedTokens) {
-            matchers.add(XMLTokenContentMatcher.t(expectedToken));
+            matchers.add(TAGTokenContentMatcher.t(expectedToken));
         }
         this.tokensWb = matchers;
         return this;

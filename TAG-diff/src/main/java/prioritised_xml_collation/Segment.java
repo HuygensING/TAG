@@ -27,8 +27,8 @@ import java.util.List;
  * Created by ellibleeker on 08/02/2017.
  */
 public class Segment {
-    final List<XMLToken>tokensWa;
-    final List<XMLToken>tokensWb;
+    final List<TAGToken>tokensWa;
+    final List<TAGToken>tokensWb;
     final Type type;
 
     public Segment(List tokensWa, List tokensWb, Type type) {
@@ -64,7 +64,7 @@ public class Segment {
         Arrays.stream(tokenA)
                 // iterate each string in the stream
                 // and transform into XMLToken object
-                .map(XMLToken::new)
+                .map(TAGToken::new)
                 // forEach runs pipeline; ordered in given order
                 .forEachOrdered(tokensWa::add);
         return this;
@@ -75,7 +75,7 @@ public class Segment {
         Arrays.stream(tokenB)
                 // iterate each string in the stream
                 // and transform into XMLToken object
-                .map(XMLToken::new)
+                .map(TAGToken::new)
                 // forEach runs pipeline; ordered in given order
                 .forEachOrdered(tokensWb::add);
         return this;

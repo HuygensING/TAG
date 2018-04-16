@@ -9,9 +9,9 @@ package prioritised_xml_collation;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,17 +19,15 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
-/**
- * Created by ellibleeker on 08/02/2017.
- */
-class ContentScorer extends AbstractScorer {
+// TODO: shouldn't the content of the end tag be different compared to the open tag? like "/tag"?
+// TODO: at the moment this is done in the default tokenizer!
+class MarkupCloseToken extends TAGToken {
+    public MarkupCloseToken(String tag) {
+        super(tag);
+    }
 
     @Override
-    public Match match(TAGToken a, TAGToken b) {
-        boolean c = a.normalizedContent.equals(b.normalizedContent);
-        if (c) {
-            return AbstractScorer.Match.match;
-        }
-        return AbstractScorer.Match.not_matched;
+    public String toString() {
+        return "{" + content + "]";
     }
 }

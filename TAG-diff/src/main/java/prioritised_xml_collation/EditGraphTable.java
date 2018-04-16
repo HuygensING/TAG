@@ -73,7 +73,7 @@ public class EditGraphTable implements Iterable<Cell> {
         // if cell contains tokens from both witnesses its a replacement or a match
         if (!segmentTokensA.isEmpty() && !segmentTokensB.isEmpty()) {
             // if currentCell has tokens of type "match", look at lastcell
-            // if lastCell is addition/omission/replacement stateChange occured and a new segment can be made
+            // if lastCell is addition/omission/replacement stateChange occurred and a new segment can be made
             if (lastCell.match == Boolean.FALSE) {
               return new Segment(segmentTokensA, segmentTokensB, Segment.Type.replacement);
             } else {
@@ -153,5 +153,37 @@ public class EditGraphTable implements Iterable<Cell> {
             return CellType.text;
         }
         throw new RuntimeException("Unknown Token.Type!");
+    }
+
+    public EditOperation createEditOperationOfCells(Cell lastCell, Cell currentCell) {
+        List<TAGToken> editOperationTokensA = tokensA.subList(currentCell.x, lastCell.x);
+        List<TAGToken> editOperationTokensB = tokensB.subList(currentCell.y, lastCell.y);
+        EditOperation.Type type = determineTypeOfEditOperation(lastCell, editOperationTokensA, editOperationTokensB);
+        EditOperation newE = new EditOperation(editOperationTokensA, editOperationTokensB, type);
+        return newE;
+
+    }
+
+    private EditOperation.Type determineTypeOfEditOperation(Cell lastCell, List<TAGToken> editOperationTokensA, List<TAGToken> editOperationTokensB) {
+        // if cell contains tokens from both witnesses its a replacement or a match
+        if (!editOperationTokensA.isEmpty() && !editOperationTokensB.isEmpty()) {
+            // if currentCell has tokens of type "match", look at lastcell
+            // if lastCell is addition/omission/replacement stateChange occurred and a new segment can be made
+            if (lastCell.match == Boolean.FALSE) {
+                return EditOperation.Type.replacement;
+            } else {
+                throw new RuntimeException("There is no edit operation here! This creation call should never have been done!");
+            }
+        }
+        // addition: no TokensA
+        else if (editOperationTokensA.isEmpty()) {
+            return EditOperation.Type.addition;
+        }
+        // it's an omission: no TokensB
+        // if last cell is not a match/addition/replacement it is an omission
+        // this condition is always true, but these lines are kept for reasons of completeness
+        else {
+            return EditOperation.Type.omission;
+        }
     }
 }

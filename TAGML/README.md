@@ -262,7 +262,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
-0. `markupMilestone ::= '['  tagIdentifier ']'`
+0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
 0. `textVariation ::= '<|' mixedContent ( '|' mixedContent )+ '|>'`
 0. `text ::= textCharacter*`
 0. `comment ::= '[!' textCharacter* '!]'`

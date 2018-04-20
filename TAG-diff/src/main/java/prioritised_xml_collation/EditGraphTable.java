@@ -32,10 +32,10 @@ import java.util.List;
  */
 public class EditGraphTable implements Iterable<Cell> {
     Cell[][] matrix;
-    private List<XMLToken> tokensA;
-    private List<XMLToken> tokensB;
+    private List<TAGToken> tokensA;
+    private List<TAGToken> tokensB;
 
-    EditGraphTable(Cell[][] cells, List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    EditGraphTable(Cell[][] cells, List<TAGToken> tokensA, List<TAGToken> tokensB) {
         this.matrix = cells;
         this.tokensA = tokensA;
         this.tokensB = tokensB;
@@ -68,12 +68,12 @@ public class EditGraphTable implements Iterable<Cell> {
     // TODO: remove the remaining duplication in the return statements
     // TODO: by separating out the segment type determination code.
     Segment createSegmentOfCells(Cell currentCell, Cell lastCell) {
-        List<XMLToken> segmentTokensA = tokensA.subList(currentCell.x, lastCell.x);
-        List<XMLToken> segmentTokensB = tokensB.subList(currentCell.y, lastCell.y);
+        List<TAGToken> segmentTokensA = tokensA.subList(currentCell.x, lastCell.x);
+        List<TAGToken> segmentTokensB = tokensB.subList(currentCell.y, lastCell.y);
         // if cell contains tokens from both witnesses its a replacement or a match
         if (!segmentTokensA.isEmpty() && !segmentTokensB.isEmpty()) {
             // if currentCell has tokens of type "match", look at lastcell
-            // if lastCell is addition/omission/replacement stateChange occured and a new segment can be made
+            // if lastCell is addition/omission/replacement stateChange occurred and a new segment can be made
             if (lastCell.match == Boolean.FALSE) {
               return new Segment(segmentTokensA, segmentTokensB, Segment.Type.replacement);
             } else {
@@ -98,21 +98,21 @@ public class EditGraphTable implements Iterable<Cell> {
         }
         if (cell.movedVertical()) {
             // get the type from one side
-            XMLToken tokenB = tokensB.get(cell.y - 1);
+            TAGToken tokenB = tokensB.get(cell.y - 1);
             return tokenB.toString();
         } else if (cell.movedHorizontal()) {
             // get the type from one side
-            XMLToken tokenA = tokensA.get(cell.x - 1);
+            TAGToken tokenA = tokensA.get(cell.x - 1);
             return tokenA.toString();
         }
         if (cell.match) {
             // get the type from one side
-            XMLToken tokenA = tokensA.get(cell.x - 1);
+            TAGToken tokenA = tokensA.get(cell.x - 1);
             return tokenA.toString()+" (aligned)";
         }
 
-        XMLToken tokenA = tokensA.get(cell.x - 1);
-        XMLToken tokenB = tokensB.get(cell.y - 1);
+        TAGToken tokenA = tokensA.get(cell.x - 1);
+        TAGToken tokenB = tokensB.get(cell.y - 1);
         return tokenA + " : " + tokenB;
     }
 
@@ -122,15 +122,15 @@ public class EditGraphTable implements Iterable<Cell> {
         }
         if (cell.movedVertical()) {
             // get the type from one side
-            XMLToken tokenB = tokensB.get(cell.y - 1);
+            TAGToken tokenB = tokensB.get(cell.y - 1);
             return convertTokenTypeIntoCellType(tokenB.getType());
         } else if (cell.movedHorizontal()) {
             // get the type from one side
-            XMLToken tokenA = tokensA.get(cell.x - 1);
+            TAGToken tokenA = tokensA.get(cell.x - 1);
             return convertTokenTypeIntoCellType(tokenA.getType());
         } else {
-            XMLToken tokenA = tokensA.get(cell.x - 1);
-            XMLToken tokenB = tokensB.get(cell.y - 1);
+            TAGToken tokenA = tokensA.get(cell.x - 1);
+            TAGToken tokenB = tokensB.get(cell.y - 1);
             Token.Type typeTokenA = tokenA.getType();
             Token.Type typeTokenB = tokenB.getType();
             if (typeTokenA == typeTokenB) {
@@ -153,5 +153,37 @@ public class EditGraphTable implements Iterable<Cell> {
             return CellType.text;
         }
         throw new RuntimeException("Unknown Token.Type!");
+    }
+
+    public EditOperation createEditOperationOfCells(Cell lastCell, Cell currentCell) {
+        List<TAGToken> editOperationTokensA = tokensA.subList(currentCell.x, lastCell.x);
+        List<TAGToken> editOperationTokensB = tokensB.subList(currentCell.y, lastCell.y);
+        EditOperation.Type type = determineTypeOfEditOperation(lastCell, editOperationTokensA, editOperationTokensB);
+        EditOperation newE = new EditOperation(editOperationTokensA, editOperationTokensB, type);
+        return newE;
+
+    }
+
+    private EditOperation.Type determineTypeOfEditOperation(Cell lastCell, List<TAGToken> editOperationTokensA, List<TAGToken> editOperationTokensB) {
+        // if cell contains tokens from both witnesses its a replacement or a match
+        if (!editOperationTokensA.isEmpty() && !editOperationTokensB.isEmpty()) {
+            // if currentCell has tokens of type "match", look at lastcell
+            // if lastCell is addition/omission/replacement stateChange occurred and a new segment can be made
+            if (lastCell.match == Boolean.FALSE) {
+                return EditOperation.Type.replacement;
+            } else {
+                throw new RuntimeException("There is no edit operation here! This creation call should never have been done!");
+            }
+        }
+        // addition: no TokensA
+        else if (editOperationTokensA.isEmpty()) {
+            return EditOperation.Type.addition;
+        }
+        // it's an omission: no TokensB
+        // if last cell is not a match/addition/replacement it is an omission
+        // this condition is always true, but these lines are kept for reasons of completeness
+        else {
+            return EditOperation.Type.omission;
+        }
     }
 }

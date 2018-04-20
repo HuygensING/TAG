@@ -31,8 +31,8 @@ public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLmatchPunctuation() {
-        XMLToken tokenA = new TextToken(",");
-        XMLToken tokenB = new TextToken("!");
+        TAGToken tokenA = new TextToken(",");
+        TAGToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
         AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(AbstractScorer.Match.match));
@@ -40,8 +40,8 @@ public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLnonMatchPunctuation() {
-        XMLToken tokenA = new TextToken("black");
-        XMLToken tokenB = new TextToken("!");
+        TAGToken tokenA = new TextToken("black");
+        TAGToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
         AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(AbstractScorer.Match.not_matched));
@@ -49,8 +49,8 @@ public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLmatchCharacters() {
-        XMLToken tokenA = new TextToken("cat");
-        XMLToken tokenB = new TextToken("white");
+        TAGToken tokenA = new TextToken("cat");
+        TAGToken tokenB = new TextToken("white");
         AbstractScorer scoreType = new TypeScorer();
         AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(AbstractScorer.Match.match));
@@ -58,8 +58,8 @@ public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLMatchElement() {
-        XMLToken tokenA = new ElementToken("s");
-        XMLToken tokenB = new ElementToken("p");
+        TAGToken tokenA = new MarkupOpenToken("s");
+        TAGToken tokenB = new MarkupOpenToken("p");
         AbstractScorer scoreType = new TypeScorer();
         AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(AbstractScorer.Match.match));
@@ -67,8 +67,8 @@ public class  TypeScorerUnitTest {
 
     @Test
     public void testScoreXMLnonMatchElement() {
-        XMLToken tokenA = new ElementToken("p");
-        XMLToken tokenB = new TextToken("!");
+        TAGToken tokenA = new MarkupOpenToken("p");
+        TAGToken tokenB = new TextToken("!");
         AbstractScorer scoreType = new TypeScorer();
         AbstractScorer.Match resultScorer = scoreType.match(tokenA, tokenB);
         assertThat(resultScorer, is(AbstractScorer.Match.not_matched));

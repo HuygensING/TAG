@@ -23,7 +23,7 @@ package prioritised_xml_collation;
  * Created by ellibleeker on 30/01/2017.
  */
 public abstract class AbstractScorer {
-    public abstract Match match(XMLToken tokenA, XMLToken tokenB);
+    public abstract Match match(TAGToken tokenA, TAGToken tokenB);
 
     // the method gap returns a new object Cell
     // Cell has the following fields: match (boolean), x + y (coordinates of EditTable), parent, global score

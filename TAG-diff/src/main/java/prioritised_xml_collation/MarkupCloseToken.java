@@ -19,17 +19,15 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
-/**
- * Created by Ronald Haentjens Dekker on 29/01/17.
- * Ported from code written by Elli Bleeker.
- */
-public class TextToken extends TAGToken {
-    public TextToken(String content) {
-        super(content);
+// TODO: shouldn't the content of the end tag be different compared to the open tag? like "/tag"?
+// TODO: at the moment this is done in the default tokenizer!
+public class MarkupCloseToken extends TAGToken {
+    public MarkupCloseToken(String tag) {
+        super(tag);
     }
 
     @Override
     public String toString() {
-        return content;
+        return "{" + content + "]";
     }
 }

@@ -40,7 +40,7 @@ public class EditGraphAligner {
 
     // tokensA is x
     // tokensB is y
-    public EditGraphTable align(List<XMLToken> tokensA, List<XMLToken> tokensB) {
+    public EditGraphTable align(List<TAGToken> tokensA, List<TAGToken> tokensB) {
         // init cells and scorer
         this.cells = new Cell[tokensB.size() + 1][tokensA.size() + 1];
 
@@ -79,7 +79,7 @@ public class EditGraphAligner {
         return new EditGraphTable(cells, tokensA, tokensB);
     }
 
-    public List<Segment> alignAndSegment(List<XMLToken> tokensA, List<XMLToken> tokensB, SegmenterInterface contentSegmenter) {
+    public List<Segment> alignAndSegment(List<TAGToken> tokensA, List<TAGToken> tokensB, SegmenterInterface contentSegmenter) {
         EditGraphTable table = this.align(tokensA, tokensB);
         return contentSegmenter.calculateSegmentation(table);
     }

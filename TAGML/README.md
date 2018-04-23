@@ -293,9 +293,9 @@ is encoded in TAGML as a group with `original` and `alt` markup.
     
 ANLTR4 grammars:
 
-TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
+TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
 
-TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
+TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
    
 ## TAGML Schema
 

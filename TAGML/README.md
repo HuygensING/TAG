@@ -47,7 +47,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   Annotations can be added to the start tag of any markup.  
   Annotation values can be any of the following data types:
   - string: `"string"` or `'string'` (bracketed by `"` or `'`)
-  - rich text: `|rich text [b>content<b]|` (bracketed by `|`)
+  - rich text: `|>rich text [b>content<b]<|` (bracketed by `|>` and `<|`)
   - boolean: `true` or `false` (not bracketed)
   - number: `3.14` (not bracketed)
   - (nested) annotation: `{x=1 y=2}` (bracketed by `{` and `}`)

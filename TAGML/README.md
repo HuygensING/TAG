@@ -255,7 +255,9 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 1. `document ::= documentHeader? richText*`
 
 0. `documentHeader ::= namespaceDefinition*`
-0. `richText ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | text | comment )*`
+0. `richText ::= ( textEnrichment | text )*`
+0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
+0. `text ::= textCharacter*`
 
 0. `namespaceDefinition ::= '[!ns ' NamespaceIdentifier ' ' NamespaceURI ']'`
 0. `NamespaceIdentifier ::= NameCharacter+`
@@ -264,8 +266,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
 0. `textVariation ::= '<|' richTextInTextVariation ( '|' mixedContentInTextVariation )+ '|>'`
-0. `richTextInTextVariation ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | textInTextVariation | comment )*`
-0. `text ::= textCharacter*`
+0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
 0. `textInTextVariation ::= textInTextVariationCharacter*`
 0. `comment ::= '[!' commentCharacter* '!]'`
 

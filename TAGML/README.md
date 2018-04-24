@@ -265,7 +265,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
-0. `textVariation ::= '<|' richTextInTextVariation ( '|' mixedContentInTextVariation )+ '|>'`
+0. `textVariation ::= '<|' richTextInTextVariation ( '|' richTextInTextVariation )+ '|>'`
 0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
 0. `textInTextVariation ::= textInTextVariationCharacter*`
 0. `comment ::= '[!' commentCharacter* '!]'`

@@ -19,6 +19,10 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 676cd4a5f84d0eed6931d2e7ef8a160c519faf89
 import org.junit.Test;
 
 import javax.xml.stream.XMLStreamException;

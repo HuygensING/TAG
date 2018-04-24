@@ -250,14 +250,13 @@ recursion encoding between LMNL and TAGML.
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
 is encoded in TAGML as a group with `original` and `alt` markup.
 
-## TAGML Grammar
+## TAGML Grammar (a)
 
 1. `document ::= documentHeader? richText*`
 
 0. `documentHeader ::= namespaceDefinition*`
 0. `richText ::= ( textEnrichment | text )*`
 0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
-0. `text ::= textCharacter*`
 
 0. `namespaceDefinition ::= '[!ns ' NamespaceIdentifier ' ' NamespaceURI ']'`
 0. `NamespaceIdentifier ::= NameCharacter+`
@@ -265,10 +264,61 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
+0. `textVariation ::= '<|' richText ( '|' richText )+ '|>'`
+0. `text ::= textCharacter*`
+0. `comment ::= '[!' textCharacter* '!]'`
+
+0. `Optional ::= '?'`
+0. `Resume ::= '+'`
+0. `Suspend ::= '-'`
+0. `tagIdentifier ::= qualifiedMarkupName markupSuffix?`
+0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
+0. `markupSuffix ::= '~' NameCharacter+'`
+0. `localMarkupName ::= NameCharacter+`
+
+0. `annotation ::= annotationName '=' annotationValue`
+0. `annotationName ::= NameCharacter+`
+0. `annotationValue ::= stringValue | numberValue | BooleanValue | richTextValue | listValue | objectValue `
+0. `stringValue ::= '"' characters '"' | "'" characters "'" `
+0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
+0. `BooleanValue ::= 'true' | 'false'`
+0. `richTextValue ::= '[>' richText '<]'`
+0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
+0. `objectValue ::= '{' annotation+ '}'`
+
+0. `Digits ::= [0-9]+`
+0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
+0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
+0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
+0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
+    
+## TAGML Grammar (b)
+
+Strictly speaking, not every special character from grammar a needs to be escaped in all parts of the document.
+The following version of the grammar defines text scopes, and for each scope the characters that need to be escaped. 
+
+1. `document ::= documentHeader? richText*`
+
+0. `documentHeader ::= namespaceDefinition*`
+0. `namespaceDefinition ::= '[!ns ' NamespaceIdentifier ' ' NamespaceURI ']'`
+0. `NamespaceIdentifier ::= NameCharacter+`
+
+0. `richText ::= ( textEnrichment | text )*`
+0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
+0. `text ::= textCharacter*`
+0. `textCharacter ::= [^[<] | '\[' | '\<'` # For regular text, we only need to escape the 2 characters that start a markupOpenTag, markupCloseTag or markupMilestone
+
+0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
+0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
+0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
+
 0. `textVariation ::= '<|' richTextInTextVariation ( '|' richTextInTextVariation )+ '|>'`
 0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
 0. `textInTextVariation ::= textInTextVariationCharacter*`
+0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|'` # For text inside textVariation tags we also have to escape the variation divider character `|`
+
 0. `comment ::= '[!' commentCharacter* '!]'`
+0. `commentCharacter ::= [^!]] | '\]' | '\!'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`
 
 0. `Optional ::= '?'`
 0. `Resume ::= '+'`
@@ -282,6 +332,9 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `annotationName ::= NameCharacter+`
 0. `annotationValue ::= stringValue | numberValue | BooleanValue | richTextValue | listValue | objectValue `
 0. `stringValue ::= '"' doubleQuotedStringValueCharacter* '"' | "'" singleQuotedStringValueCharacter* "'" `
+0. `singleQuotedStringValueCharacter ::= [^'] | "\'"` # For text inside the stringValue delimiters, only the delimiter used needs to be escaped
+0. `doubleQuotedStringValueCharacter ::= [^"] | '\"'`
+
 0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
 0. `BooleanValue ::= 'true' | 'false'`
 0. `richTextValue ::= '[>' richText '<]'`
@@ -290,12 +343,8 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 0. `Digits ::= [0-9]+`
 0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
-0. `textCharacter ::= [^[<] | '\[' | '\<'`
-0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|'`
-0. `commentCharacter ::= [^!]] | '\]' | '\!'`
-0. `singleQuotedStringValueCharacter ::= [^'] | "\'"`
-0. `doubleQuotedStringValueCharacter ::= [^"] | '\"'`
     
+
 ANLTR4 grammars:
 
 TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)

@@ -263,9 +263,11 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier ']'`
-0. `textVariation ::= '<|' mixedContent ( '|' mixedContent )+ '|>'`
+0. `textVariation ::= '<|' mixedContentInTextVariation ( '|' mixedContentInTextVariation )+ '|>'`
+0. `mixedContentInTextVariation ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | textInTextVariation | comment )*`
 0. `text ::= textCharacter*`
-0. `comment ::= '[!' textCharacter* '!]'`
+0. `textInTextVariation ::= textInTextVariationCharacter*`
+0. `comment ::= '[!' commentCharacter* '!]'`
 
 0. `Optional ::= '?'`
 0. `Resume ::= '+'`
@@ -278,7 +280,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `annotation ::= annotationName '=' annotationValue`
 0. `annotationName ::= NameCharacter+`
 0. `annotationValue ::= stringValue | numberValue | BooleanValue | mixedContentValue | listValue | objectValue `
-0. `stringValue ::= '"' characters '"' | "'" characters "'" `
+0. `stringValue ::= '"' doubleQuotedStringValueCharacter* '"' | "'" singleQuotedStringValueCharacter* "'" `
 0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
 0. `BooleanValue ::= 'true' | 'false'`
 0. `mixedContentValue ::= '[>' mixedContent '<]'`
@@ -287,9 +289,11 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 0. `Digits ::= [0-9]+`
 0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
-0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
-0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
-0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
+0. `textCharacter ::= [^[<] | '\[' | '\<'`
+0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|'`
+0. `commentCharacter ::= [^!]] | '\]' | '\!'`
+0. `singleQuotedStringValueCharacter ::= [^'] | "\'"`
+0. `doubleQuotedStringValueCharacter ::= [^"] | '\"'`
     
 ANLTR4 grammars:
 

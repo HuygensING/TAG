@@ -19,17 +19,18 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
+
 import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static prioritised_xml_collation.SegmentMatcher.sM;
 import static prioritised_xml_collation.TAGTokenContentMatcher.t;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 
 /**
  * Created by ellibleeker on 08/02/2017.

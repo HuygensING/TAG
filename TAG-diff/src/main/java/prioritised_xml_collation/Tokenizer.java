@@ -19,6 +19,7 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
+
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -26,7 +27,10 @@ import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

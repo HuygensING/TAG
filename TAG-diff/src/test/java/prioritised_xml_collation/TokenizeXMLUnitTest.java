@@ -19,10 +19,10 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
+
 import org.junit.Test;
 
 import javax.xml.stream.XMLStreamException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;

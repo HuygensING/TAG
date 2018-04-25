@@ -288,7 +288,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 0. `digits ::= [0-9]+`
 0. `nameCharacter ::= [a-zA-Z] | digits | '_' `
-0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
+0. `textCharacter ::= [^"'[]<>|\] | EscapedCharacter`
 0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
 0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
     
@@ -306,7 +306,7 @@ The following version of the grammar defines text scopes, and for each scope the
 0. `richText ::= ( textEnrichment | text )*`
 0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
 0. `text ::= textCharacter*`
-0. `textCharacter ::= [^[<] | '\[' | '\<'` # For regular text, we only need to escape the 2 characters that start a markupOpenTag, markupCloseTag or markupMilestone
+0. `textCharacter ::= [^[<] | '\[' | '\<' '\\'` # For regular text, we only need to escape the 2 characters that start a markupOpenTag, markupCloseTag or markupMilestone, plus the escape character itself.
 
 0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
@@ -315,10 +315,10 @@ The following version of the grammar defines text scopes, and for each scope the
 0. `textVariation ::= '<|' richTextInTextVariation ( '|' richTextInTextVariation )+ '|>'`
 0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
 0. `textInTextVariation ::= textInTextVariationCharacter*`
-0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|'` # For text inside textVariation tags we also have to escape the variation divider character `|`
+0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|' '\\'` # For text inside textVariation tags we also have to escape the variation divider character `|`
 
 0. `comment ::= '[!' commentCharacter* '!]'`
-0. `commentCharacter ::= [^!]] | '\]' | '\!'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`
+0. `commentCharacter ::= [^!]] | '\]' | '\!' '\\'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`, plus the escape character itself.
 
 0. `optional ::= '?'`
 0. `resume ::= '+'`
@@ -332,8 +332,8 @@ The following version of the grammar defines text scopes, and for each scope the
 0. `annotationName ::= nameCharacter+`
 0. `annotationValue ::= stringValue | numberValue | booleanValue | richTextValue | listValue | objectValue `
 0. `stringValue ::= '"' doubleQuotedStringValueCharacter* '"' | "'" singleQuotedStringValueCharacter* "'" `
-0. `singleQuotedStringValueCharacter ::= [^'] | "\'"` # For text inside the stringValue delimiters, only the delimiter used needs to be escaped
-0. `doubleQuotedStringValueCharacter ::= [^"] | '\"'`
+0. `singleQuotedStringValueCharacter ::= [^'] | "\'" '\\'` # For text inside the stringValue delimiters, only the delimiter used needs to be escaped, plus the escape character itself.
+0. `doubleQuotedStringValueCharacter ::= [^"] | '\"' '\\'`
 
 0. `numberValue ::= '-'? digits ('.' digits)? ([eE] [+-]? digits)?`
 0. `booleanValue ::= 'true' | 'false'`

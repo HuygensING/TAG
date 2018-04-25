@@ -245,7 +245,7 @@ day.<s]<v]
 ```
 
 The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation 
-recursion encoding betwen LMNL and TAGML.
+recursion encoding between LMNL and TAGML.
 
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
 is encoded in TAGML as a group with `original` and `alt` markup.
@@ -263,9 +263,11 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
 0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
-0. `textVariation ::= '<|' richText ( '|' richText )+ '|>'`
+0. `textVariation ::= '<|' richTextInTextVariation ( '|' mixedContentInTextVariation )+ '|>'`
+0. `richTextInTextVariation ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | textInTextVariation | comment )*`
 0. `text ::= textCharacter*`
-0. `comment ::= '[!' textCharacter* '!]'`
+0. `textInTextVariation ::= textInTextVariationCharacter*`
+0. `comment ::= '[!' commentCharacter* '!]'`
 
 0. `Optional ::= '?'`
 0. `Resume ::= '+'`
@@ -278,7 +280,7 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 0. `annotation ::= annotationName '=' annotationValue`
 0. `annotationName ::= NameCharacter+`
 0. `annotationValue ::= stringValue | numberValue | BooleanValue | richTextValue | listValue | objectValue `
-0. `stringValue ::= '"' characters '"' | "'" characters "'" `
+0. `stringValue ::= '"' doubleQuotedStringValueCharacter* '"' | "'" singleQuotedStringValueCharacter* "'" `
 0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
 0. `BooleanValue ::= 'true' | 'false'`
 0. `richTextValue ::= '[>' richText '<]'`
@@ -287,9 +289,11 @@ is encoded in TAGML as a group with `original` and `alt` markup.
 
 0. `Digits ::= [0-9]+`
 0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
-0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
-0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
-0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
+0. `textCharacter ::= [^[<] | '\[' | '\<'`
+0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|'`
+0. `commentCharacter ::= [^!]] | '\]' | '\!'`
+0. `singleQuotedStringValueCharacter ::= [^'] | "\'"`
+0. `doubleQuotedStringValueCharacter ::= [^"] | '\"'`
     
 ANLTR4 grammars:
 
@@ -304,7 +308,7 @@ The schema should:
 - define annotations for markup (value data type, required?)
 - define which markup can contain rich text
   (markup can be either structural, meaning it only contains other markup,  
-  or non-structural (TODO: betere term verzinnen), meaning it can contain rich text: both text and markup.
+  or non-structural, meaning it can contain rich text: both text and markup.
   )
 
 ----------

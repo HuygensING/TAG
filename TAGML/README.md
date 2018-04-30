@@ -250,54 +250,10 @@ recursion encoding between LMNL and TAGML.
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
 is encoded in TAGML as a group with `original` and `alt` markup.
 
-## TAGML Grammar (a)
-
-1. `document ::= documentHeader? richText*`
-
-0. `documentHeader ::= namespaceDefinition*`
-0. `richText ::= ( textEnrichment | text )*`
-0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
-
-0. `namespaceDefinition ::= '[!ns ' namespaceIdentifier ' ' nnamespaceURI ']'`
-0. `namespaceIdentifier ::= nameCharacter+`
-
-0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
-0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
-0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
-0. `textVariation ::= '<|' richTextInTextVariation ( '|' mixedContentInTextVariation )+ '|>'`
-0. `richTextInTextVariation ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | textInTextVariation | comment )*`
-0. `text ::= textCharacter*`
-0. `textInTextVariation ::= textInTextVariationCharacter*`
-0. `comment ::= '[!' commentCharacter* '!]'`
-
-0. `optional ::= '?'`
-0. `resume ::= '+'`
-0. `suspend ::= '-'`
-0. `tagIdentifier ::= qualifiedMarkupName markupSuffix?`
-0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
-0. `markupSuffix ::= '~' nameCharacter+'`
-0. `localMarkupName ::= nameCharacter+`
-
-0. `annotation ::= annotationName '=' annotationValue`
-0. `annotationName ::= nameCharacter+`
-0. `annotationValue ::= stringValue | numberValue | booleanValue | richTextValue | listValue | objectValue `
-0. `stringValue ::= '"' characters '"' | "'" characters "'" `
-0. `numberValue ::= '-'? digits ('.' digits)? ([eE] [+-]? digits)?`
-0. `booleanValue ::= 'true' | 'false'`
-0. `richTextValue ::= '[>' richText '<]'`
-0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
-0. `objectValue ::= '{' annotation+ '}'`
-
-0. `digits ::= [0-9]+`
-0. `nameCharacter ::= [a-zA-Z] | digits | '_' `
-0. `textCharacter ::= [^"'[]<>|\] | EscapedCharacter`
-0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
-0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
     
-## TAGML Grammar (b)
+## TAGML Grammar
 
-Strictly speaking, not every special character from grammar a needs to be escaped in all parts of the document.
-The following version of the grammar defines text scopes, and for each scope the characters that need to be escaped. 
+Strictly speaking, not every special character needs to be escaped in all parts of the document. The following grammar defines text scopes, and for each scope the characters that need to be escaped. 
 
 1. `document ::= documentHeader? richText*`
 

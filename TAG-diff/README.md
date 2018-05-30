@@ -1,4 +1,4 @@
-# Prioritised XML collation
+# Text as Graph diff (difference) module
 
 ## What is it?
 The "prioritised XML collation"-algorithm is a program that you can use to compare XML files of textual sources. When it collates an XML transcription, the program looks at the text characters _and_ the information in the XML elements. The program is based on the [CollateX algorithm](https://github.com/interedition/collatex), but departs from CollateX in a number of ways.  
@@ -17,6 +17,15 @@ The collation consists of two rounds. In the first round, the program collates t
 4. **Tree building**. The two lists of Segments are merged. Based on this latest list of Segments, the program builds a tree. Each Segment object is a node in the tree. 
 
 The tree can be used for further processing. 
+
+## Example of how to use the library
+
+      Tokenizer tokenizer = new Tokenizer();
+      List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
+      List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
+      TypeAndContentAligner aligner = new TypeAndContentAligner();
+      List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb);
+
 
 ## Is it something for me?
 If you are a literary or textual scholar, and you work with (TEI-)XML transcriptions, the answer to this question is most probabably: yes!  

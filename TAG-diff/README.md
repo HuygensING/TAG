@@ -5,7 +5,9 @@ The "prioritised XML collation"-algorithm is a program that you can use to compa
 
 The reasoning behind this approach is that XML transcriptions often contain a wealth of scholarly intelligence about the textual source. In general XML elements encompass metadata (e.g. the TEI ```<header>```), scholarly commentary (e.g. in a ```<note>```), or data from the physical artefact (e.g. the inscriptions on a manuscript). An XML transcription often permeates the boundaries of document and text, of structure and semantics, containing the scholar's analysis of both. By considering all that information during the collation process, the program is able to produce a more refined result.
  
-## What does it do? (this section needs to be updated; improvements to the algorithm have been made in the mean-time; the two rounds described here have been merge a single one)
+## What does it do? 
+
+(this section needs to be updated; improvements to the algorithm have been made in the mean-time; the two rounds described here have been merged into a single one)
 
 The collation consists of two rounds. In the first round, the program collates the text tokens. In case of a non-match, it looks at other characteristics of the token, e.g. what type it is (punctuation, text, or XML element) and uses that information to collate the non-matching tokens again. Subsequently, this second collation result is merged with the first collation result. 
 

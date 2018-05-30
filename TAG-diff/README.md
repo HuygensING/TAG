@@ -12,11 +12,10 @@ The collation consists of two rounds. In the first round, the program collates t
 ## How does it work?
 
 1. **Tokenisation**. The input XML file is parsed and tokenised on whitespace. This results in a list of Token objects. We distinguish TextTokens and ElementTokens. Each Token object contains a string of characters.
-2. **First aligment**. The TextTokens and the ElementTokens are aligned based on their content. The alignment produces a list of Segment objects. Each Segment contains tokens from both witnesses, and it knows whether these tokens are a "match" or a "replacement".
-3. **Second alignment**. The Tokens within the Segments marked with "replacement" (i.e. the Tokens that are not considered a match) are aligned again. This time the program looks only at their type. For now we distinguish three different types: "text", "punctuation", and "XML element". This operation also produces a list of Segment objects.
-4. **Tree building**. The two lists of Segments are merged. Based on this latest list of Segments, the program builds a tree. Each Segment object is a node in the tree. 
+2. **aligment**. The TextTokens and the ElementTokens are aligned firstly based on their type (text or element) and secondly on their content (textual or label in case of element). The alignment produces a list of Segment objects. Each Segment contains tokens from both witnesses, and it knows whether these tokens are a "match" or a "replacement".
+For now we distinguish three different types: "text", "punctuation", and "XML element". This operation also produces a list of Segment objects.
 
-The tree can be used for further processing. 
+The segments can be used for further processing. 
 
 ## Example of how to use the library
 

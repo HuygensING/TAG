@@ -8,30 +8,99 @@ scope: source.tagml
 
 contexts:
   main:
-    - match: "\\[[^>]*>"
-      scope: markup.open.tagml
-      #push: markup
-
-    - match: "<[^]]*]"
-      scope: markup.close.tagml
-      # pop: markup
-
-    - match: "\\|>"
-      scope: set.open.tagml
-
-    - match: "<\\|"
-      scope: set.close.tagml
-
     - match: "\\[!ns [^]]+]"
       scope: namespace.tagml
 
     - match: "\\[!--.*--]"
       scope: comments.tagml
 
+    - match: "\\|>"
+      scope: set.open.tagml
+      push: set
 
-  markup:
-    - match: "\\([^/]+/"
-      scope: annotation.open.tagml
+    - match: "\\["
+      scope: markup.open.start.tagml
+      push: markup.open
 
-    - match: "/[^/]*\\)"
-      scope: annotation.close.tagml
+    - match: "<"
+      scope: markup.close.start.tagml
+      push: markup.close
+
+
+  markup.open:
+    - match: "[a-zA-Z0-9]+"
+      scope: name.tagml
+
+    - match: "\\|"
+      scope: name.layer.divider.tagml
+      push: layer
+
+    - match: "[\\+-,\\?:\"']+"
+      scope: name.meta.tagml
+
+    - match: " "
+      push: annotation.tagml
+
+    - match: ">"
+      scope: markup.open.end.tagml
+      pop: true
+
+    - match: "]"
+      scope: markup.close.end.tagml
+      pop: true
+
+
+  markup.close:
+    - match: "[a-zA-Z0-9]+"
+      scope: name.tagml
+
+    - match: "\\|"
+      scope: name.layer.divider.tagml
+      push: layer
+
+    - match: "[\\|\\+-,\\?:\"']+"
+      scope: name.meta.tagml
+
+    - match: "]"
+      scope: markup.close.end.tagml
+      pop: true
+
+
+  set:
+    - match: "\\["
+      scope: markup.open.start.tagml
+      push: markup.open
+
+    - match: "\\|"
+      scope: set.divider.tagml
+
+    - match: "<\\|"
+      scope: set.close.tagml
+      pop: true
+
+    - match: "<"
+      scope: markup.close.start.tagml
+      push: markup.close
+
+
+  layer:
+    - match: "[\\+,a-zA-Z0-9]+"
+      scope: layer.name.tagml
+      pop: true
+
+
+  annotation.tagml:
+    - match: "[a-zA-Z0-9]+"
+      scope: annotation.name.tagml
+
+    - match: "="
+      scope: annotation.equals.tagml
+      push: annotation.value
+      pop: true
+
+
+  annotation.value:
+    - match: "[^>]*"
+      scope: annotation.value.tagml
+      pop: true
+

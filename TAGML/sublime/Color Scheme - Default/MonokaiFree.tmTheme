@@ -417,6 +417,48 @@
 
 <!-- Package: TAGML -->
 
+    <dict><key>scope</key><string>name.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#33ccff</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>name.meta.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>name.layer.divider.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>markup.open.start.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>markup.open.end.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>markup.close.start.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>markup.close.end.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#0086b3</string>
+      </dict></dict>
+
     <dict><key>scope</key><string>markup.open.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
@@ -433,6 +475,12 @@
     </dict>
 
     <dict><key>scope</key><string>set.open.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#6f99db</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>set.divider.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
           <key>foreground</key><string>#6f99db</string>
@@ -456,17 +504,36 @@
           <key>foreground</key><string>#42f483</string>
       </dict></dict>
   
-    <dict><key>scope</key><string>annotation.open.tagml</string>
+    <dict><key>scope</key><string>annotation.equals</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
           <key>foreground</key><string>#f442f4</string>
       </dict></dict>
 
-    <dict><key>scope</key><string>annotation.close.tagml</string>
+    <dict><key>scope</key><string>layer.meta.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
-          <key>foreground</key><string>#f442f4</string>
+          <key>foreground</key><string>#e6e600</string>
       </dict></dict>
+
+    <dict><key>scope</key><string>layer.name.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#ffff00</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>annotation.name.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#33cc33</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>annotation.value.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#cccc00</string>
+      </dict></dict>
+
     </array>
 </dict>
 </plist>

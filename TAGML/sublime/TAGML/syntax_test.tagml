@@ -37,7 +37,7 @@ Discontinuity: like TexMECS
 thought Alice
 [+q>without pictures or conversation?<q]
 
-[tag |attr}attr-value{attr|>mixed [b>content<b]<tag]
+[tag attr=attr-value>mixed [b>content<b]<tag]
  
 [anonymous a="b"]
 
@@ -57,7 +57,7 @@ thought Alice
 // Non-linearity: requires more research. XML solves this in the schema, TexMECS in the syntax
 // non-linearity: grouping tags
 // TexMECS: unordered contents
-|>[del>del<del][add>add<add]<|
+|>[del>del<del]|[add>add<add]<|
 
 // comments
 [!-- comments --]
@@ -76,7 +76,7 @@ thought Alice
 [img src='http://example.com/img.png']
 
 // Selfoverlap: use unique identities in markup
-[a~1>bla bla [a~2>bla bla<a~1] bla bla<a~2]
+[a|A1>bla bla [a|A2>bla bla<a|A1] bla bla<a|A2]
 
 
 annotation alternative (like ftanml)
@@ -86,21 +86,95 @@ annotation alternative (like ftanml)
 annotation Datatyping
 
 - boolean
-[m {done true}>bla<m]
+[m done=true>bla<m]
 
 - string
-[m {name "Name"}>bla<m]
-[m {name 'Name'}>bla<m]
+[m name="Name">bla<m]
+[m name='Name'>bla<m]
 
 - number
-[m {age 3.14}>bla<m]
+[m age=3.14>bla<m]
 
 - list
-[m {todo ["run","jump","fly","continue"]}>bla<m]
+[m todo=["run","jump","fly","continue"]>bla<m]
 
 - nested annotation
-[m {address {street "Broadway"} {tel 911}}>text<m]
+[m address={street="Broadway", tel 911}}>text<m]
 [m address={street="Broadway" tel=911}>text<m]
 
 - mixed content
-[m {motto |To [ex>infinity<ex] and beyond|}>bla<m]
+[m motto=[>To [ex>infinity<ex] and beyond<]>bla<m]
+
+
+[text>
+[body|+Q,+L>
+  [lg|L type="verse" bla='ok'>
+    [l|L>Asked a girl what she wanted to be<l|L]
+    [l|L>She said [q|Q>baby, can't you see<l|L]
+    [l|L>I wanna be famous, a star on the screen<l|L]
+    [l|L>But you can do something in between<l|L]
+  <lg|L]
+  [lg|L type="chorus">
+    [l|L>Baby you can drive my car<l|L]
+    [l|L>Yes I'm gonna be a star<l|L]
+    [l|L>Baby you can drive my car<l|L]
+    [l|L>And baby I love you<q|Q]<l|L]
+  <lg|L]
+<body|Q,L]
+<text]
+
+[poem|+p title='The Hunting of the Snark (An Agony in 8 Fits)' voice='Narrator'>
+[text|+l,+pr title='The Hunting of the Snark (An Agony in 8 Fits)'>
+[canto|p title='The Vanishing'>
+[page|+m n=81>
+[line|m>[phr|l type='NP'>[w|l type='D'>The<w|l] [w|l type='N'>Vanishing<w|l]<phr|l]
+[page_nr|m>81<page_nr|m]<line|m]
+[p|m>
+[stanza|p>
+[sentence|pr>
+[line|m>[l|p>[s|l>[phr|l type='NP'>(As if stung<phr|l][phr|l type='PP'>by a spasm)<phr|l][phr|l type='VP'>plunge into a chasm,<phr|l]<l|p]<line|m]
+[line|m>[l|p>[phr|l type='VP'>While they waited [w|l type='contr'>and<w|l] listened in awe.<phr|l]<s|l]<l|p]<line|m]<sentence|pr]
+<p|m]<stanza|p]
+[el|m]
+[el|m]
+[stanza|p>[p|m>
+[sentence~a|pr>[line|m>[l|p>[sentence~b|pr voice='Baker'>[s|l>[phr|l type='NP'>"It's a Snark!"<phr|l]<sentence~b|pr] [phr|l type='VP'>was the sound that first came<phr|l]<line|m]
+[line|m>[phr|l type='PP'>to their ears,<phr|l]<l|p]<line|m]
+[line|m>[l|p>[phr|l type='VP'>And seemed almost too [w|l type='A'>good<w|l] to be true.<phr|l]<s|l]<l|p]<line|m]<sentence~a|pr]
+[line|m>[l|p>[sentence~c|pr>[s|l>[phr|l type='VP'>Then followed<phr|l][phr|l type='NP'>a torrent of laughter and cheers:<phr|l]<l|p]<line|m]
+[line|m>[l|p>[phr~a|l type='NP'>Then the ominous words [sentence~d|pr voice='Baker'>[phr~b|l type='VP'>"It's a Boo--"<phr~b|l]<phr~a|l]<sentence~d|pr]<l|p]<line|m]
+<p|m]<stanza|p]
+[el|m]
+[el|m]
+[stanza|p>[p|m>
+[line|m>[l|p>[phr|l type='NP'>Then, silence.<phr|l]<s|l]<sentence~c|pr] [sentence~e|pr>[s|l>[phr|l type='NP'>Some fancied<phr|l][phr|l type='VP'>they heard in the <line|m][line|m>air<phr|l]<l|p]<line|m]
+[line|m>[l|p>[phr|l type='NP'>A weary and wandering sigh<phr|l]<l|p]<line|m]
+[line|m>[l|p>[phr~a|l type='VP'>That sounded like [sentence~f|pr voice='Baker'>[phr~b|l type='N'>"--jum!"<phr~b|l]<sentence~f|pr] but the others de-<line|m][line|m>clare<phr~a|l]<l|p]<line|m]
+[line|m>[l|p>[phr|l type='NP'>It was only a breeze that went by.<phr|l]<s|l]<l|p]<line|m]<sentence~e|pr]
+<p|m]<stanza|p]
+<canto|p]
+<page|m]
+<text|pr,l]
+<poem|p]
+
+[tag|+L,+B,+T,+C>
+[body|B>[timing|T>[chords|C>
+[div|B class='stanza' title=4>[p|B>[screenful|T+S68 starts=68>[main|S68>[em|C>Bright are the<em|C] [bm|C>stars that shine<bm|C]<main|S68]<p|B]
+[p|B>[next|S68>[screenful|T+S72 starts=72>[main|S72>[em|C>Dark is the<em|C] [bm|C>sky<bm|C]<main|S72]<next|S68]<screenful|S68]<p|B]
+[p|B>[next|S72>[screenful|T+S76 starts=76>[main|S76>[em|C>I know [lyrics|L popup={fact=[>[p>Paul McCartney wrote this about his girlfriend, an actress named Jane Asher<p]<]}>this<em|C] [bm|C>love of mine<bm|C]<main|S76]<next|S72]<screenful|S72]<p|B]
+[p|B>[next|S76>[screenful|T+S80 starts=80>[main|S80>[g|C>Will never<g|C] [a|C>die<lyrics|L]<main|S80]<next|S76]<screenful|S76]<p|B]<div|B]
+[div|B class='refrain'>[p|B>[next|S80>[screenful|T+S84 starts=84>[main|S84>And I<a|C] [d|C>love her<d|C]<next|S80]<screenful|S80]<main|S84]<screenful|S84]<p|B]<div|B]
+<chords|C]<timing|T]<body|B]<tag|L,C,T,B]
+
+[tag>
+  [poem type="limerick"
+        author='John'
+        year=1818
+        rhymes=true
+        keywords=["unfinished","censored"]>There once was a vicar from Slough...<poem]
+  [origin
+    location={
+      position={x=1 y=2}
+      countrycode='nl'
+    }>Amsterdam<origin]
+<tag]

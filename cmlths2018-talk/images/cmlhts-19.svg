@@ -1,0 +1,262 @@
+<svg width="1227pt" height="405pt"
+ viewBox="0.00 0.00 1227.41 405.20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 401.2)">
+<title>TextGraph</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-401.2 1223.4103,-401.2 1223.4103,4 -4,4"/>
+<text text-anchor="start" x="41.8339" y="-7.4" font-family="Times,serif" font-style="italic" font-size="8.00" fill="#a52a2a">[tagml&gt;\n[text|+A,+B&gt;\n[page|A&gt;\n[p|B&gt;\n[line&gt;1st. Voice from the Mountains&lt;line]\n[line&gt;Thrice three hundred thousand years&lt;line]\n[line&gt;We had been stained with bitter blood&lt;line]\n&lt;page|A]\n[page|A&gt;\n[line&gt;And had ran mute &#39;mid shrieks of slaugter\[sic]&lt;line]\n[line&gt;Thro&#39; a city &amp; a multitude&lt;line]\n&lt;p|B]\n&lt;page|A]\n&lt;text|A,B]\n&lt;tagml] </text>
+<!-- d -->
+<g id="node1" class="node">
+<title>d</title>
+<ellipse fill="#ffffff" stroke="#000000" cx="572.7318" cy="-375.2" rx="18" ry="18"/>
+<ellipse fill="none" stroke="#000000" cx="572.7318" cy="-375.2" rx="22" ry="22"/>
+</g>
+<!-- m2 -->
+<g id="node7" class="node">
+<title>m2</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="572.7318" cy="-298.2" rx="33.0624" ry="18"/>
+<text text-anchor="start" x="556.7886" y="-294" font-family="Times,serif" font-size="14.00" fill="#000000">tagml</text>
+</g>
+<!-- d&#45;&gt;m2 -->
+<g id="edge29" class="edge">
+<title>d&#45;&gt;m2</title>
+<path fill="none" stroke="#000000" d="M572.7318,-352.9284C572.7318,-341.2914 572.7318,-327.2332 572.7318,-316.2789"/>
+</g>
+<!-- t7 -->
+<g id="node2" class="node">
+<title>t7</title>
+<polygon fill="#ffffff" stroke="#0000ff" points="187.696,-53.6 -.2324,-53.6 -.2324,-17.6 187.696,-17.6 187.696,-53.6"/>
+<text text-anchor="start" x="8" y="-31.4" font-family="Times,serif" font-size="14.00" fill="#000000">1st. Voice from the Mountains</text>
+</g>
+<!-- t9 -->
+<g id="node3" class="node">
+<title>t9</title>
+<polygon fill="#ffffff" stroke="#0000ff" points="443.2051,-53.6 222.2585,-53.6 222.2585,-17.6 443.2051,-17.6 443.2051,-53.6"/>
+<text text-anchor="start" x="230.4954" y="-31.4" font-family="Times,serif" font-size="14.00" fill="#000000">Thrice three hundred thousand years</text>
+</g>
+<!-- t7&#45;&gt;t9 -->
+<g id="edge1" class="edge">
+<title>t7&#45;&gt;t9</title>
+<path fill="none" stroke="#ffffff" d="M187.558,-35.6C199.1832,-35.6 210.8085,-35.6 222.4337,-35.6"/>
+</g>
+<!-- t11 -->
+<g id="node4" class="node">
+<title>t11</title>
+<polygon fill="#ffffff" stroke="#0000ff" points="707.2852,-53.6 478.1784,-53.6 478.1784,-17.6 707.2852,-17.6 707.2852,-53.6"/>
+<text text-anchor="start" x="486.2051" y="-31.4" font-family="Times,serif" font-size="14.00" fill="#000000">We had been stained with bitter blood</text>
+</g>
+<!-- t9&#45;&gt;t11 -->
+<g id="edge2" class="edge">
+<title>t9&#45;&gt;t11</title>
+<path fill="none" stroke="#ffffff" d="M443.181,-35.6C454.7673,-35.6 466.3536,-35.6 477.9399,-35.6"/>
+</g>
+<!-- t14 -->
+<g id="node5" class="node">
+<title>t14</title>
+<polygon fill="#ffffff" stroke="#0000ff" points="1020.3682,-53.6 743.0954,-53.6 743.0954,-17.6 1020.3682,-17.6 1020.3682,-53.6"/>
+<text text-anchor="start" x="750.9137" y="-31.4" font-family="Times,serif" font-size="14.00" fill="#000000">And had ran mute &#39;mid shrieks of slaugter[sic]</text>
+</g>
+<!-- t11&#45;&gt;t14 -->
+<g id="edge3" class="edge">
+<title>t11&#45;&gt;t14</title>
+<path fill="none" stroke="#ffffff" d="M707.3158,-35.6C719.2388,-35.6 731.1617,-35.6 743.0847,-35.6"/>
+</g>
+<!-- t16 -->
+<g id="node6" class="node">
+<title>t16</title>
+<polygon fill="#ffffff" stroke="#0000ff" points="1219.5892,-53.6 1055.8744,-53.6 1055.8744,-17.6 1219.5892,-17.6 1219.5892,-53.6"/>
+<text text-anchor="start" x="1064.0533" y="-31.4" font-family="Times,serif" font-size="14.00" fill="#000000">Thro&#39; a city &amp; a multitude</text>
+</g>
+<!-- t14&#45;&gt;t16 -->
+<g id="edge4" class="edge">
+<title>t14&#45;&gt;t16</title>
+<path fill="none" stroke="#ffffff" d="M1020.4818,-35.6C1032.2373,-35.6 1043.9929,-35.6 1055.7484,-35.6"/>
+</g>
+<!-- m3 -->
+<g id="node8" class="node">
+<title>m3</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="631.7318" cy="-225.2" rx="43.0517" ry="18"/>
+<text text-anchor="start" x="608.363" y="-221" font-family="Times,serif" font-size="14.00" fill="#000000">text|A,B</text>
+</g>
+<!-- m2&#45;&gt;m3 -->
+<g id="edge5" class="edge">
+<title>m2&#45;&gt;m3</title>
+<path fill="none" stroke="#a52a2a" d="M586.1198,-281.6352C595.5715,-269.9407 608.2064,-254.3077 617.7812,-242.461"/>
+</g>
+<!-- m6 -->
+<g id="node11" class="node">
+<title>m6</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="206.7318" cy="-171.2" rx="27" ry="18"/>
+<text text-anchor="start" x="196.2339" y="-167" font-family="Times,serif" font-size="14.00" fill="#000000">line</text>
+</g>
+<!-- m2&#45;&gt;m6 -->
+<g id="edge6" class="edge">
+<title>m2&#45;&gt;m6</title>
+<path fill="none" stroke="#a52a2a" d="M544.6201,-288.4454C475.1535,-264.3408 296.3108,-202.2834 231.0395,-179.6346"/>
+</g>
+<!-- m8 -->
+<g id="node12" class="node">
+<title>m8</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="397.7318" cy="-171.2" rx="27" ry="18"/>
+<text text-anchor="start" x="387.2339" y="-167" font-family="Times,serif" font-size="14.00" fill="#000000">line</text>
+</g>
+<!-- m2&#45;&gt;m8 -->
+<g id="edge7" class="edge">
+<title>m2&#45;&gt;m8</title>
+<path fill="none" stroke="#a52a2a" d="M552.6571,-283.6315C518.4513,-258.8079 449.3642,-208.6704 416.2503,-184.6391"/>
+</g>
+<!-- m10 -->
+<g id="node13" class="node">
+<title>m10</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="561.7318" cy="-171.2" rx="27" ry="18"/>
+<text text-anchor="start" x="551.2339" y="-167" font-family="Times,serif" font-size="14.00" fill="#000000">line</text>
+</g>
+<!-- m2&#45;&gt;m10 -->
+<g id="edge8" class="edge">
+<title>m2&#45;&gt;m10</title>
+<path fill="none" stroke="#a52a2a" d="M571.1558,-280.004C569.0647,-255.8613 565.3945,-213.4879 563.3049,-189.3622"/>
+</g>
+<!-- m13 -->
+<g id="node15" class="node">
+<title>m13</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="809.7318" cy="-225.2" rx="27" ry="18"/>
+<text text-anchor="start" x="799.2339" y="-221" font-family="Times,serif" font-size="14.00" fill="#000000">line</text>
+</g>
+<!-- m2&#45;&gt;m13 -->
+<g id="edge9" class="edge">
+<title>m2&#45;&gt;m13</title>
+<path fill="none" stroke="#a52a2a" d="M601.7927,-289.2488C648.8862,-274.7432 741.0366,-246.3593 785.1088,-232.7843"/>
+</g>
+<!-- m15 -->
+<g id="node16" class="node">
+<title>m15</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="1008.7318" cy="-225.2" rx="27" ry="18"/>
+<text text-anchor="start" x="998.2339" y="-221" font-family="Times,serif" font-size="14.00" fill="#000000">line</text>
+</g>
+<!-- m2&#45;&gt;m15 -->
+<g id="edge10" class="edge">
+<title>m2&#45;&gt;m15</title>
+<path fill="none" stroke="#a52a2a" d="M604.439,-292.8912C686.8399,-279.0947 906.5927,-242.3013 982.5055,-229.5911"/>
+</g>
+<!-- m4 -->
+<g id="node9" class="node">
+<title>m4</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="474.7318" cy="-117.2" rx="38.3381" ry="18"/>
+<text text-anchor="start" x="455.0646" y="-113" font-family="Times,serif" font-size="14.00" fill="#000000">page|A</text>
+</g>
+<!-- m3&#45;&gt;m4 -->
+<g id="edge11" class="edge">
+<title>m3&#45;&gt;m4</title>
+<path fill="none" stroke="#00ffff" d="M590.7612,-219.0937C568.0671,-214.0744 540.3985,-205.0903 519.9566,-189.2 501.7758,-175.0674 488.9592,-151.4225 481.7203,-135.1065"/>
+<text text-anchor="start" x="519.7318" y="-168.8" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m5 -->
+<g id="node10" class="node">
+<title>m5</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="628.7318" cy="-117.2" rx="27" ry="18"/>
+<text text-anchor="start" x="619.1642" y="-113" font-family="Times,serif" font-size="14.00" fill="#000000">p|B</text>
+</g>
+<!-- m3&#45;&gt;m5 -->
+<g id="edge12" class="edge">
+<title>m3&#45;&gt;m5</title>
+<path fill="none" stroke="#000000" d="M631.2229,-206.8793C630.6679,-186.899 629.7852,-155.1231 629.2332,-135.2502"/>
+<text text-anchor="start" x="629.7318" y="-168.8" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m12 -->
+<g id="node14" class="node">
+<title>m12</title>
+<ellipse fill="#ffffff" stroke="#ff0000" cx="815.7318" cy="-117.2" rx="38.3381" ry="18"/>
+<text text-anchor="start" x="796.0646" y="-113" font-family="Times,serif" font-size="14.00" fill="#000000">page|A</text>
+</g>
+<!-- m3&#45;&gt;m12 -->
+<g id="edge13" class="edge">
+<title>m3&#45;&gt;m12</title>
+<path fill="none" stroke="#00ffff" d="M656.9304,-210.4095C692.4614,-189.5544 756.8339,-151.7705 791.7132,-131.2979"/>
+<text text-anchor="start" x="750.7318" y="-168.8" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m4&#45;&gt;t7 -->
+<g id="edge14" class="edge">
+<title>m4&#45;&gt;t7</title>
+<path fill="none" stroke="#00ffff" d="M438.496,-111.434C398.3587,-104.8698 331.7989,-93.458 274.9566,-81.2 237.058,-73.0272 195.0525,-62.5483 161.0324,-53.697"/>
+<text text-anchor="start" x="275.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m4&#45;&gt;t9 -->
+<g id="edge15" class="edge">
+<title>m4&#45;&gt;t9</title>
+<path fill="none" stroke="#00ffff" d="M450.3211,-103.1725C426.5321,-89.5022 390.2498,-68.6526 364.282,-53.7303"/>
+<text text-anchor="start" x="408.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m4&#45;&gt;t11 -->
+<g id="edge16" class="edge">
+<title>m4&#45;&gt;t11</title>
+<path fill="none" stroke="#00ffff" d="M496.3748,-102.2333C516.2021,-88.5223 545.5911,-68.199 566.6947,-53.6053"/>
+<text text-anchor="start" x="536.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m5&#45;&gt;t7 -->
+<g id="edge17" class="edge">
+<title>m5&#45;&gt;t7</title>
+<path fill="none" stroke="#000000" d="M602.3842,-112.5378C580.7483,-108.7647 549.2921,-103.4058 521.7318,-99.2 463.4892,-90.312 448.7006,-89.6757 390.3966,-81.2 322.4569,-71.3235 245.8718,-59.5351 187.5347,-50.4186"/>
+<text text-anchor="start" x="390.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m5&#45;&gt;t9 -->
+<g id="edge18" class="edge">
+<title>m5&#45;&gt;t9</title>
+<path fill="none" stroke="#000000" d="M603.7501,-110.3132C558.8006,-97.9217 462.9498,-71.4979 398.1552,-53.6356"/>
+<text text-anchor="start" x="488.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m5&#45;&gt;t11 -->
+<g id="edge19" class="edge">
+<title>m5&#45;&gt;t11</title>
+<path fill="none" stroke="#000000" d="M621.0971,-99.8947C615.1116,-86.3276 606.8065,-67.5027 600.7297,-53.7287"/>
+<text text-anchor="start" x="611.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m5&#45;&gt;t14 -->
+<g id="edge20" class="edge">
+<title>m5&#45;&gt;t14</title>
+<path fill="none" stroke="#000000" d="M653.4512,-109.2273C693.1152,-96.4345 771.9698,-71.0015 825.7828,-53.6452"/>
+<text text-anchor="start" x="762.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m5&#45;&gt;t16 -->
+<g id="edge21" class="edge">
+<title>m5&#45;&gt;t16</title>
+<path fill="none" stroke="#000000" d="M655.0691,-113.1512C697.963,-106.5445 785.5762,-92.9979 859.7318,-81.2 935.3259,-69.1732 954.2022,-66.0253 1029.7318,-53.6 1038.1722,-52.2115 1046.9824,-50.7549 1055.7716,-49.2972"/>
+<text text-anchor="start" x="917.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">B</text>
+</g>
+<!-- m6&#45;&gt;t7 -->
+<g id="edge22" class="edge">
+<title>m6&#45;&gt;t7</title>
+<path fill="none" stroke="#a52a2a" d="M193.5481,-155.3796C172.4728,-130.0892 131.3018,-80.684 108.9871,-53.9063"/>
+</g>
+<!-- m8&#45;&gt;t9 -->
+<g id="edge23" class="edge">
+<title>m8&#45;&gt;t9</title>
+<path fill="none" stroke="#a52a2a" d="M389.4995,-154.0262C377.2014,-128.3705 354.1324,-80.245 341.5191,-53.9317"/>
+</g>
+<!-- m10&#45;&gt;t11 -->
+<g id="edge24" class="edge">
+<title>m10&#45;&gt;t11</title>
+<path fill="none" stroke="#a52a2a" d="M565.8484,-153.1934C571.7775,-127.258 582.6596,-79.6579 588.5982,-53.6811"/>
+</g>
+<!-- m12&#45;&gt;t14 -->
+<g id="edge25" class="edge">
+<title>m12&#45;&gt;t14</title>
+<path fill="none" stroke="#00ffff" d="M829.407,-100.2924C840.4322,-86.6613 855.9008,-67.5366 867.1584,-53.618"/>
+<text text-anchor="start" x="849.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m12&#45;&gt;t16 -->
+<g id="edge26" class="edge">
+<title>m12&#45;&gt;t16</title>
+<path fill="none" stroke="#00ffff" d="M852.4259,-112.2414C891.9203,-106.4845 956.3897,-95.8681 1010.7318,-81.2 1038.5511,-73.6909 1068.9558,-62.8708 1093.0394,-53.6549"/>
+<text text-anchor="start" x="1041.7318" y="-74" font-family="Times,serif" font-size="8.00" fill="#000000">A</text>
+</g>
+<!-- m13&#45;&gt;t14 -->
+<g id="edge27" class="edge">
+<title>m13&#45;&gt;t14</title>
+<path fill="none" stroke="#a52a2a" d="M821.7319,-208.8267C833.9012,-191.4277 852.3738,-162.6888 862.7318,-135.2 873.0356,-107.8551 877.9656,-74.0942 880.1585,-53.7358"/>
+</g>
+<!-- m15&#45;&gt;t16 -->
+<g id="edge28" class="edge">
+<title>m15&#45;&gt;t16</title>
+<path fill="none" stroke="#a52a2a" d="M1019.954,-208.7059C1043.9831,-173.3888 1100.2568,-90.6795 1125.3152,-53.8496"/>
+</g>
+</g>
+</svg>

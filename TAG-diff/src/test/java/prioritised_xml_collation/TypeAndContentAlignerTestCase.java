@@ -31,7 +31,7 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static prioritised_xml_collation.Segment.Type.*;
 import static prioritised_xml_collation.SegmentMatcher.sM;
-import static prioritised_xml_collation.XMLTokenContentMatcher.t;
+import static prioritised_xml_collation.TAGTokenContentMatcher.t;
 
 /*
  * Created by Ronald Haentjens Dekker
@@ -45,8 +45,8 @@ public class TypeAndContentAlignerTestCase {
     @Test
     public void testAlignTokens() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
         List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb);
         assertThat(segments, contains(sM(aligned).tokensWa(t("TEI"), t("s")).tokensWb(t("TEI"), t("s")), sM(replacement).tokensWa(t("c")).tokensWb(t("a")), sM(aligned).tokensWa(t("/s"), t("/TEI")).tokensWb(t("/s"), t("/TEI"))));
@@ -58,8 +58,8 @@ public class TypeAndContentAlignerTestCase {
     @Test
     public void testSentence21() throws FileNotFoundException, XMLStreamException {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
 
 //        EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
@@ -95,8 +95,8 @@ public class TypeAndContentAlignerTestCase {
     @Test
     public void testPath() throws FileNotFoundException, XMLStreamException {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_A.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_B.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_A.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/test_path_B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
 
         EditGraphTable editGraphTable = aligner.alignAndReturnTable(tokensWa, tokensWb);
@@ -114,8 +114,8 @@ public class TypeAndContentAlignerTestCase {
     @Test
     public void testSentence21Reversed() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
         List<Segment> segments = aligner.alignTokens(tokensWb, tokensWa);
         for (Segment s : segments) {
@@ -142,8 +142,8 @@ public class TypeAndContentAlignerTestCase {
     @Test
     public void testReplacementOfTextWithMarkup_AKA_ForcedMixedType() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-forced_mixed_replacement.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-forced_mixed_replacement.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-forced_mixed_replacement.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-forced_mixed_replacement.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
         List<Segment> segments = aligner.alignTokens(tokensWb, tokensWa);
         for (Segment s : segments) {
@@ -160,8 +160,8 @@ public class TypeAndContentAlignerTestCase {
 //    @Test
 //    public void testAlignTokens() throws Exception {
 //        Tokenizer tokenizer = new Tokenizer();
-//        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
-//        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
+//        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
+//        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
 //        TwoPhasedAligner firstAlignment = new TwoPhasedAligner();
 //        Node rootNode = firstAlignment.alignTokensAndReturnRootNode(tokensWa, tokensWb);
 //        NodeMatcher rootNodeMatcher = nM();
@@ -177,8 +177,8 @@ public class TypeAndContentAlignerTestCase {
 //    @Test
 //    public void testAlignTokens2() throws Exception {
 //        Tokenizer tokenizer = new Tokenizer();
-//        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
-//        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
+//        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witA-simple.xml"));
+//        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/witB-simple.xml"));
 //        TwoPhasedAligner aligner = new TwoPhasedAligner();
 //        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
 //        NodeMatcher rootNodeMatcher = nM();
@@ -194,8 +194,8 @@ public class TypeAndContentAlignerTestCase {
 //    @Test
 //    public void testAlignTokensS21() throws Exception {
 //        Tokenizer tokenizer = new Tokenizer();
-//        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
-//        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
+//        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-A.xml"));
+//        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-B.xml"));
 //        TwoPhasedAligner aligner = new TwoPhasedAligner();
 //        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
 //        NodeMatcher rootNodeMatcher = nM();
@@ -221,8 +221,8 @@ public class TypeAndContentAlignerTestCase {
 //    @Test
 //    public void testAlignSelection21() throws Exception {
 //        Tokenizer tokenizer = new Tokenizer();
-//        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
-//        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
+//        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
+//        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
 //        TwoPhasedAligner aligner = new TwoPhasedAligner();
 //        Node rootNode = aligner.alignTokensAndReturnRootNode(tokensWa, tokensWb);
 //        NodeMatcher rootNodeMatcher = nM();

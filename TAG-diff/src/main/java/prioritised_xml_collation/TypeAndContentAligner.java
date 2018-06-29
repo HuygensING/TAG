@@ -28,18 +28,18 @@ import java.util.List;
  * This aligner tries to do that the other way around
  * This code is an experiment to see whether we can do the high quality alignment in one single phase
  */
-class TypeAndContentAligner {
-    List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+public class TypeAndContentAligner {
+    public List<Segment> alignTokens(List<TAGToken> tokensWa, List<TAGToken> tokensWb) {
         EditGraphAligner aligner = createAligner();
         return aligner.alignAndSegment(tokensWa, tokensWb, new AlignmentAndTypeSegmenter());
     }
 
-    List<Segment> alignTokens(List<XMLToken> tokensWa, List<XMLToken> tokensWb, SegmenterInterface segmenter) {
+    public List<Segment> alignTokens(List<TAGToken> tokensWa, List<TAGToken> tokensWb, SegmenterInterface segmenter) {
         EditGraphAligner aligner = createAligner();
         return aligner.alignAndSegment(tokensWa, tokensWb, segmenter);
     }
 
-    EditGraphTable alignAndReturnTable(List<XMLToken> tokensWa, List<XMLToken> tokensWb) {
+    EditGraphTable alignAndReturnTable(List<TAGToken> tokensWa, List<TAGToken> tokensWb) {
         EditGraphAligner editGraphAligner = createAligner();
       return editGraphAligner.align(tokensWa, tokensWb);
     }

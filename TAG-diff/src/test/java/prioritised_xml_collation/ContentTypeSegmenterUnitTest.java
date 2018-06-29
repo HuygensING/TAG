@@ -27,7 +27,7 @@ import java.util.List;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 import static prioritised_xml_collation.SegmentMatcher.sM;
-import static prioritised_xml_collation.XMLTokenContentMatcher.t;
+import static prioritised_xml_collation.TAGTokenContentMatcher.t;
 
 /**
  * Created by ellibleeker on 21/04/2017.
@@ -36,8 +36,8 @@ public class ContentTypeSegmenterUnitTest {
     @Test
     public void testSelectionS21() throws Exception {
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-A.xml"));
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(new File("input_xml/s21-focus-B.xml"));
         TypeAndContentAligner aligner = new TypeAndContentAligner();
         List<Segment> segments = aligner.alignTokens(tokensWa, tokensWb, new ContentTypeSegmenter());
         System.out.println(segments);

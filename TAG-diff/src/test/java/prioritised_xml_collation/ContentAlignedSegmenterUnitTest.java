@@ -19,17 +19,18 @@ package prioritised_xml_collation;
  * limitations under the License.
  * #L%
  */
+
 import org.junit.Test;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static prioritised_xml_collation.SegmentMatcher.sM;
-import static prioritised_xml_collation.XMLTokenContentMatcher.t;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
+import static prioritised_xml_collation.TAGTokenContentMatcher.t;
 
 /**
  * Created by ellibleeker on 08/02/2017.
@@ -39,8 +40,8 @@ public class ContentAlignedSegmenterUnitTest {
 
     @Test
     public void testSegmentMatcher() throws Exception {
-        List<XMLToken> tokensWa = Arrays.asList(new XMLToken("a"), new XMLToken("b"));
-        List<XMLToken> tokensWb = Arrays.asList(new XMLToken("a"), new XMLToken("b"));
+        List<TAGToken> tokensWa = Arrays.asList(new TAGToken("a"), new TAGToken("b"));
+        List<TAGToken> tokensWb = Arrays.asList(new TAGToken("a"), new TAGToken("b"));
         Segment.Type type = Segment.Type.aligned;
 
         Segment segment = new Segment(tokensWa, tokensWb, type);
@@ -58,8 +59,8 @@ public class ContentAlignedSegmenterUnitTest {
         File input_tokensA = new File("input_xml/witA-simple.xml");
         File input_tokensB = new File("input_xml/witB-simple.xml");
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
         AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
@@ -77,8 +78,8 @@ public class ContentAlignedSegmenterUnitTest {
         File input_tokensA = new File("input_xml/witA-simple.xml");
         File input_tokensB = new File("input_xml/witB-simple.xml");
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
         AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
@@ -97,8 +98,8 @@ public class ContentAlignedSegmenterUnitTest {
         File input_tokensA = new File("input_xml/witA-simple.xml");
         File input_tokensB = new File("input_xml/witB-simple.xml");
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
         AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
@@ -112,8 +113,8 @@ public class ContentAlignedSegmenterUnitTest {
         File input_tokensA = new File("input_xml/s21-A.xml");
         File input_tokensB = new File("input_xml/s21-B.xml");
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
         AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);
@@ -128,8 +129,8 @@ public class ContentAlignedSegmenterUnitTest {
         File input_tokensA = new File("input_xml/witA-simple2.xml");
         File input_tokensB = new File("input_xml/witB-simple.xml");
         Tokenizer tokenizer = new Tokenizer();
-        List<XMLToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
-        List<XMLToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
+        List<TAGToken> tokensWa = tokenizer.convertXMLFileIntoTokens(input_tokensA);
+        List<TAGToken> tokensWb = tokenizer.convertXMLFileIntoTokens(input_tokensB);
         AbstractScorer contentScorer = new ContentScorer();
         AlignedNonAlignedSegmenter contentSegmenter = new AlignedNonAlignedSegmenter();
         EditGraphAligner aligner = new EditGraphAligner(contentScorer);

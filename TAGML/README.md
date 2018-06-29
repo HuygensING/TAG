@@ -47,7 +47,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   Annotations can be added to the start tag of any markup.  
   Annotation values can be any of the following data types:
   - string: `"string"` or `'string'` (bracketed by `"` or `'`)
-  - mixed content: `|mixed [b>content<b]|` (bracketed by `|`)
+  - rich text: `|>rich text [b>content<b]<|` (bracketed by `|>` and `<|`)
   - boolean: `true` or `false` (not bracketed)
   - number: `3.14` (not bracketed)
   - (nested) annotation: `{x=1 y=2}` (bracketed by `{` and `}`)
@@ -123,8 +123,8 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
 
 ### Whitespace significance  
-  Whitespace is only significant within string or mixed content annotation values, or inside markup that's been defined
-  in the schema as containing mixed content.  
+  Whitespace is only significant within string or rich text annotation values, or inside markup that's been defined
+  in the schema as containing rich text.  
   In all other places, whitespace is insignificant and can be used for formatting the TAGML.
   
   ```
@@ -245,66 +245,78 @@ day.<s]<v]
 ```
 
 The nested `title` annotation had to have an extra annotation `content` added because of the difference in annotation 
-recursion encoding betwen LMNL and TAGML.
+recursion encoding between LMNL and TAGML.
 
 The non-linearity in the text that in LMNL is encoded with a `note` markup with `alt` annotation
 is encoded in TAGML as a group with `original` and `alt` markup.
 
+    
 ## TAGML Grammar
 
-1. `document ::= documentHeader? mixedContent*`
+Strictly speaking, not every special character needs to be escaped in all parts of the document. The following grammar defines text scopes, and for each scope the characters that need to be escaped. 
+
+1. `document ::= documentHeader? richText*`
 
 0. `documentHeader ::= namespaceDefinition*`
-0. `mixedContent ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | text | comment )*`
+0. `namespaceDefinition ::= '[!ns ' namespaceIdentifier ' ' namespaceURI ']'`
+0. `namespaceIdentifier ::= nameCharacter+`
 
-0. `namespaceDefinition ::= '[!ns ' NamespaceIdentifier ' ' NamespaceURI ']'`
-0. `NamespaceIdentifier ::= NameCharacter+`
-
-0. `markupOpenTag ::= '[' ( Optional | Resume )? tagIdentifier (' ' annotation)* '>'`
-0. `markupCloseTag ::= '<' ( Optional | Suspend )? tagIdentifier ']'`
-0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
-0. `textVariation ::= '<|' mixedContent ( '|' mixedContent )+ '|>'`
+0. `richText ::= ( textEnrichment | text )*`
+0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
 0. `text ::= textCharacter*`
-0. `comment ::= '[!' textCharacter* '!]'`
+0. `textCharacter ::= [^[<] | '\[' | '\<' '\\'` # For regular text, we only need to escape the 2 characters that start a markupOpenTag, markupCloseTag or markupMilestone, plus the escape character itself.
 
-0. `Optional ::= '?'`
-0. `Resume ::= '+'`
-0. `Suspend ::= '-'`
+0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
+0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
+0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
+
+0. `textVariation ::= '<|' richTextInTextVariation ( '|' richTextInTextVariation )+ '|>'`
+0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
+0. `textInTextVariation ::= textInTextVariationCharacter*`
+0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|' '\\'` # For text inside textVariation tags we also have to escape the variation divider character `|`
+
+0. `comment ::= '[!' commentCharacter* '!]'`
+0. `commentCharacter ::= [^!]] | '\]' | '\!' '\\'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`, plus the escape character itself.
+
+0. `optional ::= '?'`
+0. `resume ::= '+'`
+0. `suspend ::= '-'`
 0. `tagIdentifier ::= qualifiedMarkupName markupSuffix?`
 0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
-0. `markupSuffix ::= '~' NameCharacter+'`
-0. `localMarkupName ::= NameCharacter+`
+0. `markupSuffix ::= '~' nameCharacter+'`
+0. `localMarkupName ::= nameCharacter+`
 
 0. `annotation ::= annotationName '=' annotationValue`
-0. `annotationName ::= NameCharacter+`
-0. `annotationValue ::= stringValue | numberValue | BooleanValue | mixedContentValue | listValue | objectValue `
-0. `stringValue ::= '"' characters '"' | "'" characters "'" `
-0. `numberValue ::= '-'? Digits ('.' Digits)? ([eE] [+-]? Digits)?`
-0. `BooleanValue ::= 'true' | 'false'`
-0. `mixedContentValue ::= '[>' mixedContent '<]'`
+0. `annotationName ::= nameCharacter+`
+0. `annotationValue ::= stringValue | numberValue | booleanValue | richTextValue | listValue | objectValue `
+0. `stringValue ::= '"' doubleQuotedStringValueCharacter* '"' | "'" singleQuotedStringValueCharacter* "'" `
+0. `singleQuotedStringValueCharacter ::= [^'] | "\'" '\\'` # For text inside the stringValue delimiters, only the delimiter used needs to be escaped, plus the escape character itself.
+0. `doubleQuotedStringValueCharacter ::= [^"] | '\"' '\\'`
+
+0. `numberValue ::= '-'? digits ('.' digits)? ([eE] [+-]? digits)?`
+0. `booleanValue ::= 'true' | 'false'`
+0. `richTextValue ::= '[>' richText '<]'`
 0. `listValue ::= '[' annotationValue ( ',' ' '? annotationValue )* ']'`
 0. `objectValue ::= '{' annotation+ '}'`
 
-0. `Digits ::= [0-9]+`
-0. `NameCharacter ::= [a-zA-Z] | Digits | '_' `
-0. `textCharacter ::= ([^"'[]<>|\] | EscapedCharacter )*`
-0. `SpecialCharacter ::= '[' | ']' | '<' | '>' | '|' | '\' | '"'| "'"`
-0. `EscapedCharacter ::= '\[' | '\]' | '\<' | '\>' | '\|' | '\\' | '\"'| "\'"`
+0. `digits ::= [0-9]+`
+0. `nameCharacter ::= [a-zA-Z] | digits | '_' `
     
+
 ANLTR4 grammars:
 
-TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
+TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
 
-TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
+TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
    
 ## TAGML Schema
 
 The schema should:
 - define hierarchies
 - define annotations for markup (value data type, required?)
-- define which markup can contain mixed content
+- define which markup can contain rich text
   (markup can be either structural, meaning it only contains other markup,  
-  or non-structural (TODO: betere term verzinnen), meaning it can contain mixed content: both text and markup.
+  or non-structural, meaning it can contain rich text: both text and markup.
   )
 
 ----------

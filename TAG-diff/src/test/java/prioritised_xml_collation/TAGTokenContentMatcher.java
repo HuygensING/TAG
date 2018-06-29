@@ -31,19 +31,19 @@ import java.util.List;
  * Created by Ronald Haentjens Dekker on 27/01/17.
  * Original created by Elli Bleeker.
  */
-public class XMLTokenContentMatcher extends BaseMatcher<XMLToken> {
+public class TAGTokenContentMatcher extends BaseMatcher<TAGToken> {
     final String expectedContent;
 
-    private XMLTokenContentMatcher(String expectedContent) {
+    private TAGTokenContentMatcher(String expectedContent) {
         this.expectedContent = expectedContent;
     }
 
     @Override
     public boolean matches(Object o) {
-        if (!(o instanceof XMLToken)) {
+        if (!(o instanceof TAGToken)) {
             return false;
         }
-        XMLToken other = (XMLToken) o;
+        TAGToken other = (TAGToken) o;
         return this.expectedContent.equals(other.content);
     }
 
@@ -55,19 +55,19 @@ public class XMLTokenContentMatcher extends BaseMatcher<XMLToken> {
     @Override
     public void describeMismatch(Object item, Description description) {
         description.appendText("Expected is: "+this.expectedContent+" but actual item is class: "+item.getClass().getName());
-        if (item instanceof XMLToken) {
-            description.appendText(" and content is: "+((XMLToken)item).content);
+        if (item instanceof TAGToken) {
+            description.appendText(" and content is: "+((TAGToken)item).content);
         }
     }
 
-    static XMLTokenContentMatcher t(String expectedContent) {
-        return new XMLTokenContentMatcher(expectedContent);
+    static TAGTokenContentMatcher t(String expectedContent) {
+        return new TAGTokenContentMatcher(expectedContent);
     }
 
     static Matcher<Iterable> containsTokens(String... content) {
-        List<Matcher<XMLToken>> tokenMatchers = new ArrayList<>();
+        List<Matcher<TAGToken>> tokenMatchers = new ArrayList<>();
         for (String t : content) {
-            XMLTokenContentMatcher matcher = new XMLTokenContentMatcher(t);
+            TAGTokenContentMatcher matcher = new TAGTokenContentMatcher(t);
             tokenMatchers.add(matcher);
         }
         return new IsIterableContainingInOrder(tokenMatchers);

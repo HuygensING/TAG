@@ -8,6 +8,8 @@ scope: source.tagml
 
 contexts:
   main:
+    - include: escaped
+
     - match: "\\[!ns [^]]+]"
       scope: namespace.tagml
 
@@ -48,6 +50,13 @@ contexts:
     - match: "]"
       scope: markup.close.end.tagml
       pop: true
+
+    - match: "\\[>"
+      scope: annotation.richttext.tagml
+
+    - match: "<]"
+      scope: annotation.richttext.tagml
+
 
 
   markup.close:
@@ -90,17 +99,88 @@ contexts:
 
 
   annotation.tagml:
-    - match: "[a-zA-Z0-9]+"
-      scope: annotation.name.tagml
-
-    - match: "="
-      scope: annotation.equals.tagml
-      push: annotation.value
+    # - clear_scopes: 1
+    - match: "([a-zA-Z0-9]+)(=)([0-9]+\\.?[0-9]*)"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.number.tagml
       pop: true
 
-
-  annotation.value:
-    - match: "[^>]*"
-      scope: annotation.value.tagml
+    - match: "([a-zA-Z0-9]+)(=)\"([^\"]*)\""
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.string.tagml
       pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)'([^']*)'"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.string.tagml
+      pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)([Tt][Rr][Uu][Ee])"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.boolean.tagml
+      pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)([Ff][Aa][Ll][Ss][Ee])"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.boolean.tagml
+      pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)\[([^]]*)\])"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.list.tagml
+      pop: true
+
+  # annotation.value:
+  #   # - clear_scopes: 1
+  #   - match: '"'
+  #     embed: scope:string.quoted.tagml
+  #     embed_scope: string.quoted.tagml
+  #     escape: '"'
+  #     pop: true
+
+  #   - match: "'"
+  #     embed: scope:string.quoted.tagml
+  #     embed_scope: string.quoted.tagml
+  #     escape: "'"
+  #     pop: true
+
+  #   - match: "\\[>"
+  #     embed: scope:annotation.richtext.tagml
+  #     embed_scope: annotation.richtext.tagml
+  #     escape: "<]"
+  #     pop: true
+
+  #   - match: "\\["
+  #     embed: scope:list
+  #     embed_scope: annotation.list.tagml
+  #     escape: "]"
+  #     pop: true
+
+  #   - match: "{"
+  #     embed: scope:object
+  #     embed_scope: annotation.object.tagml
+  #     escape: "}"
+  #     pop: true
+
+  #   - match: "[^ >]*"
+  #     scope: annotation.value.tagml
+  #     pop: true
+
+
+  escaped:
+    - match: \\.
+      scope: constant.character.escape.tagml
+
 

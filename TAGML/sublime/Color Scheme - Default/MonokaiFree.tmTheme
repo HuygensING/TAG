@@ -504,10 +504,16 @@
           <key>foreground</key><string>#42f483</string>
       </dict></dict>
   
-    <dict><key>scope</key><string>annotation.equals</string>
+    <dict><key>scope</key><string>constant.equals.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
-          <key>foreground</key><string>#f442f4</string>
+          <key>foreground</key><string>#336600</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>annotation.pointer.equals</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#336600</string>
       </dict></dict>
 
     <dict><key>scope</key><string>layer.meta.tagml</string>
@@ -532,6 +538,24 @@
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
           <key>foreground</key><string>#cccc00</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>annotation.richtext.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#ffff66</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>constant.string.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#ffff66</string>
+      </dict></dict>
+
+    <dict><key>scope</key><string>constant.character.escape.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#ff3300</string>
       </dict></dict>
 
     </array>

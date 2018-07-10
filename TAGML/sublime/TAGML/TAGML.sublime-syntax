@@ -16,9 +16,9 @@ contexts:
     - match: "\\[!--.*--]"
       scope: comments.tagml
 
-    - match: "\\|>"
+    - match: "<\\|"
       scope: set.open.tagml
-      push: set
+      push: set.ctx
 
     - match: "\\["
       scope: markup.open.start.tagml
@@ -35,7 +35,7 @@ contexts:
 
     - match: "\\|"
       scope: name.layer.divider.tagml
-      push: layer
+      push: layer.ctx
 
     - match: "[\\+-,\\?:\"']+"
       scope: name.meta.tagml
@@ -51,21 +51,13 @@ contexts:
       scope: markup.close.end.tagml
       pop: true
 
-    - match: "\\[>"
-      scope: annotation.richttext.tagml
-
-    - match: "<]"
-      scope: annotation.richttext.tagml
-
-
-
   markup.close:
     - match: "[a-zA-Z0-9_]+"
       scope: name.tagml
 
     - match: "\\|"
       scope: name.layer.divider.tagml
-      push: layer
+      push: layer.ctx
 
     - match: "[\\|\\+-,\\?:\"']+"
       scope: name.meta.tagml
@@ -75,24 +67,24 @@ contexts:
       pop: true
 
 
-  set:
+  set.ctx:
     - match: "\\["
       scope: markup.open.start.tagml
       push: markup.open
 
-    - match: "\\|"
-      scope: set.divider.tagml
-
-    - match: "<\\|"
+    - match: "\\|>"
       scope: set.close.tagml
       pop: true
+
+    - match: "\\|"
+      scope: set.divider.tagml
 
     - match: "<"
       scope: markup.close.start.tagml
       push: markup.close
 
 
-  layer:
+  layer.ctx:
     - match: "[\\+,a-zA-Z0-9]+"
       scope: layer.name.tagml
       pop: true

@@ -477,19 +477,19 @@
     <dict><key>scope</key><string>set.open.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
-          <key>foreground</key><string>#6f99db</string>
+          <key>foreground</key><string>#ff66ff</string>
       </dict></dict>
 
     <dict><key>scope</key><string>set.divider.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
-          <key>foreground</key><string>#6f99db</string>
+          <key>foreground</key><string>#ff66ff</string>
       </dict></dict>
 
     <dict><key>scope</key><string>set.close.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
-          <key>foreground</key><string>#6f99db</string>
+          <key>foreground</key><string>#ff66ff</string>
       </dict></dict>
 
     <dict><key>scope</key><string>namespace.tagml</string>

@@ -26,6 +26,8 @@ Datatyping: draw inspiration from FtanML and that one unpopular XML schema langu
 [!-- source.tagml markup.close.tagml --]
 <markup]
 
+[tagml>pre <|[del>bla<del]|[add>bal<add]|> post<tagml]
+
 [m bla="x">bla bla vla<m][a>asdads <a]
 
 
@@ -57,7 +59,7 @@ thought Alice
 // Non-linearity: requires more research. XML solves this in the schema, TexMECS in the syntax
 // non-linearity: grouping tags
 // TexMECS: unordered contents
-|>[del>del<del]|[add>add<add]<|
+<|[del>del<del]|[add>add<add]|>
 
 // comments
 [!-- comments --]
@@ -169,7 +171,6 @@ annotation Datatyping
 
 
 
-
 [tag|+L,+B,+T,+C>
 [body|B>[timing|T>[chords|C>
 [div|B class='stanza' title=4>[p|B>[screenful|T+S68 starts=68>[main|S68>[em|C>Bright are the<em|C] [bm|C>stars that shine<bm|C]<main|S68]<p|B]
@@ -186,8 +187,6 @@ annotation Datatyping
         rhymes=true
         keywords=["unfinished","censored"]>There once was a vicar from Slough...<poem]
   [origin
-    location={
-      position={x=1 y=2}
-      countrycode='nl'
-    }>Amsterdam<origin]
+    location={position={x=1 y=2} countrycode='nl'}>Amsterdam<origin]
 <tag]
+

@@ -1,0 +1,12 @@
+/*Some css to adjust font*/
+div.footer {
+font-size:10pt;
+font-style: italic;
+color: #4aaeee;
+text-align: center
+}
+.reveal p {
+font-family: 'Raleway', sans-serif;
+color: #2d28cc;
+font-size:14pt;
+}

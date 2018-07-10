@@ -135,12 +135,27 @@ contexts:
         3: constant.boolean.tagml
       pop: true
 
-    - match: "([a-zA-Z0-9]+)(=)\[([^]]*)\])"
+    - match: "([a-zA-Z0-9]+)(=){(.*)}"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.object.tagml
+      pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)\\[>(.*)<\\]"
+      captures:
+        1: annotation.name.tagml
+        2: constant.equals.tagml
+        3: constant.richtext.tagml
+      pop: true
+
+    - match: "([a-zA-Z0-9]+)(=)\\[([^\\]]*)\\]"
       captures:
         1: annotation.name.tagml
         2: constant.equals.tagml
         3: constant.list.tagml
       pop: true
+
 
   # annotation.value:
   #   # - clear_scopes: 1

@@ -546,6 +546,12 @@
           <key>foreground</key><string>#ffff66</string>
       </dict></dict>
 
+    <dict><key>scope</key><string>annotation.brackets.tagml</string>
+      <key>settings</key><dict>
+          <key>background</key><string>#272822</string>
+          <key>foreground</key><string>#ccff33</string>
+      </dict></dict>
+
     <dict><key>scope</key><string>constant.string.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>

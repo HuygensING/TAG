@@ -162,7 +162,8 @@ annotation Datatyping
 
 
 
-
+[tag rt=[>rich text<]>bla bla bla<tag]
+[bla a=[>[x>rich<x]     text<]><bla]
 
 
 

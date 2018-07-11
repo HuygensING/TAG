@@ -1,0 +1,29 @@
+[!>Example of fragment with links to meta information<!]
+
+ [tagml meta={ persons=[{:id=shel001 name='Percy Bysshe Shelley'}]}>
+ [poem>
+ [title>Prometheus Unbound<title]
+ [author pers->shel001>Percy Shelley<author]
+    [head>2d. Voice from the Springs<head]
+        [lg>
+         [l>Thunderbolts had parched our water<l]
+         [l>We had been stained with bitter blood<l]
+         [l>And had ran mute 'mid shrieks of slaughter<l]
+         [l>Thro' a city & a solitude!<l]
+        <lg]
+  <poem]
+ <tagml]
+ 
+[!>Example of fragment with rich text annotation<!]
+
+ [tagml>
+ [poem meta={ persons=[{:id=shel001 name='Percy Bysshe Shelley'} {:id=shel002 name='Mary Wollstonecraft Shelley'}]}>
+    [head>2d. Voice from the Springs<head]
+        [lg>
+         [l>Thunderbolts had parched our water<l]
+         [l>[gloss info=[>Alternative page number added by [editor pers->shel002>MWS<editor] during transcription<]>78<gloss]We had been stained with bitter blood<l]
+         [l>And had ran mute 'mid shrieks of slaughter<l]
+         [l>Thro' a city & a solitude!<l]
+        <lg]
+  <poem]
+ <tagml]

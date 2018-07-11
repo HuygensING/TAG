@@ -1,0 +1,21 @@
+ [!>Document structure and verse structure combined<!]
+ [!>Example of layers as research perspective and solution to overlap<!]
+ [!>Verse layer identified with v<!]
+ [!>Document layer identified with d<!]
+ 
+[tagml>
+ [poem|+v>
+ [page|+d,+A>
+  [p|d,+B>
+    [head|v>[line|d,A,B>2d. Voice from the Springs<line|d,A,B]<head|v]
+        [lg|v>
+         [l|v>[line|d,A,B>Thunderbolts had parched our water<line|d,A,B]<l|v]
+         [l|v>[line|d,A,B>We had been stained with bitter blood<line|d,A,B]<l|v]
+         <page|d,A]
+         [page|d,A>
+         [l|v>[line|d,A,B>And had ran mute 'mid shrieks of slaughter<line|d,A,B]<l|v]
+         [l|v>[line|d,A,B>Thro' a city & a solitude!<line|m,A,B]<l|v]
+        <lg|v]
+    <page|d,A]
+  <poem|v]
+ <tagml]

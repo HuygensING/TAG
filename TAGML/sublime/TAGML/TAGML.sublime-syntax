@@ -158,44 +158,6 @@ contexts:
         5: annotation.brackets.tagml
       pop: true
 
-
-  # annotation.value:
-  #   # - clear_scopes: 1
-  #   - match: '"'
-  #     embed: scope:string.quoted.tagml
-  #     embed_scope: string.quoted.tagml
-  #     escape: '"'
-  #     pop: true
-
-  #   - match: "'"
-  #     embed: scope:string.quoted.tagml
-  #     embed_scope: string.quoted.tagml
-  #     escape: "'"
-  #     pop: true
-
-  #   - match: "\\[>"
-  #     embed: scope:annotation.richtext.tagml
-  #     embed_scope: annotation.richtext.tagml
-  #     escape: "<]"
-  #     pop: true
-
-  #   - match: "\\["
-  #     embed: scope:list
-  #     embed_scope: annotation.list.tagml
-  #     escape: "]"
-  #     pop: true
-
-  #   - match: "{"
-  #     embed: scope:object
-  #     embed_scope: annotation.object.tagml
-  #     escape: "}"
-  #     pop: true
-
-  #   - match: "[^ >]*"
-  #     scope: annotation.value.tagml
-  #     pop: true
-
-
   escaped:
     - match: \\.
       scope: constant.character.escape.tagml

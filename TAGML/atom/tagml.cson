@@ -1,0 +1,12 @@
+scopeName: 'text.tagml'
+name: 'TAGML'
+fileTypes: [ 'tagml', 'tag' ]
+limitLineLength: false
+
+patterns: [
+  {
+    comment: 'namespace'
+    name: 'namespace.tagml'
+    match: '\\[!ns [^]]+]'
+  }
+]

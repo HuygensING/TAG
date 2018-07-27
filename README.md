@@ -28,4 +28,4 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 * Alexandria command line app: <https://github.com/HuygensING/alexandria-markup-server#alexandria-command-line-app>
 * Installation guide using Docker: <https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md>
-* Server source code: <https://github.com/HuygensING/alexandria-markup>
+* Server source code: <https://github.com/HuygensING/alexandria-markup-server>

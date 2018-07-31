@@ -7,10 +7,11 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 ## Presentations and publications
 
 ### Upcoming
-* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. "Perspectives on Text. Synthesising Textual Knowledge". Presented at the international [Computational Methods for Literary-Historical Textual Scholarship](http://cts.dmu.ac.uk/events/CMLHTS/) conference at De Montfort University, July 4th 2018.
-* Dekker, Ronald Haentjens, Elli Bleeker, Bram Buitendijk, David Birnbaum and Astrid Kulsdom. "TAGML: A markup language of many dimensions". At Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 4, 2018. See [program](https://www.balisage.net/2018/Program.html).
+* Haentjens Dekker, Ronald, Elli Bleeker, Bram Buitendijk, David Birnbaum and Astrid Kulsdom. "TAGML: A markup language of many dimensions". At Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 4, 2018. See [program](https://www.balisage.net/2018/Program.html).
 
 ### Past
+
+* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. "Perspectives on Text. Synthesising Textual Knowledge". Presented at the international [Computational Methods for Literary-Historical Textual Scholarship](http://cts.dmu.ac.uk/events/CMLHTS/) conference at De Montfort University, July 4th 2018.
 
 * Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. “Including XML markup in the automated collation of literary text.” Presented at XML Prague 2018, Prague, February 8–10, 2018. In _XML Prague 2018. Conference proceedings._ Prague: University of Economics, 77–95.
 	* Paper: <http://archive.xmlprague.cz/2018/files/xmlprague-2018-proceedings.pdf#page=89>.

@@ -7,7 +7,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 ## Presentations and publications
 
 ### Upcoming
-* Haentjens Dekker, Ronald, Elli Bleeker, Bram Buitendijk, David Birnbaum and Astrid Kulsdom. "TAGML: A markup language of many dimensions". At Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 4, 2018. See [program](https://www.balisage.net/2018/Program.html).
+* Haentjens Dekker, Ronald, Elli Bleeker, Bram Buitendijk, David J. Birnbaum and Astrid Kulsdom. "TAGML: A markup language of many dimensions". At Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 4, 2018. See [program](https://www.balisage.net/2018/Program.html).
 
 ### Past
 

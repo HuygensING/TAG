@@ -21,13 +21,17 @@ package prioritised_xml_collation;
  */
 
 public class MarkupOpenToken extends TAGToken {
-    public MarkupOpenToken(String tag) {
+    private Long markupId;
+
+    public MarkupOpenToken(String tag, Long markupId) {
         super(tag);
+
+        this.markupId = markupId;
     }
 
     @Override
     public String toString() {
-        return "[" + content + "}";
+        return "[" + content + ">";
     }
 
 }

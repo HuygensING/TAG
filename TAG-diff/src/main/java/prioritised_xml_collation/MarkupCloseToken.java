@@ -22,12 +22,15 @@ package prioritised_xml_collation;
 // TODO: shouldn't the content of the end tag be different compared to the open tag? like "/tag"?
 // TODO: at the moment this is done in the default tokenizer!
 public class MarkupCloseToken extends TAGToken {
-    public MarkupCloseToken(String tag) {
-        super(tag);
-    }
+  private Long markupId;
 
-    @Override
-    public String toString() {
-        return "{" + content + "]";
-    }
+  public MarkupCloseToken(String tag, Long markupId) {
+    super(tag);
+    this.markupId = markupId;
+  }
+
+  @Override
+  public String toString() {
+    return "<" + content + "]";
+  }
 }

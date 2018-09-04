@@ -32,7 +32,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,39 +44,47 @@ import java.util.regex.Pattern;
  * Ported from code written by Elli Bleeker
  */
 class Tokenizer {
-    List<TAGToken> convertXMLFileIntoTokens(File input) throws FileNotFoundException, XMLStreamException {
-        FileReader fileReader = new FileReader(input);
-        return tokenizeXMLDocument(fileReader);
-    }
+  List<TAGToken> convertXMLFileIntoTokens(File input) throws FileNotFoundException, XMLStreamException {
+    FileReader fileReader = new FileReader(input);
+    return tokenizeXMLDocument(fileReader);
+  }
 
-    private List<TAGToken> tokenizeXMLDocument(Reader reader) throws XMLStreamException {
-        List<TAGToken> tokens = new ArrayList<>();
-        XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-        XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(reader);
-        while (xmlEventReader.hasNext()) {
-            XMLEvent event = xmlEventReader.nextEvent();
-            if (event.isStartElement()) {
-                StartElement startElement = event.asStartElement();
-                tokens.add(new MarkupOpenToken(startElement.getName().getLocalPart()));
-            } else if (event.isCharacters()) {
-                Characters characters = event.asCharacters();
-                tokens.addAll(tokenizeText(characters.getData()));
-            } else if (event.isEndElement()) {
-                EndElement endElement = event.asEndElement();
-                tokens.add(new MarkupCloseToken("/" + endElement.getName().getLocalPart()));
-            }
-        }
-        return tokens;
+  private List<TAGToken> tokenizeXMLDocument(Reader reader) throws XMLStreamException {
+    AtomicLong markupCounter = new AtomicLong();
+    Map<String, Long> markupIdMap = new HashMap<>();
+    List<TAGToken> tokens = new ArrayList<>();
+    XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+    XMLEventReader xmlEventReader = xmlInputFactory.createXMLEventReader(reader);
+    while (xmlEventReader.hasNext()) {
+      XMLEvent event = xmlEventReader.nextEvent();
+      long markupId;
+      if (event.isStartElement()) {
+        StartElement startElement = event.asStartElement();
+        markupId = markupCounter.getAndIncrement();
+        String markupName = startElement.getName().getLocalPart();
+        tokens.add(new MarkupOpenToken(markupName, markupId));
+        markupIdMap.put(markupName, markupId);
+      } else if (event.isCharacters()) {
+        Characters characters = event.asCharacters();
+        tokens.addAll(tokenizeText(characters.getData()));
+      } else if (event.isEndElement()) {
+        EndElement endElement = event.asEndElement();
+        String markupName = endElement.getName().getLocalPart();
+        markupId = markupIdMap.remove(markupName);
+        tokens.add(new MarkupCloseToken("/" + markupName, markupId));
+      }
     }
+    return tokens;
+  }
 
-    private List<TextToken> tokenizeText(String data) {
-        //NOTE: this pattern can be constructed outside of this method!
-        Pattern pattern = Pattern.compile("\\w+|[^\\w\\s]+");
-        Matcher matcher = pattern.matcher(data);
-        List<TextToken> textTokens = new ArrayList<>();
-        while (matcher.find()) {
-            textTokens.add(new TextToken(matcher.group()));
-        }
-        return textTokens;
+  private List<TextToken> tokenizeText(String data) {
+    //NOTE: this pattern can be constructed outside of this method!
+    Pattern pattern = Pattern.compile("\\w+|[^\\w\\s]+");
+    Matcher matcher = pattern.matcher(data);
+    List<TextToken> textTokens = new ArrayList<>();
+    while (matcher.find()) {
+      textTokens.add(new TextToken(matcher.group()));
     }
+    return textTokens;
+  }
 }

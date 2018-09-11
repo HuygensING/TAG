@@ -1,5 +1,7 @@
 package prioritised_xml_collation;
 
+import java.util.regex.Pattern;
+
 import static java.lang.String.format;
 
 /*-
@@ -32,8 +34,10 @@ public class TAGToken {
 
   //TODO: this can be done more efficiently!
   Token.Type getType() {
-    boolean punctuationType = (content.matches("\\W+"));
-    boolean contentType = (normalizedContent.matches("\\w+") && this instanceof TextToken);
+    Pattern punctuationPattern = Pattern.compile("\\W+", Pattern.UNICODE_CHARACTER_CLASS);
+    Pattern contentPattern = Pattern.compile("\\w+", Pattern.UNICODE_CHARACTER_CLASS);
+    boolean punctuationType = punctuationPattern.matcher(content).matches();
+    boolean contentType = (contentPattern.matcher(normalizedContent).matches() && this instanceof TextToken);
     boolean markupType = (this instanceof MarkupOpenToken || this instanceof MarkupCloseToken);
     if (punctuationType) {
       return Token.Type.punctuation;

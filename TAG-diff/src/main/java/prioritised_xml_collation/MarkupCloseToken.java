@@ -28,6 +28,6 @@ public class MarkupCloseToken extends TAGToken {
 
     @Override
     public String toString() {
-        return "{" + content + "]";
+        return "<" + content + "]";
     }
 }

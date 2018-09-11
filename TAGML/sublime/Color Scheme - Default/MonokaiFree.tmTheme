@@ -498,7 +498,7 @@
           <key>foreground</key><string>#b6eac9</string>
       </dict></dict>
 
-    <dict><key>scope</key><string>comments.tagml</string>
+    <dict><key>scope</key><string>comment.tagml</string>
       <key>settings</key><dict>
           <key>background</key><string>#272822</string>
           <key>foreground</key><string>#42f483</string>

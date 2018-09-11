@@ -14,7 +14,7 @@ contexts:
       scope: namespace.tagml
 
     - match: "\\[!--.*--]"
-      scope: comments.tagml
+      scope: comment.tagml
 
     - match: "<\\|"
       scope: set.open.tagml

@@ -1,0 +1,46 @@
+[!>Documentary structure without overlap<!]
+ [tagml>
+ [page>  
+    [p>
+      [line>2d. Voice from the Springs<line]
+      [line>Thunderbolts had parched our water<line]
+      [line>We had been stained with bitter blood<line]
+      <p]
+    <page]
+    [page>
+    [p>]
+      [line>And had ran mute 'mid shrieks of slaugter<line]
+      [line>Thro' a city and a multitude!<line]
+    <p]
+<page]
+<tagml]
+
+[!>Documentary structure more intuitively transcribed yet with overlap between page and paragraph<!]
+[tagml>
+ [page>  
+    [p>
+      [line>2d. Voice from the Springs<line]
+      [line>Thunderbolts had parched our water<line]
+      [line>We had been stained with bitter blood<line]
+    <page]
+    [page>
+      [line>And had ran mute 'mid shrieks of slaugter<line]
+      [line>Thro' a city and a multitude!<line]
+    <p]
+<page]
+<tagml]
+
+[!>Documentary structure with layers to solve page-paragraph overlap<!]
+[tagml>
+[page|+A>  
+    [p|+B>
+      [line>2d. Voice from the Springs<line]
+      [line>Thunderbolts had parched our water<line]
+      [line>We had been stained with bitter blood<line]
+    <page|A]
+    [page|A>
+      [line>And had ran mute 'mid shrieks of slaughter<line]
+      [line>Thro' a city and a multitude!<line]
+    <p|B]
+<page|A]
+<tagml]

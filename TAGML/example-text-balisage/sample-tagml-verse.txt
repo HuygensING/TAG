@@ -1,0 +1,26 @@
+[!>Verse structure<!]
+
+ [tagml>
+ [poem>
+    [head>2d. Voice from the Springs<head]
+        [lg>
+         [l>Thunderbolts had parched our water<l]
+         [l>We had been stained with bitter blood<l]
+         [l>And had ran mute 'mid shrieks of slaughter<l]
+         [l>Thro' a city & a solitude!<l]
+        <lg]
+  <poem]
+ <tagml]
+ 
+ [!>Drama structure<!]
+ 
+ [tagml>
+ 	[sp>
+ 	[speaker>2d. Voice from the Springs<speaker]
+ 	[l>Thunderbolts had parched our water<l]
+    [l>We had been stained with bitter blood<l]
+    [l>And had ran mute 'mid shrieks of slaughter<l]
+    [l>Thro' a city & a solitude!<l]
+ 	<sp]
+ 	<tagml]
+ 

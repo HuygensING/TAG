@@ -16,10 +16,10 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   For every open tag `[markup>` there should be a corresponding close tag `<markup]`  
   markup has a *name*, an optional *suffix*, and (for the open tag) one or more *annotations*.
   ```
-  [markup~1 annotation_1='string value' annotation_2=2.718>text<markup~1]
+  [markup|L1 annotation_1='string value' annotation_2=2.718>text<markup]
   ```
   `markup` is the name,  
-  `~1` is the suffix,  
+  `|1` is the layer suffix,  
   `annotation_1` and `annotation_2` are the names of the annotations
 
 ### Overlapping markup  
@@ -31,10 +31,9 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
 
 ### Self-overlapping markup
   ```
-  [s>[a~1>Cookie Monster [a~2>likes<a~1] cookies.<a~2]<s]
+  [s|+L1,+L2>[a|L11>Cookie Monster [a|L2>likes<a|L1] cookies.<a|L2]<s]
   ```
-  Markup of the same name can overlap by adding suffixes to the markup name (for both the opening and the closing tags).  
-  The combination name + suffix should be unique within the TAGML document.
+  Markup of the same name can overlap by adding layer suffixes to the markup name (for both the opening and the closing tags).  
 
 ### Markup annotations
   ```
@@ -262,29 +261,32 @@ Strictly speaking, not every special character needs to be escaped in all parts 
 0. `namespaceIdentifier ::= nameCharacter+`
 
 0. `richText ::= ( textEnrichment | text )*`
-0. `textEnrichtment ::= ( markupOpenTag | markupCloseTag | markupMilestone | textVariation | comment )*`
+0. `textEnrichment ::= ( markupStartTag | markupEndTag | markupMilestone | textVariation | comment )*`
 0. `text ::= textCharacter*`
-0. `textCharacter ::= [^[<] | '\[' | '\<' '\\'` # For regular text, we only need to escape the 2 characters that start a markupOpenTag, markupCloseTag or markupMilestone, plus the escape character itself.
+0. `textCharacter ::= [^[<\] | '\[' | '\<' | '\\'` # For regular text, we only need to escape the 2 characters that start a markupStartTag, markupEndTag or markupMilestone, plus the escape character itself.
 
-0. `markupOpenTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
-0. `markupCloseTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
+0. `markupStartTag ::= '[' ( optional | resume )? tagIdentifier (' ' annotation)* '>'`
+0. `markupEndTag ::= '<' ( optional | suspend )? tagIdentifier ']'`
 0. `markupMilestone ::= '['  tagIdentifier (' ' annotation)* ']'`
 
 0. `textVariation ::= '<|' richTextInTextVariation ( '|' richTextInTextVariation )+ '|>'`
 0. `richTextInTextVariation ::= ( textEnrichment | textInTextVariation )*`
 0. `textInTextVariation ::= textInTextVariationCharacter*`
-0. `textInTextVariationCharacter ::= [^[<|] | '\[' | '\<' | '\|' '\\'` # For text inside textVariation tags we also have to escape the variation divider character `|`
+0. `textInTextVariationCharacter ::= [^[<|\] | '\[' | '\<' | '\|' | '\\'` # For text inside textVariation tags we also have to escape the variation divider character `|`
 
 0. `comment ::= '[!' commentCharacter* '!]'`
-0. `commentCharacter ::= [^!]] | '\]' | '\!' '\\'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`, plus the escape character itself.
+0. `commentCharacter ::= [^!\] | '\!' | '\\'` # For text inside a comment we only have to escape te 2 characters that constitute the comment closing tag `!]`, plus the escape character itself.
 
 0. `optional ::= '?'`
 0. `resume ::= '+'`
 0. `suspend ::= '-'`
-0. `tagIdentifier ::= qualifiedMarkupName markupSuffix?`
+0. `tagIdentifier ::= qualifiedMarkupName layerSuffix?`
 0. `qualifiedMarkupName ::= ( namespaceIdentifier ':' )? localMarkupName`
-0. `markupSuffix ::= '~' nameCharacter+'`
 0. `localMarkupName ::= nameCharacter+`
+0. `layerSuffix ::= '|' layerInfo ( ',' layerInfo )*`
+0. `layerInfo ::= ( parentLayerId? '+' )? layerId`
+0. `parentLayerId ::= layerId`
+0. `layerId ::= nameCharacter+`
 
 0. `annotation ::= annotationName '=' annotationValue`
 0. `annotationName ::= nameCharacter+`

@@ -8,6 +8,6 @@
 - Download [an example tagml file](https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/alexandria-calabash/src/test/resources/example.tagml)
 - run calabash with the example pipeline:
   - windows:  
-   `calabash.bat test-pipeline.xml`
+   `calabash.bat test-pipeline.xpl`
   - other os:  
-    `calabash test-pipeline.xml`
+    `calabash test-pipeline.xpl`

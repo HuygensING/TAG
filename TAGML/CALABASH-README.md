@@ -1,6 +1,6 @@
 ## Using the Alexandria Step in Calabash
 
-- Install [Calabash](http://xmlcalabash.com/download/)
+- Install [Calabash](http://xmlcalabash.com/download/). Use the zip file and extract.
 - Download the latest alexandria-calabash jar from (https://cdn.huygens.knaw.nl/alexandria/) into the xmlcalabash `lib/` directory.
 - in `calabash` and/or `calabash.bat`, add the `lib/` directory to the classpath
 - Download [an example pipeline](https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/alexandria-calabash/src/test/resources/test-pipeline.xpl)

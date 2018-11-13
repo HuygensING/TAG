@@ -2,8 +2,8 @@
 
 ### New features:
 
-- [AlexandriaStep for use in Calabash](https://github.com/HuygensING/TAG/blob/master/TAGML/CALABASH-README.md)
-- [TAGML Syntax highlighting in Sublime Text 3](https://github.com/HuygensING/tagml-sublime-syntax/blob/master/README.md)
+- [AlexandriaStep for use in Calabash](https://huygensing.github.io/TAG/TAGML/CALABASH-README)
+- [TAGML Syntax highlighting in Sublime Text 3](https://huygensing.github.io/tagml-sublime-syntax/)
 
 #### [New commands for the command-line app](https://huygensing.github.io/alexandria-markup-server/)
 - export-dot

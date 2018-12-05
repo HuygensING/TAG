@@ -1,17 +1,18 @@
-# 2.1 (November 2018)
+# 2.1 (December 2018)
 
 ### New features:
 
 - [AlexandriaStep for use in Calabash](https://huygensing.github.io/TAG/TAGML/CALABASH-README)
 - [TAGML Syntax highlighting in Sublime Text 3](https://huygensing.github.io/tagml-sublime-syntax/)
 
-#### [New commands for the command-line app](https://huygensing.github.io/alexandria-markup-server/)
+#### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria-markup-server/commands)
+- about
+- add
+- commit
 - export-dot
 - export-svg
 - export-png
 - export-xml 
-- export-tagml
-- import-tagml 
 
 ### Bugfixes:
 

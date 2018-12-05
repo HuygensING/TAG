@@ -1,16 +1,35 @@
 # Text as Graph (TAG)
 
-## Synopsis
+## What is it?
 
 The Text As Graph (TAG) data model is a directed property hypergraph for modeling text, markup (roughly comparable to XML elements), and annotations (roughly comparable to what XML attributes would be like if they could contain markup, including attributes on attributes).
 
-## Presentations and publications
+## News
 
-### Upcoming
+### New release: Alexandria 2.1
+[text]
 
-* Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Editions, Graph Data-Models and Semantic Web Technologies, Université de Lausanne, 3 June 2019.
+### Upcoming presentation
 
-### Past
+Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Editions, Graph Data-Models and Semantic Web Technologies, Université de Lausanne, 3 June 2019.
+
+## Implementations
+
+### Alexandria
+[**Alexandria**](https://huygensing.github.io/alexandria-markup-server/) is a prototype implementation of TAG. 
+
+* [Alexandria command line app](https://github.com/HuygensING/alexandria-markup-server#alexandria-command-line-app)
+* [Server source code](https://github.com/HuygensING/alexandria-markup-server)
+
+### TAGML
+[**TAGML**](https://github.com/HuygensING/TAG/tree/master/TAGML) (Text-As-Graph Markup Language) is a syntax for the TAG model.
+
+### HyperCollate
+**HyperCollate** is a prototype collation engine that is able to handle intradocumentary variation (i.e. variation within one document), in addition to finding the differences between witnesses. This advanced form of collation is possible because HyperCollate looks not only at the text of a document, but also at its markup.
+
+* [HyperCollate documentation and source code](https://github.com/HuygensING/hyper-collate)
+
+## Presentations and Publications
 
 * Bleeker, Elli. 2018. “Adressing Ancient Promises: Text Modeling and _Alexandria_”. Invited talk at the DH-Kolloquium of the Berlin Brandenburgische Akademie der Wissenschaften, 2 November 2018. Slides [here](https://edoc.bbaw.de/frontdoor/index/index/searchtype/latest/docId/2932/).
  
@@ -30,12 +49,3 @@ doi: `https://doi.org/10.4242 BalisageVol21.HaentjensDekker01.`
 	* Paper: <https://www.balisage.net/Proceedings/vol19/html/Dekker01/BalisageVol19-Dekker01.html>
 	* Visualization: [“Hunting of the Snark”](snark-fly.mp4) (mp4, 20G)
 
-
-## Implementation
-
-**Alexandria Markup**  is a prototype implementation of TAG. 
-
-**TODO**: Update links to installation instructions Alexandria v.2.1
-
-* Alexandria command line app: <https://github.com/HuygensING/alexandria-markup-server#alexandria-command-line-app>
-* Server source code: <https://github.com/HuygensING/alexandria-markup-server>

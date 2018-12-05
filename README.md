@@ -7,9 +7,17 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 ## Presentations and publications
 
 ### Upcoming
-* Haentjens Dekker, Ronald, Elli Bleeker, Bram Buitendijk, David J. Birnbaum and Astrid Kulsdom. "TAGML: A markup language of many dimensions". At Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 4, 2018. See [program](https://www.balisage.net/2018/Program.html).
+
+* Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Editions, Graph Data-Models and Semantic Web Technologies, Université de Lausanne, 3 June 2019.
 
 ### Past
+
+* Bleeker, Elli. 2018. “Adressing Ancient Promises: Text Modeling and _Alexandria_”. Invited talk at the DH-Kolloquium of the Berlin Brandenburgische Akademie der Wissenschaften, 2 November 2018. Slides [here](https://edoc.bbaw.de/frontdoor/index/index/searchtype/latest/docId/2932/).
+ 
+* Haentjens Dekker, Ronald, Elli Bleeker, Bram Buitendijk, Astrid Kulsdom and David J. Birnbaum. 2018. “TAGML: A markup language of many dimensions.” Presented at Balisage: The Markup Conference 2018, Washington, DC, July 31 - August 3, 2018. In _Proceedings of Balisage: The Markup Conference 2018. Balisage Series on Markup Technologies_, vol. 21 (2018).   
+doi: `https://doi.org/10.4242 BalisageVol21.HaentjensDekker01.`
+	* Paper: <http://www.balisage.net/Proceedings/vol21/html/HaentjensDekker01/BalisageVol21-HaentjensDekker01.html>
+	* Slides: <https://docs.google.com/presentation/d/1TpOtNJR_3FSKfMSzUvI4wuJBBbZcchVGFjG2qP4csck/edit?usp=sharing>
 
 * Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2018. "Perspectives on Text. Synthesising Textual Knowledge". Presented at the international [Computational Methods for Literary-Historical Textual Scholarship](http://cts.dmu.ac.uk/events/CMLHTS/) conference at De Montfort University, July 4th 2018.
 
@@ -27,6 +35,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 **Alexandria Markup**  is a prototype implementation of TAG. 
 
+**TODO**: Update links to installation instructions Alexandria v.2.1
+
 * Alexandria command line app: <https://github.com/HuygensING/alexandria-markup-server#alexandria-command-line-app>
-* Installation guide using Docker: <https://github.com/Pittsburgh-NEH-Institute/Institute-Materials-2017/blob/master/schedule/week_3/alexandria.md>
 * Server source code: <https://github.com/HuygensING/alexandria-markup-server>

@@ -302,14 +302,14 @@ Strictly speaking, not every special character needs to be escaped in all parts 
 0. `objectValue ::= '{' annotation+ '}'`
 
 0. `digits ::= [0-9]+`
-0. `nameCharacter ::= [a-zA-Z] | digits | '_' `
+0. `nameCharacter ::= [a-zA-Z] | digits | '_' | '-'`
     
 
 ANLTR4 grammars:
 
-TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
+TAGMLLexer:  (https://raw.githubusercontent.com/HuygensING/alexandria-markup/master/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLLexer.g4)
 
-TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/develop/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
+TAGMLParser: (https://raw.githubusercontent.com/HuygensING/alexandria-markup/master/tagml/src/main/antlr4/nl/knaw/huc/di/tag/tagml/grammar/TAGMLParser.g4)
    
 ## TAGML Schema
 

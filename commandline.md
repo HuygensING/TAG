@@ -15,10 +15,10 @@ Views analoog aan git branches
    Vervangen door:
 
     * `add` {_file_|_filemask_...}  
-      meld de bestanden aan bijn de lokale repository. 
+      meld de bestanden aan bij de lokale repository. 
   
     * `commit` {_file_|_filemask_...} -a  
-      voor `*.tag/*.tagml`: parsed de file, geeft foutmelding bij parse errors  
+      voor `*.tag/*.tagml`: parse de file, geef foutmelding bij parse errors  
       voor `*.json`: parse als een view, basename-.json is de view name (Dus a.json wordt view a)  
       voor alle ge-add-e files: onthoud modification date.  
 
@@ -60,7 +60,7 @@ Views analoog aan git branches
   Hiermee wordt _tagml_file_ overschreven met de laatste versie uit de lokale repository: de hele tagml als de _main_ view actief is, en anders het gedeelte bepaald door de view.
 
 
-- `info`
+- `status`
 
   Toont:
   - in welke view we zitten.

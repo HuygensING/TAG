@@ -6,8 +6,27 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 ## News
 
-### New release: Alexandria 2.1
-[text]
+### New release: Alexandria 2.1(December 2018)
+                               
+##### New features:
+
+- [AlexandriaStep for use in Calabash](https://huygensing.github.io/TAG/TAGML/CALABASH-README)
+- [TAGML Syntax highlighting in Sublime Text 3](https://huygensing.github.io/tagml-sublime-syntax/)
+
+###### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria/commands)
+- about
+- add
+- commit
+- export-dot
+- export-svg
+- export-png
+- export-xml 
+
+##### Bugfixes:
+
+- The first markup is now always the root markup for the default layer, even if new layers are defined on that markup.
+- This means that this first markup tag must correspond with the last closing markup tag, and suspending/resuming of this markup is not allowed.
+
 
 ### Upcoming presentation
 
@@ -16,10 +35,10 @@ Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Edit
 ## Implementations
 
 ### Alexandria
-[**Alexandria**](https://huygensing.github.io/alexandria-markup-server/) is a prototype implementation of TAG. 
+[**Alexandria**](https://huygensing.github.io/alexandria/) is a prototype implementation of TAG. 
 
-* [Alexandria command line app](https://github.com/HuygensING/alexandria-markup-server#alexandria-command-line-app)
-* [Server source code](https://github.com/HuygensING/alexandria-markup-server)
+* [Alexandria command line app](https://github.com/HuygensING/alexandria#alexandria-command-line-app)
+* [Alexandria command line app source code](https://github.com/HuygensING/alexandria)
 
 ### TAGML
 [**TAGML**](https://github.com/HuygensING/TAG/tree/master/TAGML) (Text-As-Graph Markup Language) is a syntax for the TAG model.
@@ -27,7 +46,7 @@ Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Edit
 ### HyperCollate
 **HyperCollate** is a prototype collation engine that is able to handle intradocumentary variation (i.e. variation within one document), in addition to finding the differences between witnesses. This advanced form of collation is possible because HyperCollate looks not only at the text of a document, but also at its markup.
 
-* [HyperCollate documentation and source code](https://github.com/HuygensING/hyper-collate)
+* [HyperCollate documentation and source code](https://huygensing.github.io/hyper-collate/)
 
 ## Presentations and Publications
 

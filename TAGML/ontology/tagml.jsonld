@@ -238,6 +238,10 @@
     "range" : [ "tag:Document", "rdfs:Container", "rdfs:Literal" ]
   } ],
   "@context" : {
+    "subClassOf" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "@type" : "@id"
+    },
     "range" : {
       "@id" : "http://www.w3.org/2000/01/rdf-schema#range",
       "@type" : "@id"
@@ -249,14 +253,10 @@
     "label" : {
       "@id" : "http://www.w3.org/2000/01/rdf-schema#label"
     },
-    "subClassOf" : {
-      "@id" : "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-      "@type" : "@id"
-    },
     "owl" : "http://www.w3.org/2002/07/owl#",
     "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "xsd" : "http://www.w3.org/2001/XMLSchema#",
     "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
-    "tag" : "https://brambg.github.io/tag-rdf/tagml.ttl#"
+    "tag" : "https://huygensing.github.io/TAG/TAGML/ontology/tagml.ttl#"
   }
 }

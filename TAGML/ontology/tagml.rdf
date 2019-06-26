@@ -1,0 +1,146 @@
+<rdf:RDF
+    xmlns:tag="https://brambg.github.io/tag-rdf/tagml.ttl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#MapAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">MapAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#TextNode">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label xml:lang="en">TextNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#ReferenceAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">ReferenceAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#ListAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">ListAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#Document">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label xml:lang="en">Document</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode">
+    <rdfs:label xml:lang="en">MarkupNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#BranchesNode">
+    <rdfs:label xml:lang="en">BranchesNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#NumberAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">NumberAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+    <rdfs:label xml:lang="en">ElementList</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#nil">
+    <rdfs:subClassOf rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#LayerNode">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label xml:lang="en">LayerNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#BranchNode">
+    <rdfs:label xml:lang="en">BranchNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#StringAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">StringAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#BranchList">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+    <rdfs:label xml:lang="en">BranchList</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#BooleanAnnotationNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">BooleanAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    <rdfs:label xml:lang="en">AnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#RichTextAnnotationNode">
+    <rdfs:subClassOf rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    <rdfs:label xml:lang="en">RichTextAnnotationNode</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#annotation_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    <rdfs:label xml:lang="en">annotation_name</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#annotation">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:label xml:lang="en">annotation</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#first">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#TextNode"/>
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList"/>
+    <rdfs:label xml:lang="en">first</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#markup_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:label xml:lang="en">markup_name</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#rest">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList"/>
+    <rdfs:label xml:lang="en">rest</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#layer">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#LayerNode"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:label xml:lang="en">layer</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#content">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#TextNode"/>
+    <rdfs:label xml:lang="en">content</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#layer_name">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#LayerNode"/>
+    <rdfs:label xml:lang="en">layer_name</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#value">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#Document"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#AnnotationNode"/>
+    <rdfs:label xml:lang="en">value</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#root">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#Document"/>
+    <rdfs:label xml:lang="en">root</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#elements">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#ElementList"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#MarkupNode"/>
+    <rdfs:label xml:lang="en">elements</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="https://brambg.github.io/tag-rdf/tagml.ttl#branches">
+    <rdfs:range rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#BranchList"/>
+    <rdfs:domain rdf:resource="https://brambg.github.io/tag-rdf/tagml.ttl#BranchesNode"/>
+    <rdfs:label xml:lang="en">branches</rdfs:label>
+  </rdf:Property>
+</rdf:RDF>

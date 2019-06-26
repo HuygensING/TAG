@@ -1,0 +1,262 @@
+{
+  "@graph" : [ {
+    "@id" : "tag:AnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "AnnotationNode"
+    },
+    "subClassOf" : "rdfs:Resource"
+  }, {
+    "@id" : "tag:BooleanAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "BooleanAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:BranchList",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "BranchList"
+    },
+    "subClassOf" : "rdf:List"
+  }, {
+    "@id" : "tag:BranchNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "BranchNode"
+    }
+  }, {
+    "@id" : "tag:BranchesNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "BranchesNode"
+    }
+  }, {
+    "@id" : "tag:Document",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "Document"
+    },
+    "subClassOf" : "rdfs:Resource"
+  }, {
+    "@id" : "tag:ElementList",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "ElementList"
+    },
+    "subClassOf" : "rdf:List"
+  }, {
+    "@id" : "tag:LayerNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "LayerNode"
+    },
+    "subClassOf" : "rdfs:Resource"
+  }, {
+    "@id" : "tag:ListAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "ListAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:MapAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "MapAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:MarkupNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "MarkupNode"
+    }
+  }, {
+    "@id" : "tag:NumberAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "NumberAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:ReferenceAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "ReferenceAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:RichTextAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "RichTextAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:StringAnnotationNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "StringAnnotationNode"
+    },
+    "subClassOf" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:TextNode",
+    "@type" : "rdfs:Class",
+    "label" : {
+      "@language" : "en",
+      "@value" : "TextNode"
+    },
+    "subClassOf" : "rdfs:Resource"
+  }, {
+    "@id" : "tag:annotation",
+    "@type" : "rdf:Property",
+    "domain" : "tag:MarkupNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "annotation"
+    },
+    "range" : "tag:AnnotationNode"
+  }, {
+    "@id" : "tag:annotation_name",
+    "@type" : "rdf:Property",
+    "domain" : "tag:AnnotationNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "annotation_name"
+    },
+    "range" : "rdfs:Literal"
+  }, {
+    "@id" : "tag:branches",
+    "@type" : "rdf:Property",
+    "domain" : "tag:BranchesNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "branches"
+    },
+    "range" : "tag:BranchList"
+  }, {
+    "@id" : "tag:content",
+    "@type" : "rdf:Property",
+    "domain" : "tag:TextNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "content"
+    },
+    "range" : "rdfs:Literal"
+  }, {
+    "@id" : "tag:elements",
+    "@type" : "rdf:Property",
+    "domain" : "tag:MarkupNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "elements"
+    },
+    "range" : "tag:ElementList"
+  }, {
+    "@id" : "tag:first",
+    "@type" : "rdf:Property",
+    "domain" : "tag:ElementList",
+    "label" : {
+      "@language" : "en",
+      "@value" : "first"
+    },
+    "range" : [ "tag:TextNode", "tag:MarkupNode" ]
+  }, {
+    "@id" : "tag:layer",
+    "@type" : "rdf:Property",
+    "domain" : "tag:MarkupNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "layer"
+    },
+    "range" : "tag:LayerNode"
+  }, {
+    "@id" : "tag:layer_name",
+    "@type" : "rdf:Property",
+    "domain" : "tag:LayerNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "layer_name"
+    },
+    "range" : "rdfs:Literal"
+  }, {
+    "@id" : "tag:markup_name",
+    "@type" : "rdf:Property",
+    "domain" : "tag:MarkupNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "markup_name"
+    },
+    "range" : "rdfs:Literal"
+  }, {
+    "@id" : "tag:nil",
+    "@type" : "rdfs:Class",
+    "subClassOf" : "tag:ElementList"
+  }, {
+    "@id" : "tag:rest",
+    "@type" : "rdf:Property",
+    "domain" : "tag:ElementList",
+    "label" : {
+      "@language" : "en",
+      "@value" : "rest"
+    },
+    "range" : "tag:ElementList"
+  }, {
+    "@id" : "tag:root",
+    "@type" : "rdf:Property",
+    "domain" : "tag:Document",
+    "label" : {
+      "@language" : "en",
+      "@value" : "root"
+    },
+    "range" : "tag:MarkupNode"
+  }, {
+    "@id" : "tag:value",
+    "@type" : "rdf:Property",
+    "domain" : "tag:AnnotationNode",
+    "label" : {
+      "@language" : "en",
+      "@value" : "value"
+    },
+    "range" : [ "tag:Document", "rdfs:Container", "rdfs:Literal" ]
+  } ],
+  "@context" : {
+    "range" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#range",
+      "@type" : "@id"
+    },
+    "domain" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#domain",
+      "@type" : "@id"
+    },
+    "label" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#label"
+    },
+    "subClassOf" : {
+      "@id" : "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+      "@type" : "@id"
+    },
+    "owl" : "http://www.w3.org/2002/07/owl#",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "tag" : "https://brambg.github.io/tag-rdf/tagml.ttl#"
+  }
+}

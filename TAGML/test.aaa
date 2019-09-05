@@ -1,0 +1,30 @@
+[! single line comment !]
+
+Dit is een tekst
+
+[! multiline 
+comment !]
+
+!atom = kleur
+!attribute = kleur
+!bracket = kleur
+!builtin = kleur
+!def = kleur
+!error = kleur
+!hr = kleur
+!keyword = kleur
+!link = kleur
+!meta = kleur
+!number = kleur
+!operator = kleur
+!property = kleur
+!punctuation = kleur
+!qualifier = kleur
+!string = kleur
+!string-2 = kleur
+!tag = kleur
+!variable = kleur
+!variable-2 = kleur
+!variable-3 = kleur
+
+Tot zover!

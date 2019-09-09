@@ -11,7 +11,7 @@
 })(function(CodeMirror) {
 "use strict";
 
-var taglConfig = {
+var tagmlConfig = {
   autoSelfClosers: {},
   implicitlyClosed: {},
   contextGrabbers: {},
@@ -39,40 +39,36 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     }
 
     var ch = stream.next();
-    if (ch == "<") {
+    if (ch == "[") {
       if (stream.eat("!")) {
-        if (stream.eat("[")) {
-          if (stream.match("CDATA[")) return chain(inBlock("atom", "]]>"));
-          else return null;
-        } else if (stream.match("--")) {
-          return chain(inBlock("comment", "-->"));
-        } else if (stream.match("DOCTYPE", true, true)) {
-          stream.eatWhile(/[\w\._\-]/);
-          return chain(doctype(1));
-        } else {
-          return null;
-        }
-      } else if (stream.eat("?")) {
-        stream.eatWhile(/[\w\._\-]/);
-        state.tokenize = inBlock("meta", "?>");
-        return "meta";
+        return chain(inBlock("comment", "!]"));
       } else {
-        type = stream.eat("/") ? "closeTag" : "openTag";
-        state.tokenize = inTag;
-        return "tag bracket";
+        return chain(inBlock("tag",">"));
       }
-    } else if (ch == "&") {
-      var ok;
-      if (stream.eat("#")) {
-        if (stream.eat("x")) {
-          ok = stream.eatWhile(/[a-fA-F\d]/) && stream.eat(";");
-        } else {
-          ok = stream.eatWhile(/[\d]/) && stream.eat(";");
-        }
+//        type = "openTag";
+//        state.tokenize = inTag;
+//        return "tag bracket";
+    } else if (ch == "<") {
+      if (stream.eat("|")) {
+        return chain(inBlock("atom", "|>"));
       } else {
-        ok = stream.eatWhile(/[\w\.\-:]/) && stream.eat(";");
+        return chain(inBlock("tag", "]"));
+//        type = "closeTag";
+//        state.tokenize = inTag;
+//        return "tag bracket";
       }
-      return ok ? "atom" : "error";
+//    } else if (ch == "&") {
+//      var ok;
+//      if (stream.eat("#")) {
+//        if (stream.eat("x")) {
+//          ok = stream.eatWhile(/[a-fA-F\d]/) && stream.eat(";");
+//        } else {
+//          ok = stream.eatWhile(/[\d]/) && stream.eat(";");
+//        }
+//      } else {
+//        ok = stream.eatWhile(/[\w\.\-:]/) && stream.eat(";");
+//      }
+//      return ok ? "atom" : "error";
     } else {
       stream.eatWhile(/[^&<]/);
       return null;
@@ -283,8 +279,10 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     },
 
     token: function(stream, state) {
-      if (!state.tagName && stream.sol())
-        state.indented = stream.indentation();
+
+//      if (!state.tagName && stream.sol())
+//        state.indented = stream.indentation();
+//// no indentation!
 
       if (stream.eatSpace()) return null;
       type = null;
@@ -345,12 +343,11 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       else return state.baseIndent || 0;
     },
 
-    electricInput: /<\/[\s\w:]+>$/,
     blockCommentStart: "<!--",
     blockCommentEnd: "-->",
 
-    configuration: config.htmlMode ? "html" : "xml",
-    helperType: config.htmlMode ? "html" : "xml",
+    configuration: "tagml",
+//    helperType: config.htmlMode ? "html" : "xml",
 
     skipAttribute: function(state) {
       if (state.state == attrValueState)

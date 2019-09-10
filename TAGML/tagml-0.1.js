@@ -43,32 +43,14 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       if (stream.eat("!")) {
         return chain(inBlock("comment", "!]"));
       } else {
-//        return chain(inBlock("tag",">"));
-        type = "openTag";
-        state.tokenize = inTag;
-        return "tag bracket";
+        return chain(inBlock("tag",">"));
       }
     } else if (ch == "<") {
       if (stream.eat("|")) {
-        return chain(inBlock("atom", "|>")); // text variation <|A|B|>
+        return chain(inBlock("atom", "|>"));
       } else {
-//        return chain(inBlock("tag", "]"));
-        type = "closeTag";
-        state.tokenize = inTag;
-        return "tag bracket";
+        return chain(inBlock("tag", "]"));
       }
-//    } else if (ch == "&") {
-//      var ok;
-//      if (stream.eat("#")) {
-//        if (stream.eat("x")) {
-//          ok = stream.eatWhile(/[a-fA-F\d]/) && stream.eat(";");
-//        } else {
-//          ok = stream.eatWhile(/[\d]/) && stream.eat(";");
-//        }
-//      } else {
-//        ok = stream.eatWhile(/[\w\.\-:]/) && stream.eat(";");
-//      }
-//      return ok ? "atom" : "error";
     } else {
       stream.eatWhile(/[^&<]/);
       return null;
@@ -78,14 +60,23 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
 
   function inTag(stream, state) {
     var ch = stream.next();
-    if (type == "openTag" && (ch == ">" || ch == "]")) {
+    if (ch == ">" || (ch == "/" && stream.eat(">"))) {
       state.tokenize = inText;
+      type = ch == ">" ? "endTag" : "selfcloseTag";
       return "tag bracket";
-    } else if (type == "closeTag" && ch == "]") {
+    } else if (ch == "=") {
+      type = "equals";
+      return null;
+    } else if (ch == "<") {
       state.tokenize = inText;
-      return "tag bracket";
-    } else if (ch == "|") {
-      return "tag bracket"
+      state.state = baseState;
+      state.tagName = state.tagStart = null;
+      var next = state.tokenize(stream, state);
+      return next ? next + " tag error" : "tag error";
+    } else if (/[\'\"]/.test(ch)) {
+      state.tokenize = inAttribute(ch);
+      state.stringStartCol = stream.column();
+      return state.tokenize(stream, state);
     } else {
       stream.match(/^[^\s\u00a0=<>\"\']*[^\s\u00a0=<>\"\'\/]/);
       return "word";
@@ -118,26 +109,6 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       return style;
     };
   }
-  function doctype(depth) {
-    return function(stream, state) {
-      var ch;
-      while ((ch = stream.next()) != null) {
-        if (ch == "<") {
-          state.tokenize = doctype(depth + 1);
-          return state.tokenize(stream, state);
-        } else if (ch == ">") {
-          if (depth == 1) {
-            state.tokenize = inText;
-            break;
-          } else {
-            state.tokenize = doctype(depth - 1);
-            return state.tokenize(stream, state);
-          }
-        }
-      }
-      return "meta";
-    };
-  }
 
   function Context(state, tagName, startOfLine) {
     this.prev = state.context;
@@ -147,9 +118,11 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     if (config.doNotIndent.hasOwnProperty(tagName) || (state.context && state.context.noIndent))
       this.noIndent = true;
   }
+
   function popContext(state) {
     if (state.context) state.context = state.context.prev;
   }
+
   function maybePopContext(state, nextTagName) {
     var parentTagName;
     while (true) {
@@ -175,6 +148,7 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       return baseState;
     }
   }
+
   function tagNameState(type, stream, state) {
     if (type == "word") {
       state.tagName = stream.current();
@@ -188,6 +162,7 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       return tagNameState;
     }
   }
+
   function closeTagNameState(type, stream, state) {
     if (type == "word") {
       var tagName = stream.current();
@@ -218,6 +193,7 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     popContext(state);
     return baseState;
   }
+
   function closeStateErr(type, stream, state) {
     setStyle = "error";
     return closeState(type, stream, state);
@@ -242,17 +218,20 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     setStyle = "error";
     return attrState;
   }
+
   function attrEqState(type, stream, state) {
     if (type == "equals") return attrValueState;
     if (!config.allowMissing) setStyle = "error";
     return attrState(type, stream, state);
   }
+
   function attrValueState(type, stream, state) {
     if (type == "string") return attrContinuedState;
     if (type == "word" && config.allowUnquoted) {setStyle = "string"; return attrState;}
     setStyle = "error";
     return attrState(type, stream, state);
   }
+
   function attrContinuedState(type, stream, state) {
     if (type == "string") return attrContinuedState;
     return attrState(type, stream, state);
@@ -270,9 +249,6 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
     },
 
     token: function(stream, state) {
-      if (!state.tagName && stream.sol())
-        state.indented = stream.indentation();
-
       if (stream.eatSpace()) return null;
       type = null;
       var style = state.tokenize(stream, state);
@@ -332,12 +308,10 @@ CodeMirror.defineMode("tagml", function(editorConf, config_) {
       else return state.baseIndent || 0;
     },
 
-    electricInput: /<\/[\s\w:]+>$/,
-    blockCommentStart: "<!--",
-    blockCommentEnd: "-->",
+    blockCommentStart: "[!--",
+    blockCommentEnd: "--]",
 
-    configuration: config.htmlMode ? "html" : "xml",
-    helperType: config.htmlMode ? "html" : "xml",
+    configuration: "tagml",
 
     skipAttribute: function(state) {
       if (state.state == attrValueState)

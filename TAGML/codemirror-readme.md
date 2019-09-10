@@ -16,3 +16,6 @@ To use CodeMirror.defineSimpleMode, add codemirror/addon/mode/simple to : (hack!
 /opt/tljh/user/lib/python3.6/site-packages/notebook/static/edit/js/main.min.js
 (based on:
 /opt/tljh/user/lib/python3.6/site-packages/notebook/static/edit/js/editor.js)
+! DOES NOT WORK because main.min.js is "compiled" from several source files.
+
+so: stick to the hack

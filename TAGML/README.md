@@ -19,7 +19,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   [markup|L1 annotation_1='string value' annotation_2=2.718>text<markup]
   ```
   `markup` is the name,  
-  `|1` is the layer suffix,  
+  `|L1` is the layer suffix,  
   `annotation_1` and `annotation_2` are the names of the annotations
 
 ### Overlapping markup  

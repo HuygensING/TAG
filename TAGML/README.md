@@ -31,7 +31,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
 
 ### Self-overlapping markup
   ```
-  [s|+L1,+L2>[a|L11>Cookie Monster [a|L2>likes<a|L1] cookies.<a|L2]<s]
+  [s|+L1,+L2>[a|L1>Cookie Monster [a|L2>likes<a|L1] cookies.<a|L2]<s]
   ```
   Markup of the same name can overlap by adding layer suffixes to the markup name (for both the opening and the closing tags).  
 

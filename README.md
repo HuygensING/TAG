@@ -6,7 +6,27 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 ## News
 
-### New release: Alexandria 2.1(December 2018)
+### New release: Alexandria 2.3 (September 2018)
+
+##### Bugfixes:
+- It is now possible, when a view other than the default view is active, to commit new and changed view definitions, and new tagml source files.
+  Committing changes to tagml source files of existing documents is still only possible when the default view is active.
+- Running `alexandria init` in your home directory is not allowed and will fail with an error message.
+- `alexandria status` will now only search one level deep in watched directories for files/directories that may be added.
+- When committing a view definition which is valid json, but does not contain at least one of the required fields `includeLayers`, `excludeLayers`, `includeMarkup`, `excludeMarkup`, alexandria would silently accept this, producing an invalid view.
+  This has been fixed: committing this view definition will not fail with an error message.    
+
+### New release: Alexandria 2.2 (July 2019)
+
+###### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria/commands)
+- query
+
+##### Bugfixes:
+
+- After a revert, the reverted file is now no longer shown as modified.
+- It is now possible to run alexandria commands from any directory, provided one of its parent directories has been initialized.
+
+### New release: Alexandria 2.1 (December 2018)
                                
 ##### New features:
 

@@ -6,7 +6,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 
 ## News
 
-### New release: Alexandria 2.3 (September 2018)
+### New release: Alexandria 2.3 (September 2019)
 
 ##### Bugfixes:
 - It is now possible, when a view other than the default view is active, to commit new and changed view definitions, and new tagml source files.

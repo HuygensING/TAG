@@ -5,7 +5,7 @@
 - [AlexandriaStep for use in Calabash](https://huygensing.github.io/TAG/TAGML/CALABASH-README)
 - [TAGML Syntax highlighting in Sublime Text 3](https://huygensing.github.io/tagml-sublime-syntax/)
 
-#### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria-markup-server/commands)
+#### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria/commands)
 - about
 - add
 - commit

@@ -19,8 +19,10 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   [markup|L1 annotation_1='string value' annotation_2=2.718>text<markup]
   ```
   `markup` is the name,  
-  `|1` is the layer suffix,  
+  `|L1` is the layer suffix,  
   `annotation_1` and `annotation_2` are the names of the annotations
+  
+  Format: ```[tag> … text content … <tag]```
 
 ### Overlapping markup  
   Unlike in XML, markup can *overlap* in TAGML:    
@@ -31,9 +33,11 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
 
 ### Self-overlapping markup
   ```
-  [s|+L1,+L2>[a|L11>Cookie Monster [a|L2>likes<a|L1] cookies.<a|L2]<s]
+  [s|+L1,+L2>[a|L1>Cookie Monster [a|L2>likes<a|L1] cookies.<a|L2]<s]
   ```
-  Markup of the same name can overlap by adding layer suffixes to the markup name (for both the opening and the closing tags).  
+  Markup of the same name can overlap by adding layer suffixes to the markup name (for both the opening and the closing tags).
+  
+  Format: ```[tag|layer_identifier>```
 
 ### Markup annotations
   ```
@@ -61,6 +65,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
     }>Amsterdam<origin]
   ```
 
+Format: ```[tag name_of_annotation=value_of_annotation>```
  	
 ### Dominance / Containment  
   > When you’re talking about overlapping structures, it’s useful to make the distinction between structures that *contain* each other and structures that *dominate* each other. Containment is a happenstance relationship between ranges while dominance is one that has a meaningful semantic. A page may happen to *contain* a stanza, but a poem *dominates* the stanzas that it contains.
@@ -77,6 +82,8 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
   In this text, the fact that the two sets of "q" tags define one discontinued quote is indicated by suspend/resume
   indicators before the markup name: a `-` in the first closing tag, and a `+` in the following opening tag.
+  
+  Format: ```[tag> text <-tag] text content [+tag> text. <tag]```
   
 ### Non-linearity
   In general, the text of a TAGML document is to be read in the order in which it has been transcribed.
@@ -101,6 +108,7 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   [l>At this point, the new text <|diverged|differed|> from the original.<l] 
   ```
   
+  Format: ```<|[tag> … <tag]|[other_tag> … <other_tag]|>```
   
 ### Milestones / placeholders / empty markup
   ```
@@ -116,10 +124,13 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
  
 ### Comments
   ```
-  [l>text text text<l]
-  [! comment !]
-  [l>text text text<l]
+  [transcription>
+  [! This is what a comment looks like !]
+  [page>The red fox jumped over the brown dog<page]
+  <transcription]
   ```
+  
+  Format: ```[! ... !]```
 
 ### Whitespace significance  
   Whitespace is only significant within string or rich text annotation values, or inside markup that's been defined
@@ -136,23 +147,22 @@ A tag (lowercase) is the entity used to indicate the markup boundaries.
   ```
 
 ### Escaping
-A TAGML document consist of Unicode characters and adheres to the syntax defined in this description.
+  A TAGML document consist of Unicode characters and adheres to the syntax defined in this description.
 
-In text, the following characters need to be escaped using the escape character `\ ` :
-```
-[ -> \[
-] -> \]
-< -> \<
-> -> \>
-| -> \|
-\ -> \\
-```
+  In text, the following characters need to be escaped using the escape character `\ ` :
+  ```
+  [ -> \[
+  ] -> \]
+  < -> \<
+  > -> \>
+  | -> \|
+  \ -> \\
+  ```
 
-Inside annotation string values: `'` -> `\'`, `"` -> `\"`
+  Inside annotation string values: `'` -> `\'`, `"` -> `\"`
 
 ### Linking elements
-In XML, the `xml:id` attribute is used to uniquely identify an element. This id can then be used in attributes of other
- elements to link to the first element.
+  In XML, the `xml:id` attribute is used to uniquely identify an element. This id can then be used in attributes of other elements to link to the first element.
  
  ```xml
   <xml>

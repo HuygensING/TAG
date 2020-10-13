@@ -58,6 +58,10 @@ Notebooks + support code for the 2017 Alexandria workshop
 
 Python client for the alexandria-markup server
 
-## [tag-aid-poc](https://github.com/HuygensING/tag-aid-poc) (relevant?)
+## [tag-aid-poc](https://github.com/HuygensING/tag-aid-poc) (archived)
 
-## [tag-aid](https://github.com/HuygensING/tag-aid) (relevant?)
+This project is no longer under active development
+
+## [tag-aid](https://github.com/HuygensING/tag-aid) (archived)
+
+This project is no longer under active development

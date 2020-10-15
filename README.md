@@ -16,7 +16,7 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 ###### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria/commands)
 - export-xml (new option: `--leadinginglayer` / `-l`)
 
-### New release: LSP-tagml 1.0.1 (May 2020)
+### New release: [LSP-tagml](https://packagecontrol.io/packages/LSP-tagml) 1.0.1 (May 2020)
 
 LSP-tagml is a plugin for Sublime Text 3 that installs the tagml-language-server.
 

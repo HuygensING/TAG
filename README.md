@@ -9,12 +9,12 @@ The Text As Graph (TAG) data model is a directed property hypergraph for modelin
 ### New release: Alexandria 2.4 (October 2020)
 
 ##### New features:
-- schema validation
 - The `export-xml` now has an option to choose a 'leading' layer. When a TAGML document has multiple layers, `export-xml` uses Trojan Horse Milestones on the layers. Previously it used these on *all* layers. In this version you can indicate a layer to define the XML hierarchy: markup in this _leading_ layer will be output as regular XML open/close tags, for all other layers the Trojan Horse Milestones will be used.
+- Wen a view is active, changes to its definition file cannot be committed.
+- `init` now also creates a sparql directory.
 
 ###### [New/Changed commands for the command-line app](https://huygensing.github.io/alexandria/commands)
-- schema-validate
-- export-xml
+- export-xml (new option: `--leadinginglayer` / `-l`)
 
 ### New release: Alexandria 2.3 (September 2019)
 

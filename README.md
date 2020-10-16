@@ -109,4 +109,4 @@ doi: `https://doi.org/10.4242 BalisageVol21.HaentjensDekker01.`
 
 ## TAG-related GitHub repositories
 
-[TAG-related GitHub repositories](repositories)
+[TAG-related GitHub repositories](repositories.md)

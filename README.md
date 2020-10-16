@@ -107,3 +107,6 @@ doi: `https://doi.org/10.4242 BalisageVol21.HaentjensDekker01.`
 	* Paper: <https://www.balisage.net/Proceedings/vol19/html/Dekker01/BalisageVol19-Dekker01.html>
 	* Visualization: [“Hunting of the Snark”](snark-fly.mp4) (mp4, 20G)
 
+## TAG-related GitHub repositories
+
+[TAG-related GitHub repositories](repositories)

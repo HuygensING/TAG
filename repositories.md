@@ -46,6 +46,10 @@ The API for using the experimental `feature-trd-560-tagml-header` functionalitie
 
 Benchmarking the alexandria code.
 
+## [tag-parsing-with-derivatives](https://github.com/HuygensING/tag-parsing-with-derivatives) (experimental)
+
+Experiments with parsing TAGML using Brzozowski derivatives
+
 ## [tree-sitter-tagml](https://github.com/HuygensING/tree-sitter-tagml) (experimental, paused)
 
 TAGML grammar for [tree-sitter](https://tree-sitter.github.io/tree-sitter/)

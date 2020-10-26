@@ -69,7 +69,7 @@ When linked with a compatible editor, it can be used to provide syntax help in t
 
 ### Upcoming presentation
 
-Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Editions, Graph Data-Models and Semantic Web Technologies, Université de Lausanne, 3 June 2019.
+Elli Bleeker, Bram Buitendijk, and Ronald Haentjens Dekker. “Between Flexibility and Universality: Combining TAGML with XML to Improve the Modeling of Cultural Heritage Texts”. Short paper at the [online workshop Computational Humanities Research](https://www.computational-humanities-research.org/cfp/), November 18-20, 2020.
 
 ## Implementations
 
@@ -88,6 +88,28 @@ Haentjens Dekker, Ronald. Invited talk at the Workshop on Scholarly Digital Edit
 * [HyperCollate documentation and source code](https://huygensing.github.io/hyper-collate/)
 
 ## Presentations and Publications
+* Haentjens Dekker, Ronald, Bram Buitendijk, and Elli Bleeker. 2020. “Parsing a markup language that supports overlap and discontinuity”. Short paper presented online at DocEng: the 20th ACM Symposium on Document Engineering, September 29-October 1, 2020. 
+
+* Bleeker, Elli. “What Has Been Left Out: the Perks and Pitfalls of XML-aware Collation”. Keynote lecture at the online workshop _Introduction to automatic collation_ at the University of Lausanne (UNIL), September 24-25, 2020. 
+	* Slides: <https://docs.google.com/presentation/d/12-rY3DnMbGMiW5B847xJ32urKvdfQGBDySawmi_jW2Q/edit?usp=sharing>
+
+* Bleeker, Elli, Bram Buitendijk, and Ronald Haentjens Dekker. 2020. “Marking Up Microrevisions with Major Implications: Nonlinear Text in TAG”. Paper presented at Balisage: The Markup Conference 2020, online, July 27 - 31, 2020. In _Proceedings of Balisage: The Markup Conference 2020. Balisage Series on Markup Technologies_, vol. 25 (2020). doi: `https://doi.org/10.4242/BalisageVol25.Bleeker01`.
+	* Paper: <https://www.balisage.net/Proceedings/vol25/html/Bleeker01/BalisageVol25-Bleeker01.html>
+	* Slides: <https://www.balisage.net/Proceedings/vol25/html/Bleeker01/BalisageVol25-Bleeker01.html>
+
+* Bleeker, Elli, Bram Buitendijk, and Ronald Haentjens Dekker. 2019. “Uniting Scholarly Knowledge: The (recent) Past and (near) Future of Textual Scholarship”. Paper presented at the European Society of Textual Scholarship (ESTS) conference, November 28, 2019.
+	* slides: <https://docs.google.com/presentation/d/1xNWKWFahRJCSYFyT0UA7wlTTp7QYBlyg4bfG3HMzmCo/edit?usp=sharing>
+
+* Bleeker, Elli. 2019. “Different Ways of Looking: Text Models and Markup for Digital Scholarly Editing”. Invited talk at the Colloquium for Digital Cultural Heritage at the Cologne Centre for eHumanities, November 13, 2019. Slides at request.
+
+* Bleeker, Elli, Bram Buitendijk, and Ronald Haentjens Dekker. 2019. “Between Freedom and Formalisation: A Hypergraph Model for Representing the Nature of Text”. Paper presented at the [TEI conference 2019](https://gams.uni-graz.at/context:tei2019), September 16-21, 2019, University of Graz (Austria). 
+	* Slides: <https://docs.google.com/presentation/d/16f2VuZ_3oNXd8C1MQ8ye1fAStAf97Lg6mt8UdNVaCQs/edit?usp=sharing>
+
+* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker, and Astrid Kulsdom. 2019. Workshop TAG and _Alexandria_ at the DH Benelux conference in Liège, Belgium on September 11, 2019. [Slides available](https://docs.google.com/presentation/d/1QRQHONeuLN-Ao0_DWk96Dy-Mlk-OHpB3p3TAyqeka9k/edit?usp=sharing).
+
+* Haentjens Dekker, Ronald. 2019. Invited talk at the Workshop on Scholarly Digital Editions, Graph Data-Models and Semantic Web Technologies, Université de Lausanne, 3 June 2019.
+
+* Bleeker, Elli, Bram Buitendijk, Ronald Haentjens Dekker. 2019. “From Graveyard to Graph: Visualisation of Collation in a Digital Paradigm”. In: _International Journal of Digital Humanities_, vol. 1, pp. 141-163. doi: `https://doi.org/10.1007/s42803-019-00012-w`. 
 
 * Bleeker, Elli. 2018. “Adressing Ancient Promises: Text Modeling and _Alexandria_”. Invited talk at the DH-Kolloquium of the Berlin Brandenburgische Akademie der Wissenschaften, 2 November 2018. Slides [here](https://edoc.bbaw.de/frontdoor/index/index/searchtype/latest/docId/2932/).
  
